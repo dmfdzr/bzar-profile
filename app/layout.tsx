@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Portofolio Frontend Engineer",
-  description: "Portofolio profesional dibangun dengan Next.js dan shadcn/ui",
+  title: "Bzarhere",
+  description: "Built while starving, powered by coffee.",
 };
 
 export default function RootLayout({
