@@ -29,8 +29,10 @@ const experiences = [
         ],
         stack: ["Javascript", "Next.js", "TypeScript", "RESTful API", "Tailwind CSS"],
         links: [
-            { label: "Live App", url: "https://example.com", icon: <ExternalLink size={16} />, variant: "default" },
-            { label: "Source Code", url: "https://github.com/dmfdzr", icon: <Github size={16} />, variant: "outline" }
+            { label: "Test App", url: "https://sparta-bnm.vercel.app", icon: <ExternalLink size={16} />, variant: "default" },
+            { label: "Live App", url: "https://sparta-alfamart.vercel.app", icon: <ExternalLink size={16} />, variant: "default" },
+            { label: "Source Code Next.JS", url: "https://github.com/dmfdzr/sparta-fe.git", icon: <Github size={16} />, variant: "outline" },
+            { label: "Source Code VanillaJS", url: "https://github.com/dmfdzr/sparta-frontend.git", icon: <Github size={16} />, variant: "outline" }
         ]
     },
     {
@@ -49,8 +51,7 @@ const experiences = [
         ],
         stack: ["SSMS", "SQL Queries"],
         links: [
-            { label: "View Website", url: "https://example.com", icon: <ExternalLink size={16} />, variant: "default" },
-            { label: "GitHub Repo", url: "https://github.com/dmfdzr", icon: <Github size={16} />, variant: "outline" }
+            { label: "View Course", url: "https://drive.google.com/drive/folders/1yi5vJ5lA0d8Lzp14RBzpyqeGDpLPdmat?usp=sharing", icon: <ExternalLink size={16} />, variant: "default" }
         ]
     },
     {
@@ -76,8 +77,10 @@ const experiences = [
         ],
         stack: ["Figma", "Prototyping", "Product Research", "UI/UX Principles", "Frontend Development"],
         links: [
-            { label: "Figma Prototype", url: "https://figma.com", icon: <Figma size={16} />, variant: "default" },
-            { label: "Live Project", url: "https://example.com", icon: <ExternalLink size={16} />, variant: "outline" }
+            { label: "ReLive Project", url: "https://relive-frontend-seven.vercel.app/", icon: <ExternalLink size={16} />, variant: "outline" },
+            { label: "Source Code ReLive", url: "https://github.com/dmfdzr/relive-frontend.git", icon: <Github size={16} />, variant: "outline" },
+            { label: "YakinKerja Project", url: "https://freelance-lake.vercel.app/", icon: <ExternalLink size={16} />, variant: "outline" },
+            { label: "Source Code YakinKerja", url: "https://github.com/dmfdzr/freelance.git", icon: <Github size={16} />, variant: "outline" }
         ]
     }
 ];
