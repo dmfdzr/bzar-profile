@@ -77,7 +77,7 @@ const experiences = [
         ],
         stack: ["Figma", "Prototyping", "Product Research", "UI/UX Principles", "Frontend Development"],
         links: [
-            { label: "ReLive Project", url: "https://relive-frontend-seven.vercel.app/", icon: <ExternalLink size={16} />, variant: "outline" },
+            { label: "ReLive Project", url: "https://relive-health.vercel.app/", icon: <ExternalLink size={16} />, variant: "outline" },
             { label: "Source Code ReLive", url: "https://github.com/dmfdzr/relive-frontend.git", icon: <Github size={16} />, variant: "outline" },
             { label: "YakinKerja Project", url: "https://freelance-lake.vercel.app/", icon: <ExternalLink size={16} />, variant: "outline" },
             { label: "Source Code YakinKerja", url: "https://github.com/dmfdzr/freelance.git", icon: <Github size={16} />, variant: "outline" }
