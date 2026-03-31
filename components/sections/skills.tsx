@@ -16,14 +16,14 @@ export function SkillsSection() {
                     <Card className="bg-card hover:-translate-y-1 hover:shadow-lg transition-all duration-300 border-border/50">
                         <CardHeader><CardTitle className="text-xl text-primary">Frontend & UI</CardTitle></CardHeader>
                         <CardContent className="flex flex-wrap gap-2">
-                            {["JavaScript", "TypeScript", "Next.js", "Tailwind CSS", "Figma"].map((skill) => (
+                            {["JavaScript", "TypeScript", "Next.js", "Tailwind CSS", "ShadcnUI", "Figma"].map((skill) => (
                                 <Badge key={skill} variant="secondary" className="hover:bg-primary hover:text-primary-foreground transition-colors">{skill}</Badge>
                             ))}
                         </CardContent>
                     </Card>
 
                     <Card className="bg-card hover:-translate-y-1 hover:shadow-lg transition-all duration-300 border-border/50">
-                        <CardHeader><CardTitle className="text-xl text-primary">Database & Backend</CardTitle></CardHeader>
+                        <CardHeader><CardTitle className="text-xl text-primary">Backend & Database</CardTitle></CardHeader>
                         <CardContent className="flex flex-wrap gap-2">
                             {["MySQL", "Microsoft SQL Server", "SQL Queries", "RESTful APIs"].map((skill) => (
                                 <Badge key={skill} variant="secondary" className="hover:bg-primary hover:text-primary-foreground transition-colors">{skill}</Badge>

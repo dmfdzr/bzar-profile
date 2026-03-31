@@ -7,7 +7,7 @@ export function HeroSection() {
             <div className="max-w-4xl w-full flex flex-col-reverse md:flex-row items-center md:items-start justify-between gap-8 md:gap-10">
                 <div className="flex flex-col items-center md:items-start text-center md:text-left gap-5 md:gap-6 flex-1 mt-2 md:mt-0">
                     <Badge variant="outline" className="px-3 py-1 border-primary/30 bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
-                        Frontend Software Engineer
+                        Frontend Engineer
                     </Badge>
                     {/* PERBAIKAN: Ukuran teks disesuaikan untuk mobile (text-3xl sm:text-4xl) */}
                     <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold tracking-tight leading-[1.1]">
@@ -18,7 +18,7 @@ export function HeroSection() {
                     </h1>
                     {/* PERBAIKAN: Teks deskripsi dibuat lebih responsif (text-sm sm:text-base) */}
                     <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-md leading-relaxed">
-                        A <strong className="text-foreground font-semibold">Frontend Software Engineer</strong> passionate about translating UI/UX designs into seamless, interactive web applications. Experienced in building <em className="italic">enterprise-scale</em> systems, I ensure that websites are not only visually appealing but also highly performant and user-friendly.
+                        A <strong className="text-foreground font-semibold">Frontend Engineer</strong> passionate about translating UI/UX designs into seamless, interactive web applications. Experienced in building <em className="italic">enterprise-scale</em> systems, I ensure that websites are not only visually appealing but also highly performant and user-friendly.
                     </p>
                 </div>
                 {/* PERBAIKAN: Ukuran avatar dibuat w-32 h-32 di mobile, dan ditambah mb-4 */}
