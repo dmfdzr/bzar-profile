@@ -29,8 +29,8 @@ const experiences = [
         ],
         stack: ["Javascript", "Next.js", "TypeScript", "RESTful API", "Tailwind CSS"],
         links: [
-            { label: "Test App", url: "https://sparta-bnm.vercel.app", icon: <ExternalLink size={16} />, variant: "default" },
-            { label: "Live App", url: "https://sparta-alfamart.vercel.app", icon: <ExternalLink size={16} />, variant: "default" },
+            { label: "Live App", url: "https://sparta-building.vercel.app", icon: <ExternalLink size={16} />, variant: "default" },
+            { label: "Landing Page", url: "https://sparta-alfamart.vercel.app", icon: <ExternalLink size={16} />, variant: "default" },
             { label: "Source Code Next.JS", url: "https://github.com/dmfdzr/sparta-fe.git", icon: <Github size={16} />, variant: "outline" },
             { label: "Source Code VanillaJS", url: "https://github.com/dmfdzr/sparta-frontend.git", icon: <Github size={16} />, variant: "outline" }
         ]
