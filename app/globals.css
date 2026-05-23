@@ -2,48 +2,57 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: 0 0% 100%;
-  --foreground: 240 10% 3.9%;
-  --card: 0 0% 100%;
-  --card-foreground: 240 10% 3.9%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 240 10% 3.9%;
-  --primary: 240 5.9% 10%;
-  --primary-foreground: 0 0% 98%;
-  --secondary: 240 4.8% 95.9%;
-  --secondary-foreground: 240 5.9% 10%;
-  --muted: 240 4.8% 95.9%;
-  --muted-foreground: 240 3.8% 46.1%;
-  --accent: 240 4.8% 95.9%;
-  --accent-foreground: 240 5.9% 10%;
-  --destructive: 0 84.2% 60.2%;
+  --background: 45 33% 97%;
+  --foreground: 220 22% 8%;
+  --card: 42 30% 99%;
+  --card-foreground: 220 22% 8%;
+  --popover: 42 30% 99%;
+  --popover-foreground: 220 22% 8%;
+  --primary: 188 95% 34%;
+  --primary-foreground: 190 100% 98%;
+  --secondary: 38 100% 92%;
+  --secondary-foreground: 31 84% 18%;
+  --muted: 42 24% 91%;
+  --muted-foreground: 218 12% 38%;
+  --accent: 36 100% 55%;
+  --accent-foreground: 30 92% 12%;
+  --destructive: 0 84% 58%;
   --destructive-foreground: 0 0% 98%;
-  --border: 240 5.9% 90%;
-  --input: 240 5.9% 90%;
-  --ring: 240 10% 3.9%;
+  --border: 216 18% 84%;
+  --input: 216 18% 84%;
+  --ring: 188 95% 34%;
   --radius: 0.5rem;
+  --surface-code: 222 34% 9%;
+  --console-line: 188 95% 34%;
+  --warm-signal: 36 100% 55%;
+  --font-manrope: "Manrope", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-archivo: "Archivo", "Arial Narrow", "Segoe UI", sans-serif;
+  --font-geist-mono: "Geist Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
 
 .dark {
-  --background: 240 10% 3.9%;
-  --foreground: 0 0% 98%;
-  --card: 240 10% 3.9%;
-  --card-foreground: 0 0% 98%;
-  --popover: 240 10% 3.9%;
-  --popover-foreground: 0 0% 98%;
-  --primary: 0 0% 98%;
-  --primary-foreground: 240 5.9% 10%;
-  --secondary: 240 3.7% 15.9%;
-  --secondary-foreground: 0 0% 98%;
-  --muted: 240 3.7% 15.9%;
-  --muted-foreground: 240 5% 64.9%;
-  --accent: 240 3.7% 15.9%;
-  --accent-foreground: 0 0% 98%;
-  --destructive: 0 62.8% 30.6%;
+  --background: 220 31% 5%;
+  --foreground: 192 24% 94%;
+  --card: 222 28% 8%;
+  --card-foreground: 192 24% 94%;
+  --popover: 222 28% 8%;
+  --popover-foreground: 192 24% 94%;
+  --primary: 185 96% 56%;
+  --primary-foreground: 220 31% 5%;
+  --secondary: 216 28% 14%;
+  --secondary-foreground: 192 24% 94%;
+  --muted: 218 22% 16%;
+  --muted-foreground: 202 15% 68%;
+  --accent: 39 100% 62%;
+  --accent-foreground: 220 31% 5%;
+  --destructive: 0 70% 45%;
   --destructive-foreground: 0 0% 98%;
-  --border: 240 3.7% 15.9%;
-  --input: 240 3.7% 15.9%;
-  --ring: 240 4.9% 83.9%;
+  --border: 203 28% 20%;
+  --input: 203 28% 20%;
+  --ring: 185 96% 56%;
+  --surface-code: 222 34% 9%;
+  --console-line: 185 96% 56%;
+  --warm-signal: 39 100% 62%;
 }
 
 @theme inline {
@@ -66,7 +75,11 @@
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
-  --font-sans: var(--font-geist-sans);
+  --color-surface-code: hsl(var(--surface-code));
+  --color-console-line: hsl(var(--console-line));
+  --color-warm-signal: hsl(var(--warm-signal));
+  --font-sans: var(--font-manrope);
+  --font-display: var(--font-archivo);
   --font-mono: var(--font-geist-mono);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -77,4 +90,49 @@ body {
   background-color: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-sans);
+}
+
+::selection {
+  background: hsl(var(--primary) / 0.25);
+  color: hsl(var(--foreground));
+}
+
+.console-grid {
+  background-image:
+    linear-gradient(hsl(var(--console-line) / 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--console-line) / 0.08) 1px, transparent 1px),
+    radial-gradient(circle at 20% 10%, hsl(var(--primary) / 0.18), transparent 28rem),
+    radial-gradient(circle at 80% 18%, hsl(var(--accent) / 0.16), transparent 24rem);
+  background-size: 44px 44px, 44px 44px, auto, auto;
+}
+
+.scanline {
+  position: relative;
+}
+
+.scanline::after {
+  animation: scan 7s linear infinite;
+  background: linear-gradient(180deg, transparent, hsl(var(--primary) / 0.12), transparent);
+  content: "";
+  height: 18%;
+  inset: -20% 0 auto;
+  pointer-events: none;
+  position: absolute;
+}
+
+@keyframes scan {
+  to {
+    transform: translateY(720%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }

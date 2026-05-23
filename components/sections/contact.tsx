@@ -1,76 +1,103 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardFooter, CardDescription } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-// 1. Tambahkan import Linkedin di sini
-import { Mail, Phone, Github, Linkedin, Send } from "lucide-react";
 import Link from "next/link";
+import { Github, Linkedin, Mail, Phone, Terminal, UserRoundCheck } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-export function ContactSection() {
+const copy = {
+    en: {
+        command: "$ connect --intent collaboration",
+        title: "Let's build something useful.",
+        description: "Open to career opportunities, frontend projects, UI implementation, or product collaboration that needs a fast, clear, production-ready interface.",
+        availability: "Availability",
+        availabilityValue: "Open for frontend roles and project discussions",
+        response: "Response style",
+        responseValue: "Async, practical, no fluff",
+        primary: "Send Email",
+        phone: "Call phone number",
+        github: "Open GitHub profile",
+        linkedin: "Open LinkedIn profile",
+        direct: "Direct channels",
+        directValue: "Email, phone, GitHub, and LinkedIn are one tap away.",
+    },
+    id: {
+        command: "$ kontak --tujuan kolaborasi",
+        title: "Mari bangun sesuatu yang berguna.",
+        description: "Terbuka untuk peluang karier, proyek frontend, implementasi UI, atau kolaborasi produk yang butuh antarmuka cepat, jelas, dan siap produksi.",
+        availability: "Ketersediaan",
+        availabilityValue: "Terbuka untuk peran frontend dan diskusi proyek",
+        response: "Gaya respons",
+        responseValue: "Asinkron, praktis, tanpa basa-basi berlebihan",
+        primary: "Kirim Email",
+        phone: "Hubungi nomor telepon",
+        github: "Buka profil GitHub",
+        linkedin: "Buka profil LinkedIn",
+        direct: "Kanal langsung",
+        directValue: "Email, telepon, GitHub, dan LinkedIn bisa dibuka dalam satu klik.",
+    },
+};
+
+export function ContactSection({ language }: { language: "en" | "id" }) {
+    const content = copy[language];
+
     return (
-        <section className="w-full h-full shrink-0 flex justify-center items-start p-4 md:p-8 pt-4 md:pt-8 pb-36 overflow-y-auto">
-            <div className="max-w-5xl w-full flex flex-col md:flex-row gap-8 md:gap-10 items-start justify-center">
-                
-                <div className="flex-1 w-full space-y-6 md:space-y-8 md:pr-8 text-center md:text-left">
-                    <div>
-                        <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-3 md:mb-4">Let's Collaborate!</h2>
-                        <p className="text-muted-foreground text-base md:text-lg">
-                            Interested in working together, discussing career opportunities, or building something amazing? Feel free to reach out.
+        <section className="w-full h-full shrink-0 flex justify-center items-start lg:items-center p-4 md:p-8 lg:px-8 lg:py-4 pb-36 lg:pb-20 overflow-y-auto lg:overflow-hidden">
+            <div className="max-w-5xl w-full grid grid-cols-1 gap-6 lg:grid-cols-[1fr_0.88fr] lg:items-center">
+                <div className="space-y-5">
+                    <div className="rounded-[8px] border border-border/70 bg-card/82 p-5 md:p-7 shadow-xl shadow-black/5 backdrop-blur">
+                        <div className="mb-5 flex items-center gap-2 font-mono text-xs text-primary">
+                            <Terminal className="h-4 w-4" />
+                            {content.command}
+                        </div>
+                        <h2 className="font-display text-3xl font-black tracking-normal md:text-5xl">{content.title}</h2>
+                        <p className="mt-4 text-sm leading-7 text-muted-foreground md:text-base">
+                            {content.description}
                         </p>
-                    </div>
-                    
-                    <div className="space-y-3 md:space-y-4 flex flex-col items-center md:items-start">
-                        <div className="flex items-center gap-4 text-muted-foreground hover:text-foreground transition-colors">
-                            <div className="bg-primary/10 p-2.5 md:p-3 rounded-full text-primary"><Phone size={18} className="md:w-5 md:h-5" /></div>
-                            <span className="text-sm md:text-base">+62 857-2791-4053</span>
-                        </div>
-                        <div className="flex items-center gap-4 text-muted-foreground hover:text-foreground transition-colors">
-                            <div className="bg-primary/10 p-2.5 md:p-3 rounded-full text-primary"><Mail size={18} className="md:w-5 md:h-5" /></div>
-                            <span className="text-sm md:text-base">dimasfadly01@gmail.com</span>
-                        </div>
-                    </div>
-
-                    {/* 2. Tambahkan tombol LinkedIn di sebelah GitHub */}
-                    <div className="flex gap-4 justify-center md:justify-start pt-2 md:pt-4">
-                        <Link href="https://github.com/dmfdzr" target="_blank" rel="noopener noreferrer">
-                            <Button variant="outline" size="icon" className="rounded-full hover:bg-primary hover:text-primary-foreground transition-colors">
-                                <Github size={20} />
-                            </Button>
-                        </Link>
-                        
-                        <Link href="https://linkedin.com/in/dimasabidzarfadly" target="_blank" rel="noopener noreferrer">
-                            <Button variant="outline" size="icon" className="rounded-full hover:bg-primary hover:text-primary-foreground transition-colors">
-                                <Linkedin size={20} />
-                            </Button>
-                        </Link>
                     </div>
                 </div>
 
-                <Card className="flex-1 w-full max-w-md border-border/50 shadow-lg">
-                    <CardHeader className="pb-4">
-                        <CardTitle className="text-xl md:text-2xl">Send a Message</CardTitle>
-                        <CardDescription className="text-xs md:text-sm">Your message will go directly to my inbox.</CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                        <div className="space-y-1.5">
-                            <Label htmlFor="name" className="text-xs md:text-sm">Full Name</Label>
-                            <Input id="name" placeholder="John Doe" className="bg-muted/50 focus:bg-background transition-colors text-sm" />
+                <div className="rounded-[8px] border border-border/70 bg-card/82 p-5 md:p-6 shadow-2xl shadow-black/10 backdrop-blur">
+                    <div className="flex items-center gap-3 border-b border-border/60 pb-5">
+                        <div className="rounded-[8px] border border-border/70 bg-background/70 p-3 text-primary">
+                            <UserRoundCheck className="h-5 w-5" />
                         </div>
-                        <div className="space-y-1.5">
-                            <Label htmlFor="email" className="text-xs md:text-sm">Email Address</Label>
-                            <Input id="email" type="email" placeholder="john@example.com" className="bg-muted/50 focus:bg-background transition-colors text-sm" />
+                        <div>
+                            <p className="font-display text-2xl font-bold">{content.availability}</p>
+                            <p className="text-sm text-muted-foreground">{content.availabilityValue}</p>
                         </div>
-                        <div className="space-y-1.5">
-                            <Label htmlFor="message" className="text-xs md:text-sm">Message</Label>
-                            <Textarea id="message" placeholder="Write your message regarding job offers or project discussions..." className="resize-none min-h-25 md:min-h-30 bg-muted/50 focus:bg-background transition-colors text-sm" />
-                        </div>
-                    </CardContent>
-                    <CardFooter className="flex justify-end items-center bg-muted/20 py-3 md:py-4 border-t border-border/50">
-                        <Button className="rounded-full gap-2 px-5 md:px-6 text-sm">Send Message <Send size={16} /></Button>
-                    </CardFooter>
-                </Card>
+                    </div>
 
+                    <div className="my-5 rounded-[8px] border border-accent/40 bg-accent/10 p-4">
+                        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">{content.response}</p>
+                        <p className="mt-1 text-sm font-semibold">{content.responseValue}</p>
+                    </div>
+
+                    <div className="mb-5 rounded-[8px] border border-border/70 bg-background/55 p-4">
+                        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">{content.direct}</p>
+                        <p className="mt-1 text-sm font-semibold">{content.directValue}</p>
+                    </div>
+
+                    <div className="grid gap-3 sm:grid-cols-[1fr_auto_auto_auto]">
+                        <Button asChild className="rounded-[8px] gap-2 px-5 text-sm">
+                            <Link href="mailto:dimasfadly01@gmail.com">
+                                {content.primary} <Mail size={16} />
+                            </Link>
+                        </Button>
+                        <Button asChild variant="outline" size="icon" className="rounded-[8px] hover:bg-primary hover:text-primary-foreground">
+                            <Link href="tel:+6285727914053" aria-label={content.phone}>
+                                <Phone size={20} />
+                            </Link>
+                        </Button>
+                        <Button asChild variant="outline" size="icon" className="rounded-[8px] hover:bg-primary hover:text-primary-foreground">
+                            <Link href="https://github.com/dmfdzr" target="_blank" rel="noopener noreferrer" aria-label={content.github}>
+                                <Github size={20} />
+                            </Link>
+                        </Button>
+                        <Button asChild variant="outline" size="icon" className="rounded-[8px] hover:bg-primary hover:text-primary-foreground">
+                            <Link href="https://linkedin.com/in/dimasabidzarfadly" target="_blank" rel="noopener noreferrer" aria-label={content.linkedin}>
+                                <Linkedin size={20} />
+                            </Link>
+                        </Button>
+                    </div>
+                </div>
             </div>
         </section>
     );

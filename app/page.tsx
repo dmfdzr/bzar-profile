@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { ModeToggle } from "@/components/mode-toggle";
 import { HeroSection } from "@/components/sections/hero";
@@ -7,10 +8,30 @@ import { SkillsSection } from "@/components/sections/skills";
 import { ProjectsSection } from "@/components/sections/projects";
 import { ContactSection } from "@/components/sections/contact";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowRight, Circle, FileDown } from "lucide-react";
 
 export default function Home() {
   const [step, setStep] = useState(0);
+  const [language, setLanguage] = useState<"en" | "id">("en");
+
+  const copy = {
+    en: {
+      shellTitle: "interactive frontend console",
+      next: ["Run Skills Scan", "Open Case Studies", "Start Conversation", "Reboot Intro"],
+      sections: ["Intro", "Stack", "Work", "Contact"],
+      commands: ["whoami", "capabilities", "case-studies", "connect"],
+      languageLabel: "Switch to Indonesian",
+      cvLabel: "Download ATS CV",
+    },
+    id: {
+      shellTitle: "konsol frontend interaktif",
+      next: ["Pindai Skill", "Buka Studi Kasus", "Mulai Percakapan", "Ulangi Intro"],
+      sections: ["Intro", "Skill", "Karya", "Kontak"],
+      commands: ["profil", "kapabilitas", "studi-kasus", "kontak"],
+      languageLabel: "Ganti ke English",
+      cvLabel: "Unduh CV ATS",
+    },
+  }[language];
 
   const handleNext = () => {
     setStep((prev) => (prev < 3 ? prev + 1 : 0));
@@ -18,38 +39,49 @@ export default function Home() {
 
   const buttonContent = () => {
     switch (step) {
-      case 0: return <>Start Exploring <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" /></>;
-      case 1: return <>View Experience <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" /></>;
-      case 2: return <>Contact Me <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" /></>;
-      case 3: return <><ArrowLeft className="mr-2 h-5 w-5 group-hover:-translate-x-1 transition-transform duration-300" /> Back to Top</>;
+      case 0: return <>{copy.next[0]} <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" /></>;
+      case 1: return <>{copy.next[1]} <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" /></>;
+      case 2: return <>{copy.next[2]} <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" /></>;
+      case 3: return <><ArrowLeft className="mr-2 h-5 w-5 group-hover:-translate-x-1 transition-transform duration-300" /> {copy.next[3]}</>;
       default: return "Next";
     }
   };
 
-  const sectionNames = ["Introduction", "Skills", "Experience", "Contact"];
-
   return (
-    <div className="h-screen w-full flex flex-col overflow-hidden bg-background text-foreground font-sans relative">
-      
+    <div className="console-grid h-screen w-full flex flex-col overflow-hidden bg-background text-foreground font-sans relative">
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,hsl(var(--background)/0.55),hsl(var(--background)/0.9))]" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-linear-to-b from-background to-transparent z-10" />
+
       <div className="w-full px-4 pt-4 md:pt-6 z-50 shrink-0 pointer-events-none">
-        <header className="max-w-4xl mx-auto flex items-center justify-between px-3 py-2 md:px-5 md:py-3 bg-background/60 backdrop-blur-xl border border-border/50 rounded-full shadow-lg shadow-black/5 pointer-events-auto transition-all">
-          
-          <div className="hover:scale-105 hover:rotate-3 transition-transform duration-300 flex items-center justify-center">
-             <img 
+        <header className="max-w-5xl mx-auto flex items-center justify-between gap-3 px-3 py-2 md:px-4 md:py-3 bg-card/78 backdrop-blur-2xl border border-border/70 rounded-[8px] shadow-2xl shadow-black/10 pointer-events-auto transition-all">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="hover:scale-105 transition-transform duration-300 flex items-center justify-center">
+             <Image
                src="/favicon.ico" 
                alt="Dimas Logo" 
-               className="w-9 h-9 md:w-10 md:h-10 rounded-md md:rounded-lg shadow-sm object-contain bg-background border border-border/20"
+               width={40}
+               height={40}
+               className="w-9 h-9 md:w-10 md:h-10 rounded-[6px] shadow-sm object-contain bg-background border border-border/50"
              />
+            </div>
+            <div className="hidden sm:block min-w-0">
+              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">bzar.profile</p>
+              <p className="truncate font-display text-sm font-semibold">{copy.shellTitle}</p>
+            </div>
           </div>
 
-          <div className="flex items-center gap-3 bg-muted/40 px-3 md:px-5 py-1.5 md:py-2 rounded-full border border-border/50 backdrop-blur-md">
-            <span className="text-xs md:text-sm font-semibold text-foreground/80 hidden md:block w-21.25 text-right mr-1 transition-all duration-300">
-              {sectionNames[step]}
-            </span>
-            <div className="flex items-center gap-1.5 md:gap-2">
+          <div className="flex items-center gap-3 bg-muted/55 px-3 md:px-4 py-2 rounded-[8px] border border-border/60 backdrop-blur-md">
+            <div className="hidden md:flex items-center gap-2 font-mono text-xs text-muted-foreground">
+              <span className="text-primary">$</span>
+              <span>{copy.commands[step]}</span>
+            </div>
+            <div className="flex items-center gap-1.5 md:gap-2" aria-label={`Current section: ${copy.sections[step]}`}>
               {[0, 1, 2, 3].map((i) => (
-                <div
+                <button
                   key={i}
+                  type="button"
+                  onClick={() => setStep(i)}
+                  aria-label={`Go to ${copy.sections[i]}`}
                   className={`h-1.5 md:h-2 rounded-full transition-all duration-500 ease-out ${
                     step === i
                       ? "w-5 md:w-8 bg-primary shadow-sm shadow-primary/50"
@@ -60,42 +92,66 @@ export default function Home() {
                 />
               ))}
             </div>
+            <span className="text-xs md:text-sm font-semibold text-foreground/80 hidden sm:block min-w-12 transition-all duration-300">
+              {copy.sections[step]}
+            </span>
           </div>
 
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center gap-2">
+            <Button
+              asChild
+              variant="outline"
+              size="sm"
+              className="h-9 rounded-[8px] px-2.5 font-mono text-xs sm:px-3"
+            >
+              <a href="/dimas-abidzar-fadly-ats-cv.pdf" download aria-label={copy.cvLabel}>
+                <FileDown className="h-4 w-4 sm:mr-1.5" />
+                <span className="hidden sm:inline">CV</span>
+              </a>
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setLanguage((current) => (current === "en" ? "id" : "en"))}
+              aria-label={copy.languageLabel}
+              className="h-9 rounded-[8px] px-3 font-mono text-xs"
+            >
+              {language === "en" ? "ID" : "EN"}
+            </Button>
             <ModeToggle />
           </div>
 
         </header>
       </div>
 
-      <main className="flex-1 relative overflow-hidden w-full bg-grid-white/[0.02] -mt-20 md:-mt-24">
-        <div className="absolute inset-0 pt-20 md:pt-24 pointer-events-none z-10"></div>
-        
-        <div 
+      <main className="flex-1 relative overflow-hidden w-full -mt-20 md:-mt-24">
+        <div className="absolute inset-0 pt-20 md:pt-24 pointer-events-none z-10" />
+
+        <div
           className="flex h-full w-full transition-transform duration-700 ease-in-out pt-20 md:pt-24"
           style={{ transform: `translateX(-${step * 100}%)` }}
         >
-          <HeroSection />
-          <SkillsSection />
-          <ProjectsSection />
-          <ContactSection />
+          <HeroSection language={language} />
+          <SkillsSection language={language} />
+          <ProjectsSection language={language} />
+          <ContactSection language={language} />
         </div>
       </main>
 
       <div className="absolute bottom-8 md:bottom-10 left-1/2 -translate-x-1/2 z-50">
-        <Button 
+        <Button
           size="lg" 
           onClick={handleNext}
-          className="group rounded-full px-6 md:px-8 py-6 md:py-7 shadow-2xl shadow-primary/30 hover:shadow-primary/50 hover:-translate-y-1 transition-all duration-300 text-sm md:text-base font-bold"
+          className="group rounded-[8px] px-5 md:px-7 py-6 md:py-7 shadow-2xl shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-1 transition-all duration-300 text-sm md:text-base font-bold"
         >
+          <Circle className="mr-2 h-2.5 w-2.5 fill-current text-accent" />
           {buttonContent()}
         </Button>
       </div>
 
       <div className="absolute bottom-0 left-0 w-full h-1 md:h-1.5 bg-muted z-50">
-        <div 
-          className="h-full bg-linear-to-r from-primary to-blue-500 transition-all duration-700 ease-in-out"
+        <div
+          className="h-full bg-linear-to-r from-primary via-accent to-primary transition-all duration-700 ease-in-out"
           style={{ width: `${((step + 1) / 4) * 100}%` }}
         />
       </div>

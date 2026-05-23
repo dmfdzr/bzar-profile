@@ -11,7 +11,7 @@ export function ModeToggle() {
         <Button
         variant="outline"
         size="icon"
-        className="rounded-full w-9 h-9"
+        className="rounded-[8px] w-9 h-9"
         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         >
         {/* Ikon Matahari (Tampil saat Light Mode) */}
