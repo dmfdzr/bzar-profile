@@ -75,8 +75,8 @@ export function ContactSection({ language }: { language: "en" | "id" }) {
                         <p className="mt-1 text-sm font-semibold">{content.directValue}</p>
                     </div>
 
-                    <div className="grid gap-3 sm:grid-cols-[1fr_auto_auto_auto]">
-                        <Button asChild className="rounded-[8px] gap-2 px-5 text-sm">
+                    <div className="flex flex-wrap justify-center gap-2 sm:grid sm:grid-cols-[1fr_auto_auto_auto] sm:justify-normal sm:gap-3">
+                        <Button asChild className="w-full rounded-[8px] gap-2 px-5 text-sm sm:w-auto">
                             <Link href="mailto:dimasfadly01@gmail.com">
                                 {content.primary} <Mail size={16} />
                             </Link>
