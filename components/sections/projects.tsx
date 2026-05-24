@@ -256,7 +256,11 @@ export function ProjectsSection({ language }: { language: "en" | "id" }) {
                                     </Card>
                                 </DialogTrigger>
 
-                                <DialogContent className="max-w-4xl max-h-[88vh] overflow-hidden rounded-[8px] border-border/70 bg-background/96 p-0 shadow-2xl backdrop-blur-2xl">
+                                <DialogContent
+                                    onEscapeKeyDown={(event) => event.preventDefault()}
+                                    onInteractOutside={(event) => event.preventDefault()}
+                                    className="w-[calc(100vw-2rem)] max-w-[calc(100vw-2rem)] sm:max-w-[calc(100vw-2rem)] lg:max-w-312 xl:max-w-336 max-h-[88vh] overflow-hidden rounded-[8px] border-border/70 bg-background/96 p-0 shadow-2xl backdrop-blur-2xl"
+                                >
                                     <div className="max-h-[88vh] overflow-y-auto">
                                         <div className="relative overflow-hidden border-b border-border/60 bg-card/90 p-5 md:p-6">
                                             <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,hsl(var(--primary)/0.16),transparent_24rem)]" />

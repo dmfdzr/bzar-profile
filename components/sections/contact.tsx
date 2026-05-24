@@ -12,11 +12,11 @@ const copy = {
         response: "Response style",
         responseValue: "Async, practical, no fluff",
         primary: "Send Email",
-        phone: "Call phone number",
+        phone: "Open WhatsApp chat",
         github: "Open GitHub profile",
         linkedin: "Open LinkedIn profile",
         direct: "Direct channels",
-        directValue: "Email, phone, GitHub, and LinkedIn are one tap away.",
+        directValue: "Email, WhatsApp, GitHub, and LinkedIn are one tap away.",
     },
     id: {
         command: "$ kontak --tujuan kolaborasi",
@@ -27,11 +27,11 @@ const copy = {
         response: "Gaya respons",
         responseValue: "Asinkron, praktis, tanpa basa-basi berlebihan",
         primary: "Kirim Email",
-        phone: "Hubungi nomor telepon",
+        phone: "Buka chat WhatsApp",
         github: "Buka profil GitHub",
         linkedin: "Buka profil LinkedIn",
         direct: "Kanal langsung",
-        directValue: "Email, telepon, GitHub, dan LinkedIn bisa dibuka dalam satu klik.",
+        directValue: "Email, WhatsApp, GitHub, dan LinkedIn bisa dibuka dalam satu klik.",
     },
 };
 
@@ -82,7 +82,7 @@ export function ContactSection({ language }: { language: "en" | "id" }) {
                             </Link>
                         </Button>
                         <Button asChild variant="outline" size="icon" className="rounded-[8px] hover:bg-primary hover:text-primary-foreground">
-                            <Link href="tel:+6285727914053" aria-label={content.phone}>
+                            <Link href="https://wa.me/6285727914053" target="_blank" rel="noopener noreferrer" aria-label={content.phone}>
                                 <Phone size={20} />
                             </Link>
                         </Button>

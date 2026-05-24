@@ -13,8 +13,8 @@ const copy = {
             { label: "Runtime", value: "Next.js + JavaScript" },
         ],
         stats: [
-            { value: "03", label: "major experiences" },
-            { value: "08+", label: "production links" },
+            { value: "3", label: "major experiences" },
+            { value: "4", label: "live project links" },
             { value: "100%", label: "frontend ownership" },
         ],
         traits: ["Clean UI", "API aware", "Maintainable"],
@@ -30,8 +30,8 @@ const copy = {
             { label: "Runtime", value: "Next.js + JavaScript" },
         ],
         stats: [
-            { value: "03", label: "pengalaman utama" },
-            { value: "08+", label: "tautan produksi" },
+            { value: "3", label: "pengalaman utama" },
+            { value: "4", label: "tautan proyek live" },
             { value: "100%", label: "kepemilikan frontend" },
         ],
         traits: ["UI Rapi", "Paham API", "Mudah Dirawat"],
@@ -62,9 +62,9 @@ export function HeroSection({ language }: { language: "en" | "id" }) {
                         <p className="font-mono text-xs uppercase tracking-[0.24em] text-muted-foreground">
                             {content.command}
                         </p>
-                        <h1 className="font-display text-4xl font-black leading-[0.98] tracking-normal sm:text-5xl lg:text-6xl">
+                        <h1 className="pb-1 font-display text-4xl font-black leading-[1.08] tracking-normal sm:text-5xl lg:text-6xl">
                             Dimas Abidzar
-                            <span className="block bg-linear-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+                            <span className="block pb-1 bg-linear-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
                                 Fadly
                             </span>
                         </h1>
