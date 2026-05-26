@@ -7,7 +7,7 @@ const sections = [
   {
     title: "P R O F I L E",
     lines: [
-      "I am a graduate of Information Systems with a strong passion for web development, particularly in programming, website UI/UX design, and the creation of responsive and innovative websites. Equipped with a solid foundation in various programming languages, modern web technologies, and user interface design principles, I am committed to continuously enhancing my skills and knowledge in this field. I firmly believe that strong technical capabilities, combined with thoughtful design, are essential to delivering exceptional user experiences and high-quality digital solutions.",
+      "A highly motivated Frontend Engineer with a strong foundation in modern web technologies, including Vanilla JavaScript, Next.js, and Tailwind CSS. I specialize in translating thoughtful UI/UX designs into functional, responsive interfaces while maintaining clean and readable code. As a dedicated problem-solver, I am committed to continuously learning frontend best practices and delivering reliable, production-ready applications.",
     ],
   },
   {
@@ -16,11 +16,11 @@ const sections = [
       "PT. Sumber Alfaria Trijaya, Tbk",
       "November 2025 - May 2026",
       "BUILDING AND MAINTENANCE DIGITAL STORE (INTERNSHIP)",
-      "Currently participating in a comprehensive frontend development internship, actively contributing to enterprise application SPARTA Building. Leveraging Vanilla JavaScript for core system logic and Next.js (TypeScript) for modern scalable architecture. During the internship, I am involved in the following activities:",
-      "- Developing the Sparta Building application using Vanilla JavaScript, focusing on efficient DOM manipulation and lightweight performance.",
-      "- Migrate the Sparta Building platform using Next.js and TypeScript to ensure type safety and modular component architecture.",
-      "- Integrating RESTful APIs across both platforms to facilitate real-time data exchange and dynamic content rendering.",
-      "- Focused on writing clean, maintainable code and optimizing frontend performance to meet specific business requirements for both systems.",
+      "Participated in a comprehensive frontend development internship, actively contributing to the enterprise application \"SPARTA Building\", a national scale platform utilized for documenting and managing every phase of the construction process for new Alfamart stores. During the internship, I was deeply involved in both maintaining the legacy system and engineering its modern architecture:",
+      "- Core System Development: Developed and maintained the application using Vanilla JavaScript, focusing on efficient DOM manipulation and lightweight runtime performance.",
+      "- Modernization & Migration: Migrated the platform to a modern stack using Next.js and TypeScript, establishing a modular component architecture and ensuring strict type safety for better long-term scalability.",
+      "- API Integration: Integrated RESTful APIs across both legacy and modern platforms, managing efficient payload handling, real-time data exchange, and dynamic content rendering.",
+      "- Performance & Code Quality: Consistently applied clean code principles and optimized frontend rendering to meet specific business requirements, minimizing technical debt throughout the migration process.",
       "",
       "PT. Indocyber Global Teknologi",
       "September 2025 - October 2025",
@@ -34,17 +34,11 @@ const sections = [
       "PT. Kinema Systrans",
       "February 2024 - June 2024",
       "WEB DEVELOPMENT & UI/UX DESIGN (INDEPENDENT STUDY)",
-      "Micro Project",
-      "- Product Research (Freelance Website)",
-      "- Designed Wireframe Product",
-      "- Designed High Fidelity Product",
-      "- Making Prototype Product",
-      "Massive Project",
-      "- Product Research (Mental Health Service Website)",
-      "- Designed Wireframe Product",
-      "- Designed High Fidelity Product",
-      "- Making Prototype Product",
-      "- Developing Front End Website",
+      "Participated in the national Studi Independen program, an intensive study focused on end-to-end product design and frontend web development. During the activity, I was involved in the following activities:",
+      "- Handled product research for freelance and mental health service website concepts.",
+      "- Designed wireframes and high-fidelity interfaces in Figma.",
+      "- Created clickable prototypes to validate user flows before implementation.",
+      "- Developed frontend pages based on the validated design direction.",
     ],
   },
   {
@@ -57,7 +51,7 @@ const sections = [
     ],
   },
   {
-    title: "S K I L L",
+    title: "S K I L L S",
     columns: [
       {
         title: "Hard Skills",
@@ -129,6 +123,10 @@ function wrapLine(text, size, x = page.marginX) {
   return lines;
 }
 
+function contentWidth(x = page.marginX) {
+  return page.width - page.marginX - x;
+}
+
 function ensurePageSpace(pages, state, requiredHeight) {
   if (state.y < page.marginBottom + requiredHeight) {
     pages.push([]);
@@ -157,20 +155,29 @@ function pushLine(pages, state, text, size = 10, gapAfter = 4, options = {}) {
     bold = false,
     indent = 0,
     hangingIndent = 0,
-    leading = 5,
+    lineHeight = 1.5,
+    justify = false,
   } = options;
   const baseX = page.marginX + indent;
   const wrapped = text === "" ? [""] : wrapLine(text, size, baseX);
+  const lineAdvance = size * lineHeight;
 
   wrapped.forEach((line, index) => {
     ensurePageSpace(pages, state, size + gapAfter);
+    const isLastWrappedLine = index === wrapped.length - 1;
 
     const x = align === "center"
       ? Math.max(page.marginX, (page.width - textWidth(line, size)) / 2)
       : baseX + (index > 0 ? hangingIndent : 0);
+    const shouldJustify = justify && !isLastWrappedLine && line.includes(" ");
+    const availableWidth = contentWidth(x);
+    const wordGaps = Math.max(1, line.split(" ").length - 1);
+    const wordSpacing = shouldJustify
+      ? Math.max(0, (availableWidth - textWidth(line, size)) / wordGaps)
+      : 0;
 
-    pages.at(-1).push({ type: "text", text: line, size, x, y: state.y, bold });
-    state.y -= size + leading;
+    pages.at(-1).push({ type: "text", text: line, size, x, y: state.y, bold, wordSpacing });
+    state.y -= lineAdvance;
   });
 
   state.y -= gapAfter;
@@ -185,6 +192,7 @@ function pushFixedLine(pages, state, text, x, size = 10, options = {}) {
     x,
     y: state.y,
     bold: options.bold ?? false,
+    wordSpacing: 0,
   });
 }
 
@@ -223,26 +231,26 @@ function lineStyle(text) {
   }
 
   if (text.startsWith("- ")) {
-    return { size: 9.4, gapAfter: 3, indent: 12, hangingIndent: 10, leading: 5.2 };
+    return { size: 9.4, gapAfter: 3, indent: 12, hangingIndent: 10, lineHeight: 1.5, justify: true };
   }
 
   if (text.startsWith("PT.") || text === "Amikom Yogyakarta University") {
-    return { size: 10.5, gapAfter: 3, bold: true, leading: 5 };
+    return { size: 10.5, gapAfter: 3, bold: true, lineHeight: 1.5, justify: true };
   }
 
   if (text === "Micro Project" || text === "Massive Project" || text === "Hard Skills" || text === "Soft Skills") {
-    return { size: 9.8, gapAfter: 4, bold: true, leading: 5 };
+    return { size: 9.8, gapAfter: 4, bold: true, lineHeight: 1.5, justify: true };
   }
 
   if (text === text.toUpperCase() && /[A-Z]/.test(text)) {
-    return { size: 9.8, gapAfter: 5, bold: true, leading: 5 };
+    return { size: 9.8, gapAfter: 5, bold: true, lineHeight: 1.5, justify: true };
   }
 
   if (/^\d{4}|^(January|February|March|April|May|June|July|August|September|October|November|December)/.test(text)) {
-    return { size: 9.2, gapAfter: 5, leading: 5 };
+    return { size: 9.2, gapAfter: 5, lineHeight: 1.5, justify: true };
   }
 
-  return { size: 9.5, gapAfter: 5, leading: 5.4 };
+  return { size: 9.5, gapAfter: 5, lineHeight: 1.5, justify: true };
 }
 
 function buildLines() {
@@ -255,12 +263,17 @@ function buildLines() {
 
   for (const section of sections) {
     ensurePageSpace(pages, state, 46);
-    pushLine(pages, state, section.title, 11.5, 5, { bold: true, leading: 5 });
-    pushDivider(pages, state, 12);
+    pushLine(pages, state, section.title, 11.5, 0, { bold: true, lineHeight: 0.85 });
+    pushDivider(pages, state, 16);
     if (section.columns) {
       pushSkillColumns(pages, state, section.columns);
     } else {
       for (const line of section.lines) {
+        if (line === "PT. Kinema Systrans" && pages.at(-1).length > 0) {
+          pages.push([]);
+          state.y = page.height - page.marginTop;
+        }
+
         const style = lineStyle(line);
         pushLine(pages, state, line, style.size, style.gapAfter, style);
       }
@@ -287,8 +300,14 @@ function streamFor(items) {
 
     commands.push("BT");
     commands.push(`/${item.bold ? "F2" : "F1"} ${item.size} Tf`);
+    if (item.wordSpacing) {
+      commands.push(`${item.wordSpacing.toFixed(3)} Tw`);
+    }
     commands.push(`1 0 0 1 ${item.x} ${item.y} Tm`);
     commands.push(`(${escapePdf(item.text)}) Tj`);
+    if (item.wordSpacing) {
+      commands.push("0 Tw");
+    }
     commands.push("ET");
   }
 

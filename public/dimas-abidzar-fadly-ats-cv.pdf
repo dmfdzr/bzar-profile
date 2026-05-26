@@ -9,7 +9,7 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 7 0 R /F2 8 0 R >> >> /Contents 4 0 R >>
 endobj
 4 0 obj
-<< /Length 4403 >>
+<< /Length 4642 >>
 stream
 BT
 /F2 19 Tf
@@ -18,189 +18,215 @@ BT
 ET
 BT
 /F1 9.8 Tf
-1 0 0 1 141.36 710 Tm
+1 0 0 1 141.36 710.25 Tm
 (+6285727914053 | dimasfadly01@gmail.com | https://bzar-here.vercel.app) Tj
 ET
 BT
 /F2 11.5 Tf
-1 0 0 1 50 675.2 Tm
+1 0 0 1 50 678 Tm
 (P R O F I L E) Tj
 ET
 q
 0.6 w
-50 653.7 m
-562 653.7 l
+50 668.225 m
+562 668.225 l
 S
 Q
 BT
 /F1 9.5 Tf
-1 0 0 1 50 641.7 Tm
-(I am a graduate of Information Systems with a strong passion for web development, particularly in programming,) Tj
+1.720 Tw
+1 0 0 1 50 652.225 Tm
+(A highly motivated Frontend Engineer with a strong foundation in modern web technologies, including Vanilla) Tj
+0 Tw
 ET
 BT
 /F1 9.5 Tf
-1 0 0 1 50 626.8000000000001 Tm
-(website UI/UX design, and the creation of responsive and innovative websites. Equipped with a solid foundation) Tj
+1.502 Tw
+1 0 0 1 50 637.975 Tm
+(JavaScript, Next.js, and Tailwind CSS. I specialize in translating thoughtful UI/UX designs into functional,) Tj
+0 Tw
 ET
 BT
 /F1 9.5 Tf
-1 0 0 1 50 611.9000000000001 Tm
-(in various programming languages, modern web technologies, and user interface design principles, I am committed) Tj
+0.743 Tw
+1 0 0 1 50 623.725 Tm
+(responsive interfaces while maintaining clean and readable code. As a dedicated problem-solver, I am committed) Tj
+0 Tw
 ET
 BT
 /F1 9.5 Tf
-1 0 0 1 50 597.0000000000001 Tm
-(to continuously enhancing my skills and knowledge in this field. I firmly believe that strong technical) Tj
-ET
-BT
-/F1 9.5 Tf
-1 0 0 1 50 582.1000000000001 Tm
-(capabilities, combined with thoughtful design, are essential to delivering exceptional user experiences and) Tj
-ET
-BT
-/F1 9.5 Tf
-1 0 0 1 50 567.2000000000002 Tm
-(high-quality digital solutions.) Tj
+1 0 0 1 50 609.475 Tm
+(to continuously learning frontend best practices and delivering reliable, production-ready applications.) Tj
 ET
 BT
 /F2 11.5 Tf
-1 0 0 1 50 537.3000000000002 Tm
+1 0 0 1 50 580.225 Tm
 (E X P E R I E N C E) Tj
 ET
 q
 0.6 w
-50 515.8000000000002 m
-562 515.8000000000002 l
+50 570.45 m
+562 570.45 l
 S
 Q
 BT
 /F2 10.5 Tf
-1 0 0 1 50 503.8000000000002 Tm
+1 0 0 1 50 554.45 Tm
 (PT. Sumber Alfaria Trijaya, Tbk) Tj
 ET
 BT
 /F1 9.2 Tf
-1 0 0 1 50 485.3000000000002 Tm
+1 0 0 1 50 535.7 Tm
 (November 2025 - May 2026) Tj
 ET
 BT
 /F2 9.8 Tf
-1 0 0 1 50 466.1000000000002 Tm
+1 0 0 1 50 516.9000000000001 Tm
 (BUILDING AND MAINTENANCE DIGITAL STORE \(INTERNSHIP\)) Tj
 ET
 BT
 /F1 9.5 Tf
-1 0 0 1 50 446.3000000000002 Tm
-(Currently participating in a comprehensive frontend development internship, actively contributing to enterprise) Tj
+3.433 Tw
+1 0 0 1 50 497.2000000000001 Tm
+(Participated in a comprehensive frontend development internship, actively contributing to the enterprise) Tj
+0 Tw
 ET
 BT
 /F1 9.5 Tf
-1 0 0 1 50 431.4000000000002 Tm
-(application SPARTA Building. Leveraging Vanilla JavaScript for core system logic and Next.js \(TypeScript\) for) Tj
+1.069 Tw
+1 0 0 1 50 482.9500000000001 Tm
+(application "SPARTA Building", a national scale platform utilized for documenting and managing every phase of) Tj
+0 Tw
 ET
 BT
 /F1 9.5 Tf
-1 0 0 1 50 416.5000000000002 Tm
-(modern scalable architecture. During the internship, I am involved in the following activities:) Tj
+3.125 Tw
+1 0 0 1 50 468.7000000000001 Tm
+(the construction process for new Alfamart stores. During the internship, I was deeply involved in both) Tj
+0 Tw
+ET
+BT
+/F1 9.5 Tf
+1 0 0 1 50 454.4500000000001 Tm
+(maintaining the legacy system and engineering its modern architecture:) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 62 396.60000000000025 Tm
-(- Developing the Sparta Building application using Vanilla JavaScript, focusing on efficient DOM manipulation) Tj
+2.018 Tw
+1 0 0 1 62 435.2000000000001 Tm
+(- Core System Development: Developed and maintained the application using Vanilla JavaScript, focusing on) Tj
+0 Tw
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 72 382.0000000000002 Tm
-(and lightweight performance.) Tj
+1 0 0 1 72 421.1000000000001 Tm
+(efficient DOM manipulation and lightweight runtime performance.) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 62 364.4000000000002 Tm
-(- Migrate the Sparta Building platform using Next.js and TypeScript to ensure type safety and modular) Tj
+4.130 Tw
+1 0 0 1 62 404.00000000000006 Tm
+(- Modernization & Migration: Migrated the platform to a modern stack using Next.js and TypeScript,) Tj
+0 Tw
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 72 349.8000000000002 Tm
-(component architecture.) Tj
+3.985 Tw
+1 0 0 1 72 389.90000000000003 Tm
+(establishing a modular component architecture and ensuring strict type safety for better long-term) Tj
+0 Tw
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 62 332.20000000000016 Tm
-(- Integrating RESTful APIs across both platforms to facilitate real-time data exchange and dynamic content) Tj
+1 0 0 1 72 375.8 Tm
+(scalability.) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 72 317.60000000000014 Tm
-(rendering.) Tj
+0.263 Tw
+1 0 0 1 62 358.7 Tm
+(- API Integration: Integrated RESTful APIs across both legacy and modern platforms, managing efficient payload) Tj
+0 Tw
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 62 300.0000000000001 Tm
-(- Focused on writing clean, maintainable code and optimizing frontend performance to meet specific business) Tj
+1 0 0 1 72 344.59999999999997 Tm
+(handling, real-time data exchange, and dynamic content rendering.) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 72 285.4000000000001 Tm
-(requirements for both systems.) Tj
+0.907 Tw
+1 0 0 1 62 327.49999999999994 Tm
+(- Performance & Code Quality: Consistently applied clean code principles and optimized frontend rendering to) Tj
+0 Tw
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 50 267.80000000000007 Tm
+1 0 0 1 72 313.3999999999999 Tm
+(meet specific business requirements, minimizing technical debt throughout the migration process.) Tj
+ET
+BT
+/F1 9.4 Tf
+1 0 0 1 50 296.2999999999999 Tm
 () Tj
 ET
 BT
 /F2 10.5 Tf
-1 0 0 1 50 245.40000000000006 Tm
+1 0 0 1 50 276.5499999999999 Tm
 (PT. Indocyber Global Teknologi) Tj
 ET
 BT
 /F1 9.2 Tf
-1 0 0 1 50 226.90000000000006 Tm
+1 0 0 1 50 257.7999999999999 Tm
 (September 2025 - October 2025) Tj
 ET
 BT
 /F2 9.8 Tf
-1 0 0 1 50 207.70000000000007 Tm
+1 0 0 1 50 238.9999999999999 Tm
 (MICROSOFT SQL SERVER \(WORK TRAINING\)) Tj
 ET
 BT
 /F1 9.5 Tf
-1 0 0 1 50 187.90000000000006 Tm
+1.151 Tw
+1 0 0 1 50 219.2999999999999 Tm
 (Completed a work training program focused on web development and database management. Currently strengthening) Tj
+0 Tw
 ET
 BT
 /F1 9.5 Tf
-1 0 0 1 50 173.00000000000006 Tm
+0.743 Tw
+1 0 0 1 50 205.0499999999999 Tm
 (skills in Microsoft SQL Server \(SSMS\) for database design, data querying, and performance optimization. During) Tj
+0 Tw
 ET
 BT
 /F1 9.5 Tf
-1 0 0 1 50 158.10000000000005 Tm
+1 0 0 1 50 190.7999999999999 Tm
 (the training, I was involved in the following activities:) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 62 138.20000000000005 Tm
+1 0 0 1 62 171.5499999999999 Tm
 (- Learned practical skills in database management using Microsoft SQL Server \(SSMS\).) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 62 120.60000000000005 Tm
+1 0 0 1 62 154.4499999999999 Tm
 (- Designed and optimized relational databases to support real-world applications.) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 62 103.00000000000006 Tm
+1 0 0 1 62 137.3499999999999 Tm
 (- Practiced backend-database integration using SQL queries and stored procedures.) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 62 85.40000000000006 Tm
+1 0 0 1 62 120.24999999999991 Tm
 (- Focused on data handling, query performance, and reporting for work-related scenarios.) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 50 67.80000000000007 Tm
+1 0 0 1 50 103.14999999999992 Tm
 () Tj
 ET
 endstream
@@ -209,7 +235,7 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 7 0 R /F2 8 0 R >> >> /Contents 6 0 R >>
 endobj
 6 0 obj
-<< /Length 2745 >>
+<< /Length 2463 >>
 stream
 BT
 /F2 10.5 Tf
@@ -218,189 +244,166 @@ BT
 ET
 BT
 /F1 9.2 Tf
-1 0 0 1 50 723.5 Tm
+1 0 0 1 50 723.25 Tm
 (February 2024 - June 2024) Tj
 ET
 BT
 /F2 9.8 Tf
-1 0 0 1 50 704.3 Tm
+1 0 0 1 50 704.45 Tm
 (WEB DEVELOPMENT & UI/UX DESIGN \(INDEPENDENT STUDY\)) Tj
 ET
 BT
-/F2 9.8 Tf
-1 0 0 1 50 684.5 Tm
-(Micro Project) Tj
+/F1 9.5 Tf
+0.743 Tw
+1 0 0 1 50 684.75 Tm
+(Participated in the national Studi Independen program, an intensive study focused on end-to-end product design) Tj
+0 Tw
+ET
+BT
+/F1 9.5 Tf
+1 0 0 1 50 670.5 Tm
+(and frontend web development. During the activity, I was involved in the following activities:) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 62 665.7 Tm
-(- Product Research \(Freelance Website\)) Tj
+1 0 0 1 62 651.25 Tm
+(- Handled product research for freelance and mental health service website concepts.) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 62 648.1 Tm
-(- Designed Wireframe Product) Tj
+1 0 0 1 62 634.15 Tm
+(- Designed wireframes and high-fidelity interfaces in Figma.) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 62 630.5 Tm
-(- Designed High Fidelity Product) Tj
+1 0 0 1 62 617.05 Tm
+(- Created clickable prototypes to validate user flows before implementation.) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 62 612.9 Tm
-(- Making Prototype Product) Tj
-ET
-BT
-/F2 9.8 Tf
-1 0 0 1 50 595.3 Tm
-(Massive Project) Tj
-ET
-BT
-/F1 9.4 Tf
-1 0 0 1 62 576.5 Tm
-(- Product Research \(Mental Health Service Website\)) Tj
-ET
-BT
-/F1 9.4 Tf
-1 0 0 1 62 558.9 Tm
-(- Designed Wireframe Product) Tj
-ET
-BT
-/F1 9.4 Tf
-1 0 0 1 62 541.3 Tm
-(- Designed High Fidelity Product) Tj
-ET
-BT
-/F1 9.4 Tf
-1 0 0 1 62 523.6999999999999 Tm
-(- Making Prototype Product) Tj
-ET
-BT
-/F1 9.4 Tf
-1 0 0 1 62 506.0999999999999 Tm
-(- Developing Front End Website) Tj
+1 0 0 1 62 599.9499999999999 Tm
+(- Developed frontend pages based on the validated design direction.) Tj
 ET
 BT
 /F2 11.5 Tf
-1 0 0 1 50 478.4999999999999 Tm
+1 0 0 1 50 572.8499999999999 Tm
 (E D U C A T I O N) Tj
 ET
 q
 0.6 w
-50 456.9999999999999 m
-562 456.9999999999999 l
+50 563.0749999999999 m
+562 563.0749999999999 l
 S
 Q
 BT
 /F2 10.5 Tf
-1 0 0 1 50 444.9999999999999 Tm
+1 0 0 1 50 547.0749999999999 Tm
 (Amikom Yogyakarta University) Tj
 ET
 BT
 /F1 9.2 Tf
-1 0 0 1 50 426.4999999999999 Tm
+1 0 0 1 50 528.3249999999999 Tm
 (2021 - 2025) Tj
 ET
 BT
 /F1 9.5 Tf
-1 0 0 1 50 407.2999999999999 Tm
+1 0 0 1 50 509.525 Tm
 (Bachelor of Information System) Tj
 ET
 BT
 /F2 9.8 Tf
-1 0 0 1 50 387.3999999999999 Tm
+1 0 0 1 50 490.275 Tm
 (GPA 3.68) Tj
 ET
 BT
 /F2 11.5 Tf
-1 0 0 1 50 357.5999999999999 Tm
-(S K I L L) Tj
+1 0 0 1 50 460.575 Tm
+(S K I L L S) Tj
 ET
 q
 0.6 w
-50 336.0999999999999 m
-562 336.0999999999999 l
+50 450.8 m
+562 450.8 l
 S
 Q
 BT
 /F2 10 Tf
-1 0 0 1 50 324.0999999999999 Tm
+1 0 0 1 50 434.8 Tm
 (Hard Skills) Tj
 ET
 BT
 /F2 10 Tf
-1 0 0 1 324 324.0999999999999 Tm
+1 0 0 1 324 434.8 Tm
 (Soft Skills) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 62 306.0999999999999 Tm
+1 0 0 1 62 416.8 Tm
 (- MySQL) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 336 306.0999999999999 Tm
+1 0 0 1 336 416.8 Tm
 (- Effective Communication) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 62 290.0999999999999 Tm
+1 0 0 1 62 400.8 Tm
 (- Microsoft SQL Server \(SSMS\)) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 336 290.0999999999999 Tm
+1 0 0 1 336 400.8 Tm
 (- Problem Solving) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 62 274.0999999999999 Tm
+1 0 0 1 62 384.8 Tm
 (- JavaScript) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 336 274.0999999999999 Tm
+1 0 0 1 336 384.8 Tm
 (- Time Management) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 62 258.0999999999999 Tm
+1 0 0 1 62 368.8 Tm
 (- Typescript) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 336 258.0999999999999 Tm
+1 0 0 1 336 368.8 Tm
 (- Adaptability & Fast Learner) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 62 242.0999999999999 Tm
+1 0 0 1 62 352.8 Tm
 (- React) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 336 242.0999999999999 Tm
+1 0 0 1 336 352.8 Tm
 (- Attention to Detail) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 62 226.0999999999999 Tm
+1 0 0 1 62 336.8 Tm
 (- NextJS) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 336 226.0999999999999 Tm
+1 0 0 1 336 336.8 Tm
 (- Team Collaboration) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 62 210.0999999999999 Tm
+1 0 0 1 62 320.8 Tm
 (- TailwindCSS) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 336 210.0999999999999 Tm
+1 0 0 1 336 320.8 Tm
 (- Multitasking Ability) Tj
 ET
 endstream
@@ -418,12 +421,12 @@ xref
 0000000058 00000 n 
 0000000121 00000 n 
 0000000257 00000 n 
-0000004712 00000 n 
-0000004848 00000 n 
-0000007645 00000 n 
-0000007715 00000 n 
+0000004951 00000 n 
+0000005087 00000 n 
+0000007602 00000 n 
+0000007672 00000 n 
 trailer
 << /Size 9 /Root 1 0 R >>
 startxref
-7790
+7747
 %%EOF
