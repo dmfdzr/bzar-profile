@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Blocks, DatabaseZap, Gauge, Handshake, Layers3, Workflow } from "lucide-react";
+import { Blocks, Bot, DatabaseZap, Gauge, GitBranch, Handshake, Layers3, Workflow } from "lucide-react";
 
 const capabilities = [
     {
@@ -11,7 +11,7 @@ const capabilities = [
             en: "Build polished, responsive UI from design systems and product requirements.",
             id: "Membangun UI responsif dan rapi dari design system serta kebutuhan produk.",
         },
-        skills: ["JavaScript", "Next.js", "Tailwind CSS", "ShadcnUI", "Figma"],
+        skills: ["JavaScript", "Next.js", "Tailwind CSS", "ShadcnUI"],
     },
     {
         title: { en: "API-Aware Frontend", id: "Frontend Paham API" },
@@ -42,6 +42,26 @@ const capabilities = [
             id: "Menerjemahkan kebutuhan yang masih abu-abu menjadi pekerjaan yang jelas dan bisa diiterasi.",
         },
         skills: ["Problem Solving", "Time Management", "Fast Learner", "Team Collaboration"],
+    },
+    {
+        title: { en: "Delivery & Version Control", id: "Delivery & Version Control" },
+        command: "release --tracked",
+        icon: GitBranch,
+        description: {
+            en: "Manage source control and deploy frontend applications through reliable hosting workflows.",
+            id: "Mengelola source control dan deployment aplikasi frontend melalui workflow hosting yang reliable.",
+        },
+        skills: ["Git", "Vercel", "Render"],
+    },
+    {
+        title: { en: "AI-Assisted Development", id: "Pengembangan Berbantuan AI" },
+        command: "augment --dev-workflow",
+        icon: Bot,
+        description: {
+            en: "Use AI tools to accelerate coding, debugging, refactoring, documentation, and implementation planning while keeping engineering judgment in control.",
+            id: "Menggunakan AI untuk mempercepat coding, debugging, refactoring, dokumentasi, dan perencanaan implementasi dengan tetap menjaga keputusan engineering secara sadar.",
+        },
+        skills: ["Codex", "GPT-5.5", "Google Gemini"],
     },
 ];
 
@@ -125,12 +145,12 @@ export function SkillsSection({ language }: { language: "en" | "id" }) {
                 </div>
 
                 <div className="rounded-[8px] border border-accent/40 bg-accent/10 p-4">
-                    <div className="flex items-start gap-3">
-                        <Handshake className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
-                        <p className="text-sm leading-6 text-muted-foreground">
-                            {content.principle}
-                        </p>
-                    </div>
+                        <div className="flex items-start gap-3">
+                            <Handshake className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+                            <p className="text-sm leading-6 text-muted-foreground">
+                                {content.principle}
+                            </p>
+                        </div>
                 </div>
             </div>
         </section>
