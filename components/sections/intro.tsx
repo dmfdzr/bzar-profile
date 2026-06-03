@@ -13,7 +13,7 @@ const copy = {
         signals: [
             { label: "Availability", value: "Open to frontend roles" },
             { label: "Focus", value: "Interfaces, APIs, performance" },
-            { label: "Runtime", value: "Next.js + JavaScript" },
+            { label: "Runtime", value: "Next.js + TypeScript" },
         ],
         stats: [
             { id: "experiences", value: "3", label: "major experiences" },
@@ -29,7 +29,7 @@ const copy = {
         signals: [
             { label: "Ketersediaan", value: "Terbuka untuk peran frontend" },
             { label: "Fokus", value: "Antarmuka, API, performa" },
-            { label: "Runtime", value: "Next.js + JavaScript" },
+            { label: "Runtime", value: "Next.js + TypeScript" },
         ],
         stats: [
             { id: "experiences", value: "3", label: "pengalaman utama" },

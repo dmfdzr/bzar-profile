@@ -11,7 +11,7 @@ const capabilities = [
             en: "Build polished, responsive UI from design systems and product requirements.",
             id: "Membangun UI responsif dan rapi dari design system serta kebutuhan produk.",
         },
-        skills: ["JavaScript", "Next.js", "Tailwind CSS", "ShadcnUI"],
+        skills: ["JavaScript", "TypeScript", "Next.js", "Tailwind CSS", "ShadcnUI"],
     },
     {
         title: { en: "API-Aware Frontend", id: "Frontend Paham API" },
