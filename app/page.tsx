@@ -3,8 +3,9 @@
 import Image from "next/image";
 import { useState } from "react";
 import { ModeToggle } from "@/components/mode-toggle";
-import { HeroSection } from "@/components/sections/hero";
+import { IntroSection } from "@/components/sections/intro";
 import { SkillsSection } from "@/components/sections/skills";
+import { WorksSection } from "@/components/sections/works";
 import { ProjectsSection } from "@/components/sections/projects";
 import { ContactSection } from "@/components/sections/contact";
 import { Button } from "@/components/ui/button";
@@ -17,24 +18,24 @@ export default function Home() {
   const copy = {
     en: {
       shellTitle: "interactive frontend console",
-      next: ["Run Skills Scan", "Open Case Studies", "Start Conversation", "Reboot Intro"],
-      sections: ["Intro", "Stack", "Work", "Contact"],
-      commands: ["whoami", "capabilities", "case-studies", "connect"],
+      next: ["Run Skills Scan", "Open Work Log", "Sync Projects", "Start Conversation", "Reboot Intro"],
+      sections: ["Intro", "Skills", "Works", "Projects", "Contact"],
+      commands: ["whoami", "capabilities", "case-studies", "projects-api", "connect"],
       languageLabel: "Switch to Indonesian",
       cvLabel: "Download ATS CV",
     },
     id: {
       shellTitle: "konsol frontend interaktif",
-      next: ["Pindai Skill", "Buka Studi Kasus", "Mulai Percakapan", "Ulangi Intro"],
-      sections: ["Intro", "Skill", "Karya", "Kontak"],
-      commands: ["profil", "kapabilitas", "studi-kasus", "kontak"],
+      next: ["Pindai Skill", "Buka Riwayat Kerja", "Sinkron Proyek", "Mulai Percakapan", "Ulangi Intro"],
+      sections: ["Intro", "Skill", "Karya", "Proyek", "Kontak"],
+      commands: ["profil", "kapabilitas", "studi-kasus", "projects-api", "kontak"],
       languageLabel: "Ganti ke English",
       cvLabel: "Unduh CV ATS",
     },
   }[language];
 
   const handleNext = () => {
-    setStep((prev) => (prev < 3 ? prev + 1 : 0));
+    setStep((prev) => (prev < 4 ? prev + 1 : 0));
   };
 
   const buttonContent = () => {
@@ -42,13 +43,14 @@ export default function Home() {
       case 0: return <>{copy.next[0]} <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" /></>;
       case 1: return <>{copy.next[1]} <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" /></>;
       case 2: return <>{copy.next[2]} <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" /></>;
-      case 3: return <><ArrowLeft className="mr-2 h-5 w-5 group-hover:-translate-x-1 transition-transform duration-300" /> {copy.next[3]}</>;
+      case 3: return <>{copy.next[3]} <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" /></>;
+      case 4: return <><ArrowLeft className="mr-2 h-5 w-5 group-hover:-translate-x-1 transition-transform duration-300" /> {copy.next[4]}</>;
       default: return "Next";
     }
   };
 
   return (
-    <div className="console-grid h-screen w-full flex flex-col overflow-hidden bg-background text-foreground font-sans relative">
+    <div className="console-grid h-dvh w-full flex flex-col overflow-hidden bg-background text-foreground font-sans relative">
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,hsl(var(--background)/0.55),hsl(var(--background)/0.9))]" />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-linear-to-b from-background to-transparent z-10" />
 
@@ -76,7 +78,7 @@ export default function Home() {
               <span>{copy.commands[step]}</span>
             </div>
             <div className="flex items-center gap-1.5 md:gap-2" aria-label={`Current section: ${copy.sections[step]}`}>
-              {[0, 1, 2, 3].map((i) => (
+              {[0, 1, 2, 3, 4].map((i) => (
                 <button
                   key={i}
                   type="button"
@@ -124,15 +126,16 @@ export default function Home() {
         </header>
       </div>
 
-      <main className="flex-1 relative overflow-hidden w-full -mt-20 md:-mt-24">
-        <div className="absolute inset-0 pt-20 md:pt-24 pointer-events-none z-10" />
+      <main className="min-h-0 flex-1 relative overflow-hidden w-full">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-10 bg-linear-to-b from-background to-transparent z-10" />
 
         <div
-          className="flex h-full w-full transition-transform duration-700 ease-in-out pt-20 md:pt-24"
+          className="flex h-full min-h-0 w-full transition-transform duration-700 ease-in-out"
           style={{ transform: `translateX(-${step * 100}%)` }}
         >
-          <HeroSection language={language} />
+          <IntroSection language={language} />
           <SkillsSection language={language} />
+          <WorksSection language={language} />
           <ProjectsSection language={language} />
           <ContactSection language={language} />
         </div>
@@ -152,7 +155,7 @@ export default function Home() {
       <div className="absolute bottom-0 left-0 w-full h-1 md:h-1.5 bg-muted z-50">
         <div
           className="h-full bg-linear-to-r from-primary via-accent to-primary transition-all duration-700 ease-in-out"
-          style={{ width: `${((step + 1) / 4) * 100}%` }}
+          style={{ width: `${((step + 1) / 5) * 100}%` }}
         />
       </div>
 

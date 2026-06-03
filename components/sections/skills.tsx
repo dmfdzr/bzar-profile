@@ -21,7 +21,7 @@ const capabilities = [
             en: "Integrate REST APIs with clear loading, error, and data-state behavior.",
             id: "Mengintegrasikan REST API dengan status loading, error, dan data yang jelas.",
         },
-        skills: ["RESTful APIs", "Payload Mapping", "Error States", "SQL Context"],
+        skills: ["RESTful APIs", "Supabase", "Payload Mapping", "Error States", "SQL Context"],
     },
     {
         title: { en: "Performance Mindset", id: "Pola Pikir Performa" },
@@ -51,7 +51,7 @@ const capabilities = [
             en: "Manage source control and deploy frontend applications through reliable hosting workflows.",
             id: "Mengelola source control dan deployment aplikasi frontend melalui workflow hosting yang reliable.",
         },
-        skills: ["Git", "Vercel", "Render"],
+        skills: ["Git", "Node.js", "Vercel", "Render"],
     },
     {
         title: { en: "AI-Assisted Development", id: "Pengembangan Berbantuan AI" },
@@ -82,6 +82,8 @@ const skillLabels: Record<"en" | "id", Record<string, string>> = {
     en: {},
     id: {
         "Payload Mapping": "Pemetaan Payload",
+        Supabase: "Supabase",
+        "Node.js": "Node.js",
         "Error States": "Status Error",
         "SQL Context": "Konteks SQL",
         "DOM Efficiency": "Efisiensi DOM",
@@ -99,8 +101,8 @@ export function SkillsSection({ language }: { language: "en" | "id" }) {
     const content = sectionCopy[language];
 
     return (
-        <section className="w-full h-full shrink-0 flex justify-center items-start lg:items-center p-4 md:p-8 lg:px-8 lg:py-4 pb-36 lg:pb-20 overflow-y-auto lg:overflow-hidden">
-            <div className="max-w-6xl w-full space-y-6 lg:space-y-4">
+        <section className="w-full h-full min-h-0 shrink-0 flex justify-center items-start overflow-y-auto px-4 pb-40 pt-6 md:px-8 md:pt-8 lg:px-8 lg:pt-6">
+            <div className="max-w-6xl w-full space-y-5 lg:space-y-4">
                 <div className="grid gap-4 md:grid-cols-[0.9fr_1.1fr] md:items-end">
                     <div className="space-y-3">
                         <Badge variant="outline" className="h-7 rounded-[6px] border-primary/40 bg-primary/10 px-3 font-mono text-primary">
@@ -116,14 +118,14 @@ export function SkillsSection({ language }: { language: "en" | "id" }) {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
                     {capabilities.map(({ title, command, icon: Icon, description, skills }) => (
                         <Card key={command} className="group rounded-[8px] border-border/70 bg-card/82 py-0 shadow-xl shadow-black/5 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-primary/50">
                             <CardHeader className="border-b border-border/60 p-5 lg:p-4">
                                 <div className="flex items-start justify-between gap-4">
                                     <div>
                                         <p className="font-mono text-xs text-primary">$ {command}</p>
-                                        <CardTitle className="mt-2 font-display text-xl font-bold lg:text-2xl">{title[language]}</CardTitle>
+                                        <CardTitle className="mt-2 font-display text-lg font-bold leading-tight lg:text-xl">{title[language]}</CardTitle>
                                     </div>
                                     <div className="rounded-[8px] border border-border/70 bg-background/70 p-3 text-primary transition-transform duration-300 group-hover:scale-105">
                                         <Icon className="h-5 w-5" />

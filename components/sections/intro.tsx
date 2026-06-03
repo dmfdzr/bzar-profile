@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useMemo, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Activity, Braces, Cpu, GitBranch, Sparkles, Terminal } from "lucide-react";
@@ -13,9 +16,8 @@ const copy = {
             { label: "Runtime", value: "Next.js + JavaScript" },
         ],
         stats: [
-            { value: "3", label: "major experiences" },
-            { value: "4", label: "live project links" },
-            { value: "100%", label: "frontend ownership" },
+            { id: "experiences", value: "3", label: "major experiences" },
+            { id: "liveProjects", value: "4", label: "live project links" },
         ],
         traits: ["Clean UI", "API aware", "Maintainable"],
         note: "Currently shaping interfaces that balance visual polish, network efficiency, and long-term maintainability.",
@@ -30,18 +32,57 @@ const copy = {
             { label: "Runtime", value: "Next.js + JavaScript" },
         ],
         stats: [
-            { value: "3", label: "pengalaman utama" },
-            { value: "4", label: "tautan proyek live" },
-            { value: "100%", label: "kepemilikan frontend" },
+            { id: "experiences", value: "3", label: "pengalaman utama" },
+            { id: "liveProjects", value: "4", label: "tautan proyek live" },
         ],
         traits: ["UI Rapi", "Paham API", "Mudah Dirawat"],
         note: "Saat ini fokus membentuk antarmuka yang seimbang antara kualitas visual, efisiensi jaringan, dan kemudahan perawatan jangka panjang.",
     },
 };
 
-export function HeroSection({ language }: { language: "en" | "id" }) {
+type ProjectSummary = {
+    liveUrl?: string | null;
+};
+
+export function IntroSection({ language }: { language: "en" | "id" }) {
     const content = copy[language];
     const traitIcons = [Braces, Cpu, GitBranch];
+    const [liveProjectLinks, setLiveProjectLinks] = useState("4");
+
+    useEffect(() => {
+        let isMounted = true;
+
+        async function loadLiveProjectLinks() {
+            try {
+                const response = await fetch("/api/projects", {
+                    headers: { Accept: "application/json" },
+                });
+
+                if (!response.ok) return;
+
+                const payload = await response.json();
+                const projects: ProjectSummary[] = Array.isArray(payload.projects) ? payload.projects : [];
+                const liveLinks = projects.filter((project) => Boolean(project.liveUrl)).length;
+
+                if (isMounted) {
+                    setLiveProjectLinks(String(liveLinks));
+                }
+            } catch {
+                // Keep the curated baseline stat if GitHub is unavailable.
+            }
+        }
+
+        loadLiveProjectLinks();
+
+        return () => {
+            isMounted = false;
+        };
+    }, []);
+
+    const stats = useMemo(
+        () => content.stats.map((item) => (item.id === "liveProjects" ? { ...item, value: liveProjectLinks } : item)),
+        [content.stats, liveProjectLinks],
+    );
 
     return (
         <section className="w-full h-full shrink-0 flex justify-center items-start lg:items-center p-4 md:p-8 lg:px-8 lg:py-4 pb-36 lg:pb-20 overflow-y-auto lg:overflow-hidden animate-in fade-in duration-1000">
@@ -73,8 +114,8 @@ export function HeroSection({ language }: { language: "en" | "id" }) {
                         </p>
                     </div>
 
-                    <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
-                        {content.stats.map((item) => (
+                    <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                        {stats.map((item) => (
                             <div key={item.label} className="rounded-[8px] border border-border/60 bg-background/55 p-4">
                                 <div className="font-mono text-2xl font-bold text-primary">{item.value}</div>
                                 <div className="mt-1 text-[11px] uppercase tracking-[0.14em] text-muted-foreground">{item.label}</div>

@@ -1,387 +1,306 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-    Briefcase,
-    Calendar,
-    Code2,
-    Database,
+    Activity,
     ExternalLink,
     Github,
-    Layout,
-    Link as LinkIcon,
-    Milestone,
-    Search,
-    Sparkles,
+    GitPullRequest,
+    Loader2,
+    MonitorUp,
+    RadioTower,
+    RefreshCw,
     TerminalSquare,
 } from "lucide-react";
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog";
 
-const experiences = [
-    {
-        id: "sat",
-        company: "PT. Sumber Alfaria Trijaya, Tbk.",
-        role: {
-            en: "Building Maintenance Digital Store",
-            id: "Building Maintenance Digital Store",
-        },
-        period: { en: "November 2025 - May 2026", id: "November 2025 - Mei 2026" },
-        badge: { en: "Internship", id: "Magang" },
-        icon: Briefcase,
-        accent: "text-primary",
-        command: "deploy enterprise-ui",
-        metric: {
-            en: "National-scale construction documentation platform",
-            id: "Platform dokumentasi konstruksi berskala nasional",
-        },
-        impact: {
-            en: "Supported legacy maintenance and modern architecture migration for SPARTA Building.",
-            id: "Mendukung maintenance legacy dan migrasi arsitektur modern untuk SPARTA Building.",
-        },
-        scope: {
-            en: ["Legacy maintenance", "Modernization", "API integration"],
-            id: ["Maintenance legacy", "Modernisasi", "Integrasi API"],
-        },
-        description: {
-            en: "Participated in a frontend development internship for SPARTA Building, an enterprise platform used to document and manage construction phases for new Alfamart stores.",
-            id: "Mengikuti magang frontend development untuk SPARTA Building, platform enterprise untuk mendokumentasikan dan mengelola tahapan konstruksi toko Alfamart baru.",
-        },
-        details: {
-            en: [
-                "Core System Development: Developed and maintained the application using Vanilla JavaScript, focusing on efficient DOM manipulation and lightweight runtime performance.",
-                "Modernization & Migration: Migrated the platform to a modern stack using Next.js and TypeScript, establishing modular component architecture and strict type safety for long-term scalability.",
-                "API Integration: Integrated RESTful APIs across legacy and modern platforms, managing efficient payload handling, real-time data exchange, and dynamic content rendering.",
-                "Performance & Code Quality: Applied clean code principles and optimized frontend rendering to meet business requirements while minimizing technical debt during migration.",
-            ],
-            id: [
-                "Core System Development: Mengembangkan dan menjaga aplikasi menggunakan Vanilla JavaScript dengan fokus pada manipulasi DOM yang efisien dan runtime ringan.",
-                "Modernization & Migration: Memigrasikan platform ke stack modern menggunakan Next.js dan TypeScript, membangun arsitektur komponen modular dan type safety untuk skalabilitas jangka panjang.",
-                "API Integration: Mengintegrasikan RESTful API pada platform legacy dan modern, termasuk payload handling, pertukaran data real-time, dan rendering konten dinamis.",
-                "Performance & Code Quality: Menerapkan clean code dan mengoptimalkan rendering frontend sesuai kebutuhan bisnis sambil menekan technical debt selama proses migrasi.",
-            ],
-        },
-        stack: ["Javascript", "Next.js", "TypeScript", "RESTful API", "Tailwind CSS"],
-        links: [
-            { label: { en: "Live App", id: "Aplikasi Live" }, url: "https://sparta-building.vercel.app", icon: ExternalLink, variant: "default" },
-            { label: { en: "Landing Page", id: "Landing Page" }, url: "https://sparta-alfamart.vercel.app", icon: ExternalLink, variant: "default" },
-            { label: { en: "Next.js Source", id: "Kode Next.js" }, url: "https://github.com/dmfdzr/sparta-fe.git", icon: Github, variant: "outline" },
-            { label: { en: "VanillaJS Source", id: "Kode VanillaJS" }, url: "https://github.com/dmfdzr/sparta-frontend.git", icon: Github, variant: "outline" },
-        ],
-    },
-    {
-        id: "indocyber",
-        company: "PT. Indocyber Global Teknologi",
-        role: { en: "Microsoft SQL Server", id: "Microsoft SQL Server" },
-        period: { en: "September 2025 - October 2025", id: "September 2025 - Oktober 2025" },
-        badge: { en: "Work Training", id: "Pelatihan Kerja" },
-        icon: Database,
-        accent: "text-emerald-500",
-        command: "query relational-data",
-        metric: { en: "Database design and reporting context", id: "Konteks desain database dan pelaporan" },
-        impact: {
-            en: "Built stronger data fundamentals for frontend work that depends on accurate backend contracts.",
-            id: "Memperkuat fondasi data untuk pekerjaan frontend yang bergantung pada kontrak backend yang akurat.",
-        },
-        scope: {
-            en: ["Relational design", "Query practice", "Reporting context"],
-            id: ["Desain relasional", "Latihan query", "Konteks pelaporan"],
-        },
-        description: {
-            en: "Focused on relational database management and practical backend integration fundamentals.",
-            id: "Berfokus pada pengelolaan database relasional dan dasar integrasi backend secara praktis.",
-        },
-        details: {
-            en: [
-                "Learned practical database management using Microsoft SQL Server and SSMS.",
-                "Designed and optimized relational databases to support real-world applications.",
-                "Practiced backend database integration using SQL queries and stored procedures.",
-                "Focused on data handling, query performance, and reporting for work-related scenarios.",
-            ],
-            id: [
-                "Mempelajari pengelolaan database secara praktis menggunakan Microsoft SQL Server dan SSMS.",
-                "Mendesain dan mengoptimalkan database relasional untuk mendukung aplikasi nyata.",
-                "Berlatih integrasi backend database menggunakan SQL query dan stored procedure.",
-                "Berfokus pada pengolahan data, performa query, dan pelaporan untuk skenario kerja.",
-            ],
-        },
-        stack: ["SSMS", "SQL Queries"],
-        links: [
-            { label: { en: "View Course", id: "Lihat Materi" }, url: "https://drive.google.com/drive/folders/1yi5vJ5lA0d8Lzp14RBzpyqeGDpLPdmat?usp=sharing", icon: ExternalLink, variant: "default" },
-        ],
-    },
-    {
-        id: "kinema",
-        company: "PT. Kinema Systrans",
-        role: { en: "Web Development & UI/UX Design", id: "Web Development & UI/UX Design" },
-        period: { en: "February 2024 - June 2024", id: "Februari 2024 - Juni 2024" },
-        badge: { en: "Independent Study", id: "Studi Independen" },
-        icon: Search,
-        accent: "text-accent",
-        command: "prototype product-flow",
-        metric: { en: "Research, design, prototype, frontend", id: "Riset, desain, prototipe, frontend" },
-        impact: {
-            en: "Connected end-to-end product design and frontend development through the national Studi Independen program.",
-            id: "Menghubungkan desain produk end-to-end dan pengembangan frontend melalui program Studi Independen nasional.",
-        },
-        scope: {
-            en: ["Product research", "UI/UX design", "Frontend delivery"],
-            id: ["Riset produk", "Desain UI/UX", "Delivery frontend"],
-        },
-        description: {
-            en: "Participated in an intensive study focused on end-to-end product design and frontend web development.",
-            id: "Mengikuti studi intensif yang berfokus pada desain produk end-to-end dan pengembangan web frontend.",
-        },
-        details: {
-            en: [
-                "Participated in the national Studi Independen program focused on product design and frontend web development.",
-                "Handled product research for freelance and mental health service website concepts.",
-                "Designed wireframes and high-fidelity interfaces in Figma.",
-                "Created clickable prototypes to validate user flows before implementation.",
-                "Developed frontend pages based on the validated design direction.",
-            ],
-            id: [
-                "Mengikuti program Studi Independen nasional yang berfokus pada desain produk dan pengembangan web frontend.",
-                "Melakukan product research untuk konsep website freelance dan layanan mental health.",
-                "Mendesain wireframe dan high-fidelity antarmuka menggunakan Figma.",
-                "Membuat prototipe interaktif untuk memvalidasi alur pengguna sebelum implementasi.",
-                "Mengembangkan halaman frontend berdasarkan arah desain yang sudah divalidasi.",
-            ],
-        },
-        stack: ["Figma", "Prototyping", "Product Research", "UI/UX Principles", "Frontend Development"],
-        links: [
-            { label: { en: "ReLive Project", id: "Proyek ReLive" }, url: "https://relive-health.vercel.app/", icon: ExternalLink, variant: "outline" },
-            { label: { en: "ReLive Source", id: "Kode ReLive" }, url: "https://github.com/dmfdzr/relive-frontend.git", icon: Github, variant: "outline" },
-            { label: { en: "YakinKerja Project", id: "Proyek YakinKerja" }, url: "https://freelance-lake.vercel.app/", icon: ExternalLink, variant: "outline" },
-            { label: { en: "YakinKerja Source", id: "Kode YakinKerja" }, url: "https://github.com/dmfdzr/freelance.git", icon: Github, variant: "outline" },
-        ],
-    },
-];
+type ProjectFilter = "all" | "live" | "latest";
 
-const stackLabels: Record<"en" | "id", Record<string, string>> = {
-    en: {},
+const copy = {
+    en: {
+        title: "Projects shipped and traceable.",
+        description: "This panel reads public repository data from GitHub and enriches matching repos with clearer portfolio metadata.",
+        badge: "projects.api",
+        sourceGithub: "Live from GitHub",
+        sourceUnavailable: "GitHub unavailable",
+        loading: "Syncing repositories",
+        retry: "Retry",
+        live: "Live",
+        source: "Source",
+        latest: "Latest",
+        updated: "Updated",
+        stack: "Stack",
+        empty: "Project data is not available right now.",
+        filteredEmpty: "No projects match this filter.",
+        stats: ["projects", "live links", "latest"],
+    },
     id: {
-        "Product Research": "Riset Produk",
-        Prototyping: "Prototyping",
-        "UI/UX Principles": "Prinsip UI/UX",
-        "Frontend Development": "Pengembangan Frontend",
+        title: "Proyek yang pernah dikerjakan.",
+        description: "Panel ini membaca data repository publik dari GitHub dan memperkaya repo yang cocok dengan metadata portfolio yang lebih jelas.",
+        badge: "projects.api",
+        sourceGithub: "Langsung dari GitHub",
+        sourceUnavailable: "GitHub tidak tersedia",
+        loading: "Sinkronisasi repository",
+        retry: "Coba lagi",
+        live: "Live",
+        source: "Source",
+        latest: "Terbaru",
+        updated: "Diupdate",
+        stack: "Stack",
+        empty: "Data proyek dari GitHub belum tersedia saat ini.",
+        filteredEmpty: "Tidak ada proyek yang cocok dengan filter ini.",
+        stats: ["proyek", "link live", "terbaru"],
     },
 };
 
+type Project = {
+    name: string;
+    title: string;
+    description: {
+        en: string;
+        id: string;
+    };
+    sourceUrl: string;
+    liveUrl?: string | null;
+    language: string;
+    stack: string[];
+    updatedAt?: string;
+    stars?: number;
+    forks?: number;
+};
+
+function formatDate(value: string | undefined, language: "en" | "id") {
+    if (!value) return "-";
+
+    return new Intl.DateTimeFormat(language === "id" ? "id-ID" : "en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+    }).format(new Date(value));
+}
+
+function normalizeProjects(projects: Project[]) {
+    return projects.map((project) => ({
+        ...project,
+        description: project.description ?? {
+            en: "Public repository from the GitHub profile.",
+            id: "Repository publik dari profil GitHub.",
+        },
+        stack: project.stack?.length ? project.stack : [project.language].filter(Boolean),
+    }));
+}
+
+function isLatestProject(updatedAt: string | undefined) {
+    if (!updatedAt) return false;
+
+    const updatedDate = new Date(updatedAt);
+    const twoMonthsAgo = new Date();
+    twoMonthsAgo.setMonth(twoMonthsAgo.getMonth() - 2);
+
+    return updatedDate >= twoMonthsAgo;
+}
+
 export function ProjectsSection({ language }: { language: "en" | "id" }) {
-    const sectionCopy = {
-        en: {
-            title: "Experience with signal.",
-            description: "Each card works like a case-study snapshot: work context, key contribution, stack, and links that can be verified directly.",
-            signal: "signal",
-            viewDetails: "View Details",
-            keyContributions: "Key Contributions",
-            technologies: "Technologies & Tools",
-            projectLinks: "Project Links",
-            impact: "Impact",
-            scope: "Scope",
-            overview: "Overview",
-        },
-        id: {
-            title: "Pengalaman yang jelas sinyalnya.",
-            description: "Setiap card dibuat seperti snapshot case study: konteks pekerjaan, kontribusi utama, stack, dan link yang bisa langsung diverifikasi.",
-            signal: "sinyal",
-            viewDetails: "Lihat Detail",
-            keyContributions: "Kontribusi Utama",
-            technologies: "Teknologi & Tools",
-            projectLinks: "Tautan Proyek",
-            impact: "Dampak",
-            scope: "Cakupan",
-            overview: "Ringkasan",
-        },
-    }[language];
+    const content = copy[language];
+    const [projects, setProjects] = useState<Project[]>([]);
+    const [activeFilter, setActiveFilter] = useState<ProjectFilter>("all");
+    const [isAvailable, setIsAvailable] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+
+    const loadProjects = async () => {
+        setIsLoading(true);
+
+        try {
+            const response = await fetch("/api/projects", {
+                headers: { Accept: "application/json" },
+            });
+
+            if (!response.ok) {
+                throw new Error(`projects-${response.status}`);
+            }
+
+            const payload = await response.json();
+            const nextProjects = Array.isArray(payload.projects) ? normalizeProjects(payload.projects) : [];
+
+            setProjects(nextProjects);
+            setIsAvailable(true);
+        } catch {
+            setProjects([]);
+            setIsAvailable(false);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        loadProjects();
+    }, []);
+
+    const stats = useMemo(() => {
+        const liveLinks = projects.filter((project) => project.liveUrl).length;
+        const latest = projects.filter((project) => isLatestProject(project.updatedAt)).length;
+
+        return [
+            { value: projects.length, label: content.stats[0], filter: "all" as const },
+            { value: liveLinks, label: content.stats[1], filter: "live" as const },
+            { value: latest, label: content.stats[2], filter: "latest" as const },
+        ];
+    }, [content.stats, projects]);
+
+    const visibleProjects = useMemo(() => {
+        if (activeFilter === "live") {
+            return projects.filter((project) => project.liveUrl);
+        }
+
+        if (activeFilter === "latest") {
+            return projects.filter((project) => isLatestProject(project.updatedAt));
+        }
+
+        return projects;
+    }, [activeFilter, projects]);
 
     return (
-        <section className="w-full h-full shrink-0 flex justify-center items-start lg:items-center p-4 md:p-8 lg:px-8 lg:py-4 pb-36 lg:pb-20 overflow-y-auto lg:overflow-hidden">
-            <div className="max-w-6xl w-full flex flex-col space-y-6 lg:space-y-4">
-                <div className="grid gap-4 md:grid-cols-[0.9fr_1.1fr] md:items-end">
-                    <div className="space-y-3">
-                        <Badge variant="outline" className="h-7 rounded-[6px] border-primary/40 bg-primary/10 px-3 font-mono text-primary">
+        <section className="w-full h-full min-h-0 shrink-0 flex justify-center items-start overflow-y-auto px-4 pb-40 pt-6 md:px-8 md:pt-8 lg:px-8 lg:pt-6">
+            <div className="max-w-6xl w-full flex flex-col gap-5 lg:gap-4">
+                <div className="grid gap-4 md:grid-cols-[0.92fr_1.08fr] md:items-end">
+                    <div className="flex flex-col gap-3">
+                        <Badge variant="outline" className="h-7 w-fit rounded-[6px] border-primary/40 bg-primary/10 px-3 font-mono text-primary">
                             <TerminalSquare className="mr-1 h-3.5 w-3.5" />
-                            case-studies.json
+                            {content.badge}
                         </Badge>
-                        <h2 className="font-display text-3xl font-black tracking-normal lg:text-4xl">{sectionCopy.title}</h2>
+                        <h2 className="font-display text-3xl font-black tracking-normal lg:text-4xl">{content.title}</h2>
                     </div>
-                    <p className="text-sm leading-7 text-muted-foreground md:text-base">
-                        {sectionCopy.description}
-                    </p>
+                    <div className="flex flex-col gap-3">
+                        <p className="text-sm leading-7 text-muted-foreground md:text-base">{content.description}</p>
+                        <div className="flex flex-wrap items-center gap-2">
+                            <Badge variant={isAvailable ? "default" : "secondary"} className="h-7 rounded-[6px] px-3 font-mono">
+                                <RadioTower className="mr-1 h-3.5 w-3.5" />
+                                {isAvailable ? content.sourceGithub : content.sourceUnavailable}
+                            </Badge>
+                            {isLoading && (
+                                <Badge variant="outline" className="h-7 rounded-[6px] px-3 font-mono">
+                                    <Loader2 className="mr-1 h-3.5 w-3.5 animate-spin" />
+                                    {content.loading}
+                                </Badge>
+                            )}
+                            <Button
+                                type="button"
+                                variant="outline"
+                                size="sm"
+                                onClick={loadProjects}
+                                disabled={isLoading}
+                                className="h-7 rounded-[6px] px-3 font-mono text-xs"
+                            >
+                                <RefreshCw className={`mr-1.5 h-3.5 w-3.5 ${isLoading ? "animate-spin" : ""}`} />
+                                {content.retry}
+                            </Button>
+                        </div>
+                    </div>
                 </div>
 
-                <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-                    {experiences.map((exp, index) => {
-                        const Icon = exp.icon;
+                <div className="grid grid-cols-3 gap-3">
+                    {stats.map((item) => (
+                        <button
+                            key={item.label}
+                            type="button"
+                            onClick={() => setActiveFilter(item.filter)}
+                            aria-pressed={activeFilter === item.filter}
+                            className={`rounded-[8px] border p-3 text-left shadow-lg shadow-black/5 backdrop-blur transition-all duration-300 sm:p-4 ${
+                                activeFilter === item.filter
+                                    ? "border-primary/60 bg-primary/10"
+                                    : "border-border/70 bg-card/78 hover:border-primary/40 hover:bg-card"
+                            }`}
+                        >
+                            <div className="font-mono text-xl font-bold text-primary sm:text-2xl">{item.value}</div>
+                            <div className="mt-1 text-[10px] uppercase tracking-[0.14em] text-muted-foreground sm:text-[11px]">{item.label}</div>
+                        </button>
+                    ))}
+                </div>
 
-                        return (
-                            <Dialog key={exp.id}>
-                                <DialogTrigger asChild>
-                                    <Card className="group cursor-pointer rounded-[8px] border-border/70 bg-card/82 py-0 shadow-xl shadow-black/5 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-primary/10">
-                                        <CardHeader className="border-b border-border/60 p-5 lg:p-4">
-                                            <div className="mb-4 flex items-center justify-between">
-                                                <div className="rounded-[8px] border border-border/70 bg-background/70 p-3 transition-transform duration-300 group-hover:scale-105">
-                                                    <Icon className={`h-6 w-6 ${exp.accent}`} />
-                                                </div>
-                                                <span className="font-mono text-xs text-muted-foreground">0{index + 1}</span>
-                                            </div>
-                                            <p className="font-mono text-xs text-primary">$ {exp.command}</p>
-                                            <CardTitle className="mt-2 font-display text-xl font-bold leading-tight group-hover:text-primary">
-                                                {exp.role[language]}
-                                            </CardTitle>
-                                            <CardDescription className="font-medium text-foreground/80">
-                                                {exp.company}
-                                            </CardDescription>
-                                        </CardHeader>
-                                        <CardContent className="space-y-5 p-5">
-                                            <p className="text-sm leading-6 text-muted-foreground">{exp.description[language]}</p>
-                                            <div className="rounded-[8px] border border-border/60 bg-background/55 p-3">
-                                                <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">{sectionCopy.signal}</p>
-                                                <p className="mt-1 text-sm font-semibold">{exp.metric[language]}</p>
-                                            </div>
-                                            <div className="flex items-center text-xs text-muted-foreground gap-2">
-                                                <Calendar size={14} /> {exp.period[language]}
-                                            </div>
-                                            <div className="flex items-center text-sm font-semibold text-primary">
-                                                {sectionCopy.viewDetails} <ExternalLink size={14} className="ml-2 transition-transform group-hover:translate-x-1" />
-                                            </div>
-                                        </CardContent>
-                                    </Card>
-                                </DialogTrigger>
-
-                                <DialogContent
-                                    onEscapeKeyDown={(event) => event.preventDefault()}
-                                    onInteractOutside={(event) => event.preventDefault()}
-                                    className="w-[calc(100vw-2rem)] max-w-[calc(100vw-2rem)] sm:max-w-[calc(100vw-2rem)] lg:max-w-312 xl:max-w-336 max-h-[88vh] overflow-hidden rounded-[8px] border-border/70 bg-background/96 p-0 shadow-2xl backdrop-blur-2xl"
-                                >
-                                    <div className="max-h-[88vh] overflow-y-auto">
-                                        <div className="relative overflow-hidden border-b border-border/60 bg-card/90 p-5 md:p-6">
-                                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,hsl(var(--primary)/0.16),transparent_24rem)]" />
-                                            <DialogHeader className="relative">
-                                                <div className="flex flex-wrap items-center gap-3 mb-3">
-                                                    <Badge variant="secondary" className="rounded-[6px] bg-primary/10 text-primary border-primary/20">
-                                                        {exp.badge[language]}
-                                                    </Badge>
-                                                    <span className="font-mono text-xs text-muted-foreground">$ {exp.command}</span>
-                                                </div>
-                                                <DialogTitle className="font-display text-2xl font-bold md:text-4xl">{exp.role[language]}</DialogTitle>
-                                                <DialogDescription className="text-base font-semibold text-foreground/90">
-                                                    {exp.company}
-                                                </DialogDescription>
-                                            </DialogHeader>
+                {projects.length === 0 ? (
+                    <div className="rounded-[8px] border border-border/70 bg-card/82 p-6 text-sm text-muted-foreground">{content.empty}</div>
+                ) : visibleProjects.length === 0 ? (
+                    <div className="rounded-[8px] border border-border/70 bg-card/82 p-6 text-sm text-muted-foreground">{content.filteredEmpty}</div>
+                ) : (
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+                        {visibleProjects.map((project) => (
+                            <Card key={project.name} className="group rounded-[8px] border-border/70 bg-card/82 py-0 shadow-xl shadow-black/5 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-primary/10">
+                                <CardHeader className="border-b border-border/60 p-4">
+                                    <div className="mb-2 flex items-center justify-between gap-3">
+                                        <div className="rounded-[8px] border border-border/70 bg-background/70 p-3 transition-transform duration-300 group-hover:scale-105">
+                                            <MonitorUp className="h-6 w-6 text-primary" />
                                         </div>
-
-                                        <div className="grid gap-5 p-5 md:grid-cols-[0.9fr_1.1fr] md:p-6">
-                                            <aside className="space-y-4">
-                                                <div className="rounded-[8px] border border-border/70 bg-card/70 p-4">
-                                                    <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">{sectionCopy.signal}</p>
-                                                    <p className="mt-1 text-sm font-semibold">{exp.metric[language]}</p>
-                                                    <div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
-                                                        <Calendar size={16} />
-                                                        <span>{exp.period[language]}</span>
-                                                    </div>
-                                                </div>
-
-                                                <div className="rounded-[8px] border border-accent/40 bg-accent/10 p-4">
-                                                    <h4 className="font-bold flex items-center gap-2">
-                                                        <Sparkles size={18} className="text-accent" /> {sectionCopy.impact}
-                                                    </h4>
-                                                    <p className="mt-2 text-sm leading-6 text-muted-foreground">{exp.impact[language]}</p>
-                                                </div>
-
-                                                <div className="rounded-[8px] border border-border/70 bg-card/70 p-4">
-                                                    <h4 className="font-bold flex items-center gap-2">
-                                                        <Milestone size={18} className="text-primary" /> {sectionCopy.scope}
-                                                    </h4>
-                                                    <div className="mt-3 flex flex-wrap gap-2">
-                                                        {exp.scope[language].map((scope) => (
-                                                            <Badge key={scope} variant="outline" className="rounded-[6px] bg-muted/50">
-                                                                {scope}
-                                                            </Badge>
-                                                        ))}
-                                                    </div>
-                                                </div>
-                                            </aside>
-
-                                            <div className="space-y-5">
-                                                <div className="rounded-[8px] border border-border/70 bg-card/70 p-4">
-                                                    <h4 className="font-bold flex items-center gap-2">
-                                                        <TerminalSquare size={18} className="text-primary" /> {sectionCopy.overview}
-                                                    </h4>
-                                                    <p className="mt-2 text-sm leading-6 text-muted-foreground">{exp.description[language]}</p>
-                                                </div>
-
-                                                <div className="rounded-[8px] border border-border/70 bg-card/70 p-4">
-                                                    <h4 className="font-bold flex items-center gap-2">
-                                                        <Code2 size={18} className="text-primary" /> {sectionCopy.keyContributions}
-                                                    </h4>
-                                                    <ol className="mt-4 grid gap-3">
-                                                        {exp.details[language].map((detail, detailIndex) => (
-                                                            <li key={detail} className="grid grid-cols-[auto_1fr] gap-3 text-sm text-muted-foreground">
-                                                                <span className="flex h-7 w-7 items-center justify-center rounded-[6px] border border-primary/30 bg-primary/10 font-mono text-xs font-bold text-primary">
-                                                                    {detailIndex + 1}
-                                                                </span>
-                                                                <span className="pt-1">{detail}</span>
-                                                            </li>
-                                                        ))}
-                                                    </ol>
-                                                </div>
-
-                                                <div className="rounded-[8px] border border-border/70 bg-card/70 p-4">
-                                                    <h4 className="font-bold flex items-center gap-2">
-                                                        <Layout size={18} className="text-primary" /> {sectionCopy.technologies}
-                                                    </h4>
-                                                    <div className="mt-3 flex flex-wrap gap-2">
-                                                        {exp.stack.map((tech) => (
-                                                            <Badge key={tech} variant="outline" className="rounded-[6px] bg-muted/50">
-                                                                {stackLabels[language][tech] ?? tech}
-                                                            </Badge>
-                                                        ))}
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <div className="flex items-center gap-2">
+                                            {isLatestProject(project.updatedAt) && (
+                                                <Badge variant="secondary" className="rounded-[6px] bg-accent/18 text-accent-foreground dark:text-accent">
+                                                    {content.latest}
+                                                </Badge>
+                                            )}
+                                            <Badge variant="outline" className="rounded-[6px] bg-muted/50 font-mono">
+                                                {project.language}
+                                            </Badge>
                                         </div>
+                                    </div>
+                                    <CardTitle className="font-display text-lg font-bold leading-tight group-hover:text-primary">
+                                        {project.title}
+                                    </CardTitle>
+                                    <CardDescription className="truncate font-mono text-xs">
+                                        github.com/dmfdzr/{project.name}
+                                    </CardDescription>
+                                </CardHeader>
+                                <CardContent className="flex h-full flex-col gap-3 p-4">
+                                    <p className="text-sm leading-6 text-muted-foreground">{project.description[language]}</p>
 
-                                        {exp.links.length > 0 && (
-                                            <div className="border-t border-border/60 bg-muted/25 p-5 md:p-6">
-                                                <h4 className="font-bold flex items-center gap-2">
-                                                    <LinkIcon size={18} className="text-primary" /> {sectionCopy.projectLinks}
-                                                </h4>
-                                                <div className="mt-3 flex flex-wrap gap-3">
-                                                    {exp.links.map((link) => {
-                                                        const LinkIconComponent = link.icon;
+                                    <div className="rounded-[8px] border border-border/60 bg-background/55 p-3">
+                                        <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">{content.stack}</p>
+                                        <div className="mt-2 flex flex-wrap gap-2">
+                                            {project.stack.slice(0, 4).map((tech) => (
+                                                <Badge key={tech} variant="outline" className="rounded-[6px] bg-muted/50">
+                                                    {tech}
+                                                </Badge>
+                                            ))}
+                                        </div>
+                                    </div>
 
-                                                        return (
-                                                            <Button
-                                                                key={link.label.en}
-                                                                asChild
-                                                                variant={link.variant as "default" | "outline"}
-                                                                className="gap-2 rounded-[8px] shadow-md transition-all duration-300 hover:-translate-y-0.5"
-                                                            >
-                                                                <Link href={link.url} target="_blank" rel="noopener noreferrer">
-                                                                    <LinkIconComponent size={16} /> {link.label[language]}
-                                                                </Link>
-                                                            </Button>
-                                                        );
-                                                    })}
-                                                </div>
-                                            </div>
+                                    <div className="flex min-w-0 items-center gap-2 text-xs text-muted-foreground">
+                                        <Activity size={14} />
+                                        <span className="truncate">{content.updated}: {formatDate(project.updatedAt, language)}</span>
+                                        {typeof project.stars === "number" && (
+                                            <span className="ml-auto flex items-center gap-1">
+                                                stars {project.stars}
+                                            </span>
+                                        )}
+                                        {typeof project.forks === "number" && (
+                                            <span className="flex items-center gap-1">
+                                                <GitPullRequest size={13} /> {project.forks}
+                                            </span>
                                         )}
                                     </div>
-                                </DialogContent>
-                            </Dialog>
-                        );
-                    })}
-                </div>
+
+                                    <div className="mt-auto flex flex-wrap gap-2 pt-1">
+                                        {project.liveUrl && (
+                                            <Button asChild size="sm" className="rounded-[8px]">
+                                                <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                                                    <ExternalLink className="mr-1.5 h-4 w-4" />
+                                                    {content.live}
+                                                </Link>
+                                            </Button>
+                                        )}
+                                        <Button asChild size="sm" variant="outline" className="rounded-[8px]">
+                                            <Link href={project.sourceUrl} target="_blank" rel="noopener noreferrer">
+                                                <Github className="mr-1.5 h-4 w-4" />
+                                                {content.source}
+                                            </Link>
+                                        </Button>
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        ))}
+                    </div>
+                )}
             </div>
         </section>
     );
