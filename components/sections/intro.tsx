@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import GlitchText from "@/components/GlitchText";
+import ProfileCard from "@/components/ProfileCard";
 import { Badge } from "@/components/ui/badge";
 import { Activity, Braces, Cpu, GitBranch, Sparkles, Terminal } from "lucide-react";
 
@@ -103,11 +104,14 @@ export function IntroSection({ language }: { language: "en" | "id" }) {
                         <p className="font-mono text-xs uppercase tracking-[0.24em] text-muted-foreground">
                             {content.command}
                         </p>
-                        <h1 className="pb-1 font-display text-4xl font-black leading-[1.08] tracking-normal sm:text-5xl lg:text-6xl">
-                            Dimas Abidzar
-                            <span className="block pb-1 bg-linear-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-                                Fadly
-                            </span>
+                        <h1 className="pb-1 font-display text-2xl font-black leading-[1.08] tracking-normal sm:text-5xl lg:text-5xl">
+                            <GlitchText
+                                speed={0.56}
+                                enableShadows
+                                className="mx-0 cursor-default text-inherit leading-[inherit] after:bg-card after:text-foreground before:bg-card before:text-foreground"
+                            >
+                                Dimas Abidzar Fadly
+                            </GlitchText>
                         </h1>
                         <p className="max-w-2xl text-sm leading-7 text-muted-foreground sm:text-base md:text-lg">
                             {content.body}
@@ -134,13 +138,23 @@ export function IntroSection({ language }: { language: "en" | "id" }) {
                             </span>
                         </div>
                         <div className="flex flex-col items-center gap-5 sm:flex-row">
-                            <div className="shrink-0 relative group">
-                                <div className="absolute -inset-1 bg-linear-to-r from-primary to-accent opacity-35 blur-xl transition duration-700 group-hover:opacity-65" />
-                                <Avatar className="relative h-36 w-36 border-4 border-background shadow-2xl ring-1 ring-border sm:h-44 sm:w-44 lg:h-48 lg:w-48">
-                                    <AvatarImage src="/profile.jpg" alt="Dimas Abidzar Fadly" className="object-cover" />
-                                    <AvatarFallback className="text-2xl md:text-4xl bg-primary text-primary-foreground font-bold">DA</AvatarFallback>
-                                </Avatar>
-                            </div>
+                            <ProfileCard
+                                avatarUrl="/profile.jpg"
+                                iconUrl=""
+                                grainUrl=""
+                                name="Dimas Abidzar Fadly"
+                                showUserInfo={false}
+                                showDetails={false}
+                                showHolographicEffect={false}
+                                enableMobileTilt
+                                cardHeight="220px"
+                                cardMaxHeight="220px"
+                                cardAspectRatio="0.78"
+                                innerGradient="linear-gradient(145deg,hsl(var(--primary)/0.30) 0%,hsl(var(--accent)/0.18) 100%)"
+                                behindGlowColor="hsl(var(--primary) / 0.55)"
+                                behindGlowSize="62%"
+                                className="w-43 shrink-0 sm:w-47.5 lg:w-50.5"
+                            />
                             <div className="w-full space-y-3">
                                 {content.signals.map((signal) => (
                                     <div key={signal.label} className="rounded-[8px] border border-border/60 bg-background/55 p-3">

@@ -1,7 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import type { PointerEvent } from "react";
+import { useRef, useState } from "react";
+import LetterGlitch from "@/components/LetterGlitch";
 import { ModeToggle } from "@/components/mode-toggle";
 import { IntroSection } from "@/components/sections/intro";
 import { SkillsSection } from "@/components/sections/skills";
@@ -9,16 +11,16 @@ import { WorksSection } from "@/components/sections/works";
 import { ProjectsSection } from "@/components/sections/projects";
 import { ContactSection } from "@/components/sections/contact";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowRight, Circle, FileDown } from "lucide-react";
+import { FileDown } from "lucide-react";
 
 export default function Home() {
   const [step, setStep] = useState(0);
   const [language, setLanguage] = useState<"en" | "id">("en");
+  const swipeStart = useRef<{ x: number; y: number } | null>(null);
 
   const copy = {
     en: {
       shellTitle: "interactive frontend console",
-      next: ["Run Skills Scan", "Open Work Log", "Sync Projects", "Start Conversation", "Reboot Intro"],
       sections: ["Intro", "Skills", "Works", "Projects", "Contact"],
       commands: ["whoami", "capabilities", "case-studies", "projects-api", "connect"],
       languageLabel: "Switch to Indonesian",
@@ -26,7 +28,6 @@ export default function Home() {
     },
     id: {
       shellTitle: "konsol frontend interaktif",
-      next: ["Pindai Skill", "Buka Riwayat Kerja", "Sinkron Proyek", "Mulai Percakapan", "Ulangi Intro"],
       sections: ["Intro", "Skill", "Karya", "Proyek", "Kontak"],
       commands: ["profil", "kapabilitas", "studi-kasus", "projects-api", "kontak"],
       languageLabel: "Ganti ke English",
@@ -34,28 +35,55 @@ export default function Home() {
     },
   }[language];
 
-  const handleNext = () => {
-    setStep((prev) => (prev < 4 ? prev + 1 : 0));
+  const goNext = () => {
+    setStep((prev) => Math.min(prev + 1, 4));
   };
 
-  const buttonContent = () => {
-    switch (step) {
-      case 0: return <>{copy.next[0]} <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" /></>;
-      case 1: return <>{copy.next[1]} <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" /></>;
-      case 2: return <>{copy.next[2]} <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" /></>;
-      case 3: return <>{copy.next[3]} <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" /></>;
-      case 4: return <><ArrowLeft className="mr-2 h-5 w-5 group-hover:-translate-x-1 transition-transform duration-300" /> {copy.next[4]}</>;
-      default: return "Next";
+  const goPrev = () => {
+    setStep((prev) => Math.max(prev - 1, 0));
+  };
+
+  const handleSwipeStart = (event: PointerEvent<HTMLElement>) => {
+    swipeStart.current = { x: event.clientX, y: event.clientY };
+  };
+
+  const handleSwipeEnd = (event: PointerEvent<HTMLElement>) => {
+    const start = swipeStart.current;
+    swipeStart.current = null;
+
+    if (!start) return;
+
+    const deltaX = event.clientX - start.x;
+    const deltaY = event.clientY - start.y;
+    const isHorizontalSwipe = Math.abs(deltaX) > 56 && Math.abs(deltaX) > Math.abs(deltaY) * 1.35;
+
+    if (!isHorizontalSwipe) return;
+
+    if (deltaX < 0) {
+      goNext();
+      return;
     }
+
+    goPrev();
   };
 
   return (
     <div className="console-grid h-dvh w-full flex flex-col overflow-hidden bg-background text-foreground font-sans relative">
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,hsl(var(--background)/0.55),hsl(var(--background)/0.9))]" />
+      <div className="pointer-events-none absolute inset-0 opacity-[0.5] dark:opacity-[1]">
+        <LetterGlitch
+          glitchColors={["#0f766e", "#22d3ee", "#f59e0b"]}
+          glitchSpeed={88}
+          centerVignette={false}
+          outerVignette
+          smooth
+          characters="01{}[]()/\\<>_+=NEXTJS_TYPESCRIPT_API"
+        />
+      </div>
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,hsl(var(--background)/0.72),hsl(var(--background)/0.94))]" />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-linear-to-b from-background to-transparent z-10" />
 
-      <div className="w-full px-4 pt-4 md:pt-6 z-50 shrink-0 pointer-events-none">
-        <header className="max-w-5xl mx-auto flex items-center justify-between gap-3 px-3 py-2 md:px-4 md:py-3 bg-card/78 backdrop-blur-2xl border border-border/70 rounded-[8px] shadow-2xl shadow-black/10 pointer-events-auto transition-all">
+      <div className="w-full px-4 pt-3 md:pt-5 z-50 shrink-0 pointer-events-none">
+        <header className="max-w-5xl mx-auto flex items-center justify-between gap-3 rounded-[28px] border border-border/30 bg-background/58 px-3 py-2 shadow-[0_18px_60px_hsl(var(--foreground)/0.10),inset_0_1px_0_hsl(var(--foreground)/0.08)] backdrop-blur-2xl pointer-events-auto transition-all dark:bg-background/42 dark:border-border/20 md:rounded-4xl md:px-4 md:py-3">
           <div className="flex items-center gap-3 min-w-0">
             <div className="hover:scale-105 transition-transform duration-300 flex items-center justify-center">
              <Image
@@ -126,9 +154,14 @@ export default function Home() {
         </header>
       </div>
 
-      <main className="min-h-0 flex-1 relative overflow-hidden w-full">
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-10 bg-linear-to-b from-background to-transparent z-10" />
-
+      <main
+        className="min-h-0 flex-1 relative overflow-hidden w-full touch-pan-y"
+        onPointerDown={handleSwipeStart}
+        onPointerUp={handleSwipeEnd}
+        onPointerCancel={() => {
+          swipeStart.current = null;
+        }}
+      >
         <div
           className="flex h-full min-h-0 w-full transition-transform duration-700 ease-in-out"
           style={{ transform: `translateX(-${step * 100}%)` }}
@@ -141,14 +174,29 @@ export default function Home() {
         </div>
       </main>
 
-      <div className="absolute bottom-8 md:bottom-10 left-1/2 -translate-x-1/2 z-50">
+      <div className="pointer-events-none absolute inset-y-0 left-4 z-50 hidden items-center lg:flex">
         <Button
-          size="lg" 
-          onClick={handleNext}
-          className="group rounded-[8px] px-5 md:px-7 py-6 md:py-7 shadow-2xl shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-1 transition-all duration-300 text-sm md:text-base font-bold"
+          type="button"
+          variant="ghost"
+          onClick={goPrev}
+          disabled={step === 0}
+          aria-label="Previous section"
+          className="pointer-events-auto h-16 w-12 rounded-[8px] bg-transparent p-0 font-mono text-5xl font-light leading-none text-foreground/38 backdrop-blur-sm transition-all hover:bg-primary/5 hover:text-primary/80 disabled:opacity-0"
         >
-          <Circle className="mr-2 h-2.5 w-2.5 fill-current text-accent" />
-          {buttonContent()}
+          ‹
+        </Button>
+      </div>
+
+      <div className="pointer-events-none absolute inset-y-0 right-4 z-50 hidden items-center lg:flex">
+        <Button
+          type="button"
+          variant="ghost"
+          onClick={goNext}
+          disabled={step === 4}
+          aria-label="Next section"
+          className="pointer-events-auto h-16 w-12 rounded-[8px] bg-transparent p-0 font-mono text-5xl font-light leading-none text-foreground/38 backdrop-blur-sm transition-all hover:bg-primary/5 hover:text-primary/80 disabled:opacity-0"
+        >
+          ›
         </Button>
       </div>
 

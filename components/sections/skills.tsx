@@ -1,6 +1,36 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Blocks, Bot, DatabaseZap, Gauge, GitBranch, Handshake, Layers3, Workflow } from "lucide-react";
+import LogoLoop, { LogoItem } from "@/components/LogoLoop";
+import {
+    AlertTriangle,
+    Blocks,
+    Bot,
+    Brain,
+    Braces,
+    Clock,
+    Cloud,
+    Code2,
+    Component,
+    Database,
+    DatabaseZap,
+    Gauge,
+    GitBranch,
+    GraduationCap,
+    Handshake,
+    Layers3,
+    Network,
+    Rocket,
+    Route,
+    Search,
+    Server,
+    Sparkles,
+    Users,
+    Wind,
+    Workflow,
+    Wrench,
+    Zap,
+    type LucideIcon,
+} from "lucide-react";
 
 const capabilities = [
     {
@@ -97,6 +127,51 @@ const skillLabels: Record<"en" | "id", Record<string, string>> = {
     },
 };
 
+const skillIcons: Record<string, LucideIcon> = {
+    JavaScript: Code2,
+    TypeScript: Braces,
+    "Next.js": Route,
+    "Tailwind CSS": Wind,
+    ShadcnUI: Component,
+    "RESTful APIs": Network,
+    Supabase: Database,
+    "Payload Mapping": Server,
+    "Error States": AlertTriangle,
+    "SQL Context": DatabaseZap,
+    "DOM Efficiency": Zap,
+    "Responsive UI": Layers3,
+    "Core UX": Search,
+    Maintainability: Wrench,
+    "Problem Solving": Brain,
+    "Time Management": Clock,
+    "Fast Learner": GraduationCap,
+    "Team Collaboration": Users,
+    Git: GitBranch,
+    "Node.js": Server,
+    Vercel: Cloud,
+    Render: Rocket,
+    Codex: Bot,
+    "GPT-5.5": Sparkles,
+    "Google Gemini": Sparkles,
+};
+
+const skillLogoItems: LogoItem[] = Array.from(new Set(capabilities.flatMap((capability) => capability.skills))).map((skill) => {
+    const Icon = skillIcons[skill] ?? Blocks;
+
+    return {
+        title: skill,
+        ariaLabel: skill,
+        node: (
+            <div className="inline-flex h-10 items-center gap-2 rounded-[8px] border border-border/70 bg-background/72 px-3 font-mono text-xs font-semibold text-foreground shadow-sm backdrop-blur">
+                <span className="flex h-6 min-w-6 items-center justify-center rounded-[6px] bg-primary/12 px-1.5 text-primary">
+                    <Icon className="h-3.5 w-3.5" />
+                </span>
+                <span>{skill}</span>
+            </div>
+        ),
+    };
+});
+
 export function SkillsSection({ language }: { language: "en" | "id" }) {
     const content = sectionCopy[language];
 
@@ -116,6 +191,19 @@ export function SkillsSection({ language }: { language: "en" | "id" }) {
                     <p className="text-sm leading-7 text-muted-foreground md:text-base">
                         {content.description}
                     </p>
+                </div>
+
+                <div className="rounded-[8px] border border-border/70 bg-card/76 p-3 shadow-xl shadow-black/5 backdrop-blur">
+                    <LogoLoop
+                        logos={skillLogoItems}
+                        speed={72}
+                        logoHeight={40}
+                        gap={14}
+                        pauseOnHover
+                        fadeOut
+                        scaleOnHover
+                        ariaLabel="Skill logos"
+                    />
                 </div>
 
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">

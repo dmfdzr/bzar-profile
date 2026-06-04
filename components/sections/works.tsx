@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ElectricBorder from "@/components/ElectricBorder";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -219,44 +220,52 @@ export function WorksSection({ language }: { language: "en" | "id" }) {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+                <div className="grid grid-cols-1 items-stretch gap-4 lg:grid-cols-3">
                     {experiences.map((exp, index) => {
                         const Icon = exp.icon;
 
                         return (
                             <Dialog key={exp.id}>
-                                <DialogTrigger asChild>
-                                    <Card className="group cursor-pointer rounded-[8px] border-border/70 bg-card/82 py-0 shadow-xl shadow-black/5 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-primary/10">
-                                        <CardHeader className="border-b border-border/60 p-5 lg:p-4">
-                                            <div className="mb-4 flex items-center justify-between">
-                                                <div className="rounded-[8px] border border-border/70 bg-background/70 p-3 transition-transform duration-300 group-hover:scale-105">
-                                                    <Icon className={`h-6 w-6 ${exp.accent}`} />
+                                <ElectricBorder
+                                    color={index === 1 ? "#34d399" : index === 2 ? "#f59e0b" : "#22d3ee"}
+                                    speed={0.42}
+                                    chaos={0.055}
+                                    borderRadius={8}
+                                    className="group h-full rounded-[8px]"
+                                >
+                                    <DialogTrigger asChild>
+                                        <Card className="h-full cursor-pointer rounded-[8px] border-border/70 bg-card/86 py-0 shadow-xl shadow-black/5 backdrop-blur transition-all duration-300 group-hover:-translate-y-1 group-hover:border-primary/50 group-hover:shadow-primary/10">
+                                            <CardHeader className="border-b border-border/60 p-5 lg:p-4">
+                                                <div className="mb-4 flex items-center justify-between">
+                                                    <div className="rounded-[8px] border border-border/70 bg-background/70 p-3 transition-transform duration-300 group-hover:scale-105">
+                                                        <Icon className={`h-6 w-6 ${exp.accent}`} />
+                                                    </div>
+                                                    <span className="font-mono text-xs text-muted-foreground">0{index + 1}</span>
                                                 </div>
-                                                <span className="font-mono text-xs text-muted-foreground">0{index + 1}</span>
-                                            </div>
-                                            <p className="font-mono text-xs text-primary">$ {exp.command}</p>
-                                            <CardTitle className="mt-2 font-display text-xl font-bold leading-tight group-hover:text-primary">
-                                                {exp.role[language]}
-                                            </CardTitle>
-                                            <CardDescription className="font-medium text-foreground/80">
-                                                {exp.company}
-                                            </CardDescription>
-                                        </CardHeader>
-                                        <CardContent className="space-y-5 p-5">
-                                            <p className="text-sm leading-6 text-muted-foreground">{exp.description[language]}</p>
-                                            <div className="rounded-[8px] border border-border/60 bg-background/55 p-3">
-                                                <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">{sectionCopy.signal}</p>
-                                                <p className="mt-1 text-sm font-semibold">{exp.metric[language]}</p>
-                                            </div>
-                                            <div className="flex items-center text-xs text-muted-foreground gap-2">
-                                                <Calendar size={14} /> {exp.period[language]}
-                                            </div>
-                                            <div className="flex items-center text-sm font-semibold text-primary">
-                                                {sectionCopy.viewDetails} <ExternalLink size={14} className="ml-2 transition-transform group-hover:translate-x-1" />
-                                            </div>
-                                        </CardContent>
-                                    </Card>
-                                </DialogTrigger>
+                                                <p className="font-mono text-xs text-primary">$ {exp.command}</p>
+                                                <CardTitle className="mt-2 font-display text-xl font-bold leading-tight group-hover:text-primary">
+                                                    {exp.role[language]}
+                                                </CardTitle>
+                                                <CardDescription className="font-medium text-foreground/80">
+                                                    {exp.company}
+                                                </CardDescription>
+                                            </CardHeader>
+                                            <CardContent className="flex flex-1 flex-col space-y-5 p-5">
+                                                <p className="text-sm leading-6 text-muted-foreground">{exp.description[language]}</p>
+                                                <div className="rounded-[8px] border border-border/60 bg-background/55 p-3">
+                                                    <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">{sectionCopy.signal}</p>
+                                                    <p className="mt-1 text-sm font-semibold">{exp.metric[language]}</p>
+                                                </div>
+                                                <div className="mt-auto flex items-center text-xs text-muted-foreground gap-2">
+                                                    <Calendar size={14} /> {exp.period[language]}
+                                                </div>
+                                                <div className="flex items-center text-sm font-semibold text-primary">
+                                                    {sectionCopy.viewDetails} <ExternalLink size={14} className="ml-2 transition-transform group-hover:translate-x-1" />
+                                                </div>
+                                            </CardContent>
+                                        </Card>
+                                    </DialogTrigger>
+                                </ElectricBorder>
 
                                 <DialogContent
                                     onEscapeKeyDown={(event) => event.preventDefault()}

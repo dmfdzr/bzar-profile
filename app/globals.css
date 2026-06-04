@@ -101,9 +101,22 @@ body {
   background-image:
     linear-gradient(hsl(var(--console-line) / 0.08) 1px, transparent 1px),
     linear-gradient(90deg, hsl(var(--console-line) / 0.08) 1px, transparent 1px),
+    linear-gradient(135deg, transparent 0 48%, hsl(var(--console-line) / 0.045) 49%, transparent 50% 100%),
     radial-gradient(circle at 20% 10%, hsl(var(--primary) / 0.18), transparent 28rem),
     radial-gradient(circle at 80% 18%, hsl(var(--accent) / 0.16), transparent 24rem);
-  background-size: 44px 44px, 44px 44px, auto, auto;
+  background-size: 44px 44px, 44px 44px, 160px 160px, auto, auto;
+}
+
+.console-grid::before {
+  background:
+    linear-gradient(90deg, transparent, hsl(var(--primary) / 0.18), transparent),
+    linear-gradient(180deg, transparent, hsl(var(--accent) / 0.10), transparent);
+  content: "";
+  inset: 0;
+  mask-image: linear-gradient(180deg, black, transparent 72%);
+  opacity: 0.55;
+  pointer-events: none;
+  position: absolute;
 }
 
 .scanline {
@@ -124,6 +137,126 @@ body {
   to {
     transform: translateY(720%);
   }
+}
+
+@keyframes glitch {
+  0% {
+    clip-path: inset(20% 0 50% 0);
+    transform: translate3d(-1px, 0, 0);
+  }
+  5% {
+    clip-path: inset(10% 0 60% 0);
+    transform: translate3d(2px, -1px, 0);
+  }
+  10% {
+    clip-path: inset(15% 0 55% 0);
+    transform: translate3d(-2px, 1px, 0);
+  }
+  15% {
+    clip-path: inset(25% 0 35% 0);
+    transform: translate3d(1px, 0, 0);
+  }
+  20% {
+    clip-path: inset(30% 0 40% 0);
+    transform: translate3d(-3px, 1px, 0);
+  }
+  25% {
+    clip-path: inset(40% 0 20% 0);
+    transform: translate3d(2px, 0, 0);
+  }
+  30% {
+    clip-path: inset(10% 0 60% 0);
+    transform: translate3d(-1px, -1px, 0);
+  }
+  35% {
+    clip-path: inset(15% 0 55% 0);
+    transform: translate3d(3px, 1px, 0);
+  }
+  40% {
+    clip-path: inset(25% 0 35% 0);
+    transform: translate3d(-2px, 0, 0);
+  }
+  45% {
+    clip-path: inset(30% 0 40% 0);
+    transform: translate3d(1px, -1px, 0);
+  }
+  50% {
+    clip-path: inset(20% 0 50% 0);
+    transform: translate3d(-1px, 1px, 0);
+  }
+  55% {
+    clip-path: inset(10% 0 60% 0);
+    transform: translate3d(2px, 0, 0);
+  }
+  60% {
+    clip-path: inset(15% 0 55% 0);
+    transform: translate3d(-3px, -1px, 0);
+  }
+  65% {
+    clip-path: inset(25% 0 35% 0);
+    transform: translate3d(1px, 1px, 0);
+  }
+  70% {
+    clip-path: inset(30% 0 40% 0);
+    transform: translate3d(-2px, 0, 0);
+  }
+  75% {
+    clip-path: inset(40% 0 20% 0);
+    transform: translate3d(3px, -1px, 0);
+  }
+  80% {
+    clip-path: inset(20% 0 50% 0);
+    transform: translate3d(-1px, 0, 0);
+  }
+  85% {
+    clip-path: inset(10% 0 60% 0);
+    transform: translate3d(2px, 1px, 0);
+  }
+  90% {
+    clip-path: inset(15% 0 55% 0);
+    transform: translate3d(-2px, -1px, 0);
+  }
+  95% {
+    clip-path: inset(25% 0 35% 0);
+    transform: translate3d(1px, 0, 0);
+  }
+  100% {
+    clip-path: inset(30% 0 40% 0);
+    transform: translate3d(-1px, 1px, 0);
+  }
+}
+
+.glitch-text::after,
+.glitch-text::before {
+  background: hsl(var(--card) / 0.96);
+  content: attr(data-text);
+  inset: 0 auto auto 0;
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  will-change: clip-path, transform;
+}
+
+.glitch-text::after {
+  color: inherit;
+  left: 0.14em;
+  text-shadow: var(--after-shadow);
+}
+
+.glitch-text::before {
+  color: inherit;
+  left: -0.14em;
+  text-shadow: var(--before-shadow);
+}
+
+.glitch-text::after,
+.animate-glitch-after {
+  animation: glitch var(--after-duration) infinite linear alternate-reverse;
+}
+
+.glitch-text::before,
+.animate-glitch-before {
+  animation: glitch var(--before-duration) infinite linear alternate-reverse;
 }
 
 @media (prefers-reduced-motion: reduce) {

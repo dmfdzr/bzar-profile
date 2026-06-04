@@ -227,76 +227,78 @@ export function ProjectsSection({ language }: { language: "en" | "id" }) {
                 ) : (
                     <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
                         {visibleProjects.map((project) => (
-                            <Card key={project.name} className="group rounded-[8px] border-border/70 bg-card/82 py-0 shadow-xl shadow-black/5 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-primary/10">
-                                <CardHeader className="border-b border-border/60 p-4">
-                                    <div className="mb-2 flex items-center justify-between gap-3">
-                                        <div className="rounded-[8px] border border-border/70 bg-background/70 p-3 transition-transform duration-300 group-hover:scale-105">
-                                            <MonitorUp className="h-6 w-6 text-primary" />
-                                        </div>
-                                        <div className="flex items-center gap-2">
-                                            {isLatestProject(project.updatedAt) && (
-                                                <Badge variant="secondary" className="rounded-[6px] bg-accent/18 text-accent-foreground dark:text-accent">
-                                                    {content.latest}
+                            <Card key={project.name} className="group flex h-full rounded-[8px] border-border/70 bg-card/82 py-0 shadow-xl shadow-black/5 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-primary/10">
+                                <Link
+                                    href={project.sourceUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex min-h-80 flex-1 flex-col"
+                                    aria-label={`Open ${project.name} repository`}
+                                >
+                                    <CardHeader className="border-b border-border/60 p-4">
+                                        <div className="mb-3 flex items-center justify-between gap-3">
+                                            <div className="rounded-[8px] border border-border/70 bg-background/70 p-3 transition-transform duration-300 group-hover:scale-105">
+                                                <MonitorUp className="h-6 w-6 text-primary" />
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                {isLatestProject(project.updatedAt) && (
+                                                    <Badge variant="secondary" className="rounded-[6px] bg-accent/18 text-accent-foreground dark:text-accent">
+                                                        {content.latest}
+                                                    </Badge>
+                                                )}
+                                                <Badge variant="outline" className="rounded-[6px] bg-muted/50 font-mono">
+                                                    {project.language}
                                                 </Badge>
+                                            </div>
+                                        </div>
+                                        <CardTitle className="font-display text-lg font-bold leading-tight group-hover:text-primary">
+                                            {project.name}
+                                        </CardTitle>
+                                        <CardDescription className="truncate font-mono text-xs">
+                                            github.com/dmfdzr/{project.name}
+                                        </CardDescription>
+                                    </CardHeader>
+                                    <CardContent className="flex flex-1 flex-col gap-4 p-4">
+                                        <div className="rounded-[8px] border border-border/60 bg-background/55 p-3">
+                                            <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">{content.stack}</p>
+                                            <div className="mt-2 flex flex-wrap gap-2">
+                                                {project.stack.slice(0, 5).map((tech) => (
+                                                    <Badge key={tech} variant="outline" className="rounded-[6px] bg-muted/50">
+                                                        {tech}
+                                                    </Badge>
+                                                ))}
+                                            </div>
+                                        </div>
+
+                                        <div className="mt-auto flex min-w-0 items-center gap-2 text-xs text-muted-foreground">
+                                            <Activity size={14} />
+                                            <span className="truncate">{content.updated}: {formatDate(project.updatedAt, language)}</span>
+                                            {typeof project.stars === "number" && (
+                                                <span className="ml-auto flex items-center gap-1">
+                                                    stars {project.stars}
+                                                </span>
                                             )}
-                                            <Badge variant="outline" className="rounded-[6px] bg-muted/50 font-mono">
-                                                {project.language}
-                                            </Badge>
+                                            {typeof project.forks === "number" && (
+                                                <span className="flex items-center gap-1">
+                                                    <GitPullRequest size={13} /> {project.forks}
+                                                </span>
+                                            )}
                                         </div>
-                                    </div>
-                                    <CardTitle className="font-display text-lg font-bold leading-tight group-hover:text-primary">
-                                        {project.title}
-                                    </CardTitle>
-                                    <CardDescription className="truncate font-mono text-xs">
-                                        github.com/dmfdzr/{project.name}
-                                    </CardDescription>
-                                </CardHeader>
-                                <CardContent className="flex h-full flex-col gap-3 p-4">
-                                    <p className="text-sm leading-6 text-muted-foreground">{project.description[language]}</p>
-
-                                    <div className="rounded-[8px] border border-border/60 bg-background/55 p-3">
-                                        <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">{content.stack}</p>
-                                        <div className="mt-2 flex flex-wrap gap-2">
-                                            {project.stack.slice(0, 4).map((tech) => (
-                                                <Badge key={tech} variant="outline" className="rounded-[6px] bg-muted/50">
-                                                    {tech}
-                                                </Badge>
-                                            ))}
-                                        </div>
-                                    </div>
-
-                                    <div className="flex min-w-0 items-center gap-2 text-xs text-muted-foreground">
-                                        <Activity size={14} />
-                                        <span className="truncate">{content.updated}: {formatDate(project.updatedAt, language)}</span>
-                                        {typeof project.stars === "number" && (
-                                            <span className="ml-auto flex items-center gap-1">
-                                                stars {project.stars}
-                                            </span>
-                                        )}
-                                        {typeof project.forks === "number" && (
-                                            <span className="flex items-center gap-1">
-                                                <GitPullRequest size={13} /> {project.forks}
-                                            </span>
-                                        )}
-                                    </div>
-
-                                    <div className="mt-auto flex flex-wrap gap-2 pt-1">
-                                        {project.liveUrl && (
-                                            <Button asChild size="sm" className="rounded-[8px]">
-                                                <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                                                    <ExternalLink className="mr-1.5 h-4 w-4" />
-                                                    {content.live}
-                                                </Link>
-                                            </Button>
-                                        )}
-                                        <Button asChild size="sm" variant="outline" className="rounded-[8px]">
-                                            <Link href={project.sourceUrl} target="_blank" rel="noopener noreferrer">
-                                                <Github className="mr-1.5 h-4 w-4" />
-                                                {content.source}
+                                    </CardContent>
+                                </Link>
+                                {project.liveUrl && (
+                                    <div className="border-t border-border/60 p-4 pt-0">
+                                        <Button asChild size="sm" className="w-full rounded-[8px]">
+                                            <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                                                <ExternalLink className="mr-1.5 h-4 w-4" />
+                                                {content.live}
                                             </Link>
                                         </Button>
                                     </div>
-                                </CardContent>
+                                )}
+                                <div className="sr-only">
+                                    <Github /> {content.source}
+                                </div>
                             </Card>
                         ))}
                     </div>
