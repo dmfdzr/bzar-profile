@@ -68,6 +68,8 @@ export default function Home() {
     if (!main) return;
 
     const handleNativeTouchStart = (event: globalThis.TouchEvent) => {
+      if (shouldSkipSectionSwipe(event.target)) return;
+
       const touch = event.touches[0];
 
       if (!touch) return;
@@ -94,7 +96,12 @@ export default function Home() {
     };
   }, []);
 
+  const shouldSkipSectionSwipe = (target: EventTarget | null) =>
+    target instanceof Element && Boolean(target.closest("[data-section-swipe-skip='true']"));
+
   const handleSwipeStart = (event: PointerEvent<HTMLElement>) => {
+    if (shouldSkipSectionSwipe(event.target)) return;
+
     swipeStart.current = { x: event.clientX, y: event.clientY };
   };
 
@@ -106,6 +113,8 @@ export default function Home() {
   };
 
   const handleTouchStart = (event: TouchEvent<HTMLElement>) => {
+    if (shouldSkipSectionSwipe(event.target)) return;
+
     const touch = event.touches[0];
 
     if (!touch) return;

@@ -1,14 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
     Activity,
+    ChevronLeft,
+    ChevronRight,
     ExternalLink,
-    Github,
     GitPullRequest,
     Loader2,
     MonitorUp,
@@ -33,6 +34,10 @@ const copy = {
         latest: "Latest",
         updated: "Updated",
         stack: "Stack",
+        gallery: "Repository carousel",
+        previous: "Previous projects",
+        next: "Next projects",
+        openRepo: "Open repository",
         empty: "Project data is not available right now.",
         filteredEmpty: "No projects match this filter.",
         stats: ["projects", "live links", "latest"],
@@ -50,6 +55,10 @@ const copy = {
         latest: "Terbaru",
         updated: "Diupdate",
         stack: "Stack",
+        gallery: "Carousel repository",
+        previous: "Proyek sebelumnya",
+        next: "Proyek berikutnya",
+        openRepo: "Buka repository",
         empty: "Data proyek dari GitHub belum tersedia saat ini.",
         filteredEmpty: "Tidak ada proyek yang cocok dengan filter ini.",
         stats: ["proyek", "link live", "terbaru"],
@@ -109,6 +118,7 @@ export function ProjectsSection({ language }: { language: "en" | "id" }) {
     const [activeFilter, setActiveFilter] = useState<ProjectFilter>("all");
     const [isAvailable, setIsAvailable] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const carouselRef = useRef<HTMLDivElement | null>(null);
 
     const loadProjects = async () => {
         setIsLoading(true);
@@ -162,9 +172,20 @@ export function ProjectsSection({ language }: { language: "en" | "id" }) {
         return projects;
     }, [activeFilter, projects]);
 
+    const scrollProjects = (direction: "left" | "right") => {
+        const carousel = carouselRef.current;
+
+        if (!carousel) return;
+
+        carousel.scrollBy({
+            left: direction === "left" ? -carousel.clientWidth * 0.86 : carousel.clientWidth * 0.86,
+            behavior: "smooth",
+        });
+    };
+
     return (
-        <section className="w-full h-full min-h-0 shrink-0 flex justify-center items-start overflow-y-auto px-4 pb-40 pt-6 md:px-8 md:pt-8 lg:px-8 lg:pt-6">
-            <div className="max-w-6xl w-full flex flex-col gap-5 lg:gap-4">
+        <section className="w-full h-full min-h-0 shrink-0 flex justify-center items-start overflow-x-hidden overflow-y-auto px-4 pb-8 pt-4 md:px-8 md:pb-10 md:pt-8 lg:px-8 lg:pb-8 lg:pt-6">
+            <div className="max-w-6xl min-w-0 w-full flex flex-col gap-4 lg:gap-4">
                 <div className="grid gap-4 md:grid-cols-[0.92fr_1.08fr] md:items-end">
                     <div className="flex flex-col gap-3">
                         <Badge variant="outline" className="h-7 w-fit rounded-[6px] border-primary/40 bg-primary/10 px-3 font-mono text-primary">
@@ -225,82 +246,120 @@ export function ProjectsSection({ language }: { language: "en" | "id" }) {
                 ) : visibleProjects.length === 0 ? (
                     <div className="rounded-[8px] border border-border/70 bg-card/82 p-6 text-sm text-muted-foreground">{content.filteredEmpty}</div>
                 ) : (
-                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-                        {visibleProjects.map((project) => (
-                            <Card key={project.name} className="group flex h-full rounded-[8px] border-border/70 bg-card/82 py-0 shadow-xl shadow-black/5 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-primary/10">
-                                <Link
-                                    href={project.sourceUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex min-h-80 flex-1 flex-col"
-                                    aria-label={`Open ${project.name} repository`}
+                    <div className="flex min-w-0 flex-col gap-3">
+                        <div className="flex items-center gap-3">
+                            <h3 className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">{content.gallery}</h3>
+                            <span className="h-px flex-1 bg-border/70" />
+                            <div className="hidden items-center gap-2 md:flex">
+                                <Button
+                                    type="button"
+                                    variant="outline"
+                                    size="icon"
+                                    onClick={() => scrollProjects("left")}
+                                    aria-label={content.previous}
+                                    className="size-9 rounded-[8px] border-border/60 bg-background/45 backdrop-blur"
                                 >
-                                    <CardHeader className="border-b border-border/60 p-4">
-                                        <div className="mb-3 flex items-center justify-between gap-3">
-                                            <div className="rounded-[8px] border border-border/70 bg-background/70 p-3 transition-transform duration-300 group-hover:scale-105">
-                                                <MonitorUp className="h-6 w-6 text-primary" />
-                                            </div>
-                                            <div className="flex items-center gap-2">
-                                                {isLatestProject(project.updatedAt) && (
-                                                    <Badge variant="secondary" className="rounded-[6px] bg-accent/18 text-accent-foreground dark:text-accent">
-                                                        {content.latest}
-                                                    </Badge>
-                                                )}
-                                                <Badge variant="outline" className="rounded-[6px] bg-muted/50 font-mono">
-                                                    {project.language}
-                                                </Badge>
-                                            </div>
-                                        </div>
-                                        <CardTitle className="font-display text-lg font-bold leading-tight group-hover:text-primary">
-                                            {project.name}
-                                        </CardTitle>
-                                        <CardDescription className="truncate font-mono text-xs">
-                                            github.com/dmfdzr/{project.name}
-                                        </CardDescription>
-                                    </CardHeader>
-                                    <CardContent className="flex flex-1 flex-col gap-4 p-4">
-                                        <div className="rounded-[8px] border border-border/60 bg-background/55 p-3">
-                                            <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">{content.stack}</p>
-                                            <div className="mt-2 flex flex-wrap gap-2">
-                                                {project.stack.slice(0, 5).map((tech) => (
-                                                    <Badge key={tech} variant="outline" className="rounded-[6px] bg-muted/50">
-                                                        {tech}
-                                                    </Badge>
-                                                ))}
-                                            </div>
-                                        </div>
+                                    <ChevronLeft className="h-4 w-4" />
+                                </Button>
+                                <Button
+                                    type="button"
+                                    variant="outline"
+                                    size="icon"
+                                    onClick={() => scrollProjects("right")}
+                                    aria-label={content.next}
+                                    className="size-9 rounded-[8px] border-border/60 bg-background/45 backdrop-blur"
+                                >
+                                    <ChevronRight className="h-4 w-4" />
+                                </Button>
+                            </div>
+                        </div>
 
-                                        <div className="mt-auto flex min-w-0 items-center gap-2 text-xs text-muted-foreground">
-                                            <Activity size={14} />
-                                            <span className="truncate">{content.updated}: {formatDate(project.updatedAt, language)}</span>
-                                            {typeof project.stars === "number" && (
-                                                <span className="ml-auto flex items-center gap-1">
-                                                    stars {project.stars}
-                                                </span>
-                                            )}
-                                            {typeof project.forks === "number" && (
-                                                <span className="flex items-center gap-1">
-                                                    <GitPullRequest size={13} /> {project.forks}
-                                                </span>
-                                            )}
+                        <div
+                            ref={carouselRef}
+                            data-section-swipe-skip="true"
+                            className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-3 [scrollbar-width:none] md:-mx-8 md:px-8 [&::-webkit-scrollbar]:hidden"
+                        >
+                            {visibleProjects.map((project) => (
+                                <Card
+                                    key={project.name}
+                                    className="group flex w-[82vw] shrink-0 snap-center rounded-[8px] border-border/70 bg-card/82 py-0 shadow-xl shadow-black/5 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-primary/10 sm:w-105 lg:w-97.5"
+                                >
+                                    <Link
+                                        href={project.sourceUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex min-h-72 min-w-0 flex-1 flex-col"
+                                        aria-label={`Open ${project.name} repository`}
+                                    >
+                                        <CardHeader className="border-b border-border/60 p-4">
+                                            <div className="mb-3 flex items-center justify-between gap-3">
+                                                <div className="rounded-[8px] border border-border/70 bg-background/70 p-3 transition-transform duration-300 group-hover:scale-105">
+                                                    <MonitorUp className="h-6 w-6 text-primary" />
+                                                </div>
+                                                <div className="flex min-w-0 flex-wrap justify-end gap-2">
+                                                    {project.liveUrl && (
+                                                        <Badge variant="default" className="rounded-[6px] font-mono">
+                                                            {content.live}
+                                                        </Badge>
+                                                    )}
+                                                    {isLatestProject(project.updatedAt) && (
+                                                        <Badge variant="secondary" className="rounded-[6px] bg-accent/18 text-accent-foreground dark:text-accent">
+                                                            {content.latest}
+                                                        </Badge>
+                                                    )}
+                                                    <Badge variant="outline" className="rounded-[6px] bg-muted/50 font-mono">
+                                                        {project.language}
+                                                    </Badge>
+                                                </div>
+                                            </div>
+                                            <CardTitle className="font-display text-lg font-bold leading-tight group-hover:text-primary">
+                                                {project.name}
+                                            </CardTitle>
+                                            <CardDescription className="truncate font-mono text-xs">
+                                                github.com/dmfdzr/{project.name}
+                                            </CardDescription>
+                                        </CardHeader>
+                                        <CardContent className="flex flex-1 flex-col gap-4 p-4">
+                                            <p className="overflow-hidden text-sm leading-6 text-muted-foreground [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3]">
+                                                {project.description[language]}
+                                            </p>
+                                            <div className="rounded-[8px] border border-border/60 bg-background/55 p-3">
+                                                <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">{content.stack}</p>
+                                                <div className="mt-2 flex flex-wrap gap-2">
+                                                    {project.stack.slice(0, 5).map((tech) => (
+                                                        <Badge key={tech} variant="outline" className="rounded-[6px] bg-muted/50">
+                                                            {tech}
+                                                        </Badge>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                            <div className="mt-auto flex min-w-0 items-center gap-2 text-xs text-muted-foreground">
+                                                <Activity size={14} />
+                                                <span className="truncate">{content.updated}: {formatDate(project.updatedAt, language)}</span>
+                                                {typeof project.stars === "number" && (
+                                                    <span className="ml-auto whitespace-nowrap">stars {project.stars}</span>
+                                                )}
+                                                {typeof project.forks === "number" && (
+                                                    <span className="flex items-center gap-1 whitespace-nowrap">
+                                                        <GitPullRequest size={13} /> {project.forks}
+                                                    </span>
+                                                )}
+                                            </div>
+                                        </CardContent>
+                                    </Link>
+                                    {project.liveUrl && (
+                                        <div className="border-t border-border/60 p-4 pt-0">
+                                            <Button asChild size="sm" className="w-full rounded-[8px]">
+                                                <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                                                    <ExternalLink className="mr-1.5 h-4 w-4" />
+                                                    {content.live}
+                                                </Link>
+                                            </Button>
                                         </div>
-                                    </CardContent>
-                                </Link>
-                                {project.liveUrl && (
-                                    <div className="border-t border-border/60 p-4 pt-0">
-                                        <Button asChild size="sm" className="w-full rounded-[8px]">
-                                            <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                                                <ExternalLink className="mr-1.5 h-4 w-4" />
-                                                {content.live}
-                                            </Link>
-                                        </Button>
-                                    </div>
-                                )}
-                                <div className="sr-only">
-                                    <Github /> {content.source}
-                                </div>
-                            </Card>
-                        ))}
+                                    )}
+                                </Card>
+                            ))}
+                        </div>
                     </div>
                 )}
             </div>
