@@ -13,7 +13,7 @@ function normalizeUrl(url) {
 function mergeGithubRepo(repo, fallback) {
   return {
     name: repo.name,
-    title: fallback?.title ?? repo.name.replaceAll("-", " "),
+    title: repo.name,
     description: fallback?.description ?? {
       en: repo.description || "Public repository from the GitHub profile.",
       id: repo.description || "Repository publik dari profil GitHub.",
