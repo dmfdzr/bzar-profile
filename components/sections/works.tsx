@@ -205,53 +205,54 @@ export function WorksSection({ language }: { language: "en" | "id" }) {
     }[language];
 
     return (
-        <section className="w-full h-full min-h-0 shrink-0 flex justify-center items-start overflow-y-auto px-4 pb-40 pt-6 md:px-8 md:pt-8 lg:px-8 lg:pt-6">
-            <div className="max-w-6xl w-full flex flex-col gap-5 lg:gap-4">
-                <div className="grid gap-4 md:grid-cols-[0.9fr_1.1fr] md:items-end">
-                    <div className="space-y-3">
+        <section className="w-full h-full min-h-0 shrink-0 flex justify-center items-start overflow-x-hidden overflow-y-auto px-4 pb-8 pt-4 md:px-8 md:pb-10 md:pt-7 lg:px-8 lg:pb-8 lg:pt-6">
+            <div className="max-w-6xl min-w-0 w-full flex flex-col gap-4">
+                <div className="grid gap-3 md:grid-cols-[0.9fr_1.1fr] md:items-end">
+                    <div className="space-y-2">
                         <Badge variant="outline" className="h-7 rounded-[6px] border-primary/40 bg-primary/10 px-3 font-mono text-primary">
                             <TerminalSquare className="mr-1 h-3.5 w-3.5" />
                             case-studies.json
                         </Badge>
-                        <h2 className="font-display text-3xl font-black tracking-normal lg:text-4xl">{sectionCopy.title}</h2>
+                        <h2 className="font-display text-2xl font-black tracking-normal md:text-3xl lg:text-4xl">{sectionCopy.title}</h2>
                     </div>
-                    <p className="text-sm leading-7 text-muted-foreground md:text-base">
+                    <p className="text-sm leading-6 text-muted-foreground md:text-base md:leading-7">
                         {sectionCopy.description}
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 items-stretch gap-4 lg:grid-cols-3">
+                <div className="grid min-w-0 grid-cols-1 items-stretch gap-3 md:gap-4 lg:grid-cols-3">
                     {experiences.map((exp, index) => {
                         const Icon = exp.icon;
 
                         return (
                             <Dialog key={exp.id}>
-                                <ElectricBorder
-                                    color={index === 1 ? "#34d399" : index === 2 ? "#f59e0b" : "#22d3ee"}
-                                    speed={0.42}
-                                    chaos={0.055}
-                                    borderRadius={8}
-                                    className="group h-full rounded-[8px]"
-                                >
-                                    <DialogTrigger asChild>
-                                        <Card className="h-full cursor-pointer rounded-[8px] border-border/70 bg-card/86 py-0 shadow-xl shadow-black/5 backdrop-blur transition-all duration-300 group-hover:-translate-y-1 group-hover:border-primary/50 group-hover:shadow-primary/10">
-                                            <CardHeader className="border-b border-border/60 p-5 lg:p-4">
-                                                <div className="mb-4 flex items-center justify-between">
-                                                    <div className="rounded-[8px] border border-border/70 bg-background/70 p-3 transition-transform duration-300 group-hover:scale-105">
-                                                        <Icon className={`h-6 w-6 ${exp.accent}`} />
+                                <div className="min-w-0 overflow-hidden rounded-[8px] p-px lg:overflow-visible">
+                                    <ElectricBorder
+                                        color={index === 1 ? "#34d399" : index === 2 ? "#f59e0b" : "#22d3ee"}
+                                        speed={0.42}
+                                        chaos={0.055}
+                                        borderRadius={8}
+                                        className="group h-full min-w-0 rounded-[8px]"
+                                    >
+                                        <DialogTrigger asChild>
+                                            <Card className="h-full min-w-0 cursor-pointer rounded-[8px] border-border/70 bg-card/86 py-0 shadow-xl shadow-black/5 backdrop-blur transition-all duration-300 group-hover:-translate-y-1 group-hover:border-primary/50 group-hover:shadow-primary/10">
+                                            <CardHeader className="border-b border-border/60 p-4 lg:p-4">
+                                                <div className="mb-3 flex items-center justify-between">
+                                                    <div className="rounded-[8px] border border-border/70 bg-background/70 p-2.5 transition-transform duration-300 group-hover:scale-105">
+                                                        <Icon className={`h-5 w-5 md:h-6 md:w-6 ${exp.accent}`} />
                                                     </div>
                                                     <span className="font-mono text-xs text-muted-foreground">0{index + 1}</span>
                                                 </div>
                                                 <p className="font-mono text-xs text-primary">$ {exp.command}</p>
-                                                <CardTitle className="mt-2 font-display text-xl font-bold leading-tight group-hover:text-primary">
+                                                <CardTitle className="mt-1.5 font-display text-lg font-bold leading-tight group-hover:text-primary md:text-xl">
                                                     {exp.role[language]}
                                                 </CardTitle>
                                                 <CardDescription className="font-medium text-foreground/80">
                                                     {exp.company}
                                                 </CardDescription>
                                             </CardHeader>
-                                            <CardContent className="flex flex-1 flex-col space-y-5 p-5">
-                                                <p className="text-sm leading-6 text-muted-foreground">{exp.description[language]}</p>
+                                            <CardContent className="flex flex-1 flex-col gap-3 p-4 md:gap-4 md:p-5">
+                                                <p className="overflow-hidden text-sm leading-6 text-muted-foreground [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3]">{exp.description[language]}</p>
                                                 <div className="rounded-[8px] border border-border/60 bg-background/55 p-3">
                                                     <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">{sectionCopy.signal}</p>
                                                     <p className="mt-1 text-sm font-semibold">{exp.metric[language]}</p>
@@ -263,9 +264,10 @@ export function WorksSection({ language }: { language: "en" | "id" }) {
                                                     {sectionCopy.viewDetails} <ExternalLink size={14} className="ml-2 transition-transform group-hover:translate-x-1" />
                                                 </div>
                                             </CardContent>
-                                        </Card>
-                                    </DialogTrigger>
-                                </ElectricBorder>
+                                            </Card>
+                                        </DialogTrigger>
+                                    </ElectricBorder>
+                                </div>
 
                                 <DialogContent
                                     onEscapeKeyDown={(event) => event.preventDefault()}
