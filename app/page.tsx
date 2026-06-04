@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import type { PointerEvent } from "react";
-import { useRef, useState } from "react";
+import type { PointerEvent, TouchEvent } from "react";
+import { useEffect, useRef, useState } from "react";
 import LetterGlitch from "@/components/LetterGlitch";
 import { ModeToggle } from "@/components/mode-toggle";
 import { IntroSection } from "@/components/sections/intro";
@@ -16,7 +16,9 @@ import { FileDown } from "lucide-react";
 export default function Home() {
   const [step, setStep] = useState(0);
   const [language, setLanguage] = useState<"en" | "id">("en");
+  const mainRef = useRef<HTMLElement | null>(null);
   const swipeStart = useRef<{ x: number; y: number } | null>(null);
+  const touchSwipeStart = useRef<{ x: number; y: number } | null>(null);
 
   const copy = {
     en: {
@@ -43,19 +45,12 @@ export default function Home() {
     setStep((prev) => Math.max(prev - 1, 0));
   };
 
-  const handleSwipeStart = (event: PointerEvent<HTMLElement>) => {
-    swipeStart.current = { x: event.clientX, y: event.clientY };
-  };
-
-  const handleSwipeEnd = (event: PointerEvent<HTMLElement>) => {
-    const start = swipeStart.current;
-    swipeStart.current = null;
-
+  const finishSwipe = (start: { x: number; y: number } | null, endX: number, endY: number) => {
     if (!start) return;
 
-    const deltaX = event.clientX - start.x;
-    const deltaY = event.clientY - start.y;
-    const isHorizontalSwipe = Math.abs(deltaX) > 56 && Math.abs(deltaX) > Math.abs(deltaY) * 1.35;
+    const deltaX = endX - start.x;
+    const deltaY = endY - start.y;
+    const isHorizontalSwipe = Math.abs(deltaX) > 44 && Math.abs(deltaX) > Math.abs(deltaY) * 1.2;
 
     if (!isHorizontalSwipe) return;
 
@@ -65,6 +60,67 @@ export default function Home() {
     }
 
     goPrev();
+  };
+
+  useEffect(() => {
+    const main = mainRef.current;
+
+    if (!main) return;
+
+    const handleNativeTouchStart = (event: globalThis.TouchEvent) => {
+      const touch = event.touches[0];
+
+      if (!touch) return;
+
+      touchSwipeStart.current = { x: touch.clientX, y: touch.clientY };
+    };
+
+    const handleNativeTouchEnd = (event: globalThis.TouchEvent) => {
+      const touch = event.changedTouches[0];
+      const start = touchSwipeStart.current;
+      touchSwipeStart.current = null;
+
+      if (!touch) return;
+
+      finishSwipe(start, touch.clientX, touch.clientY);
+    };
+
+    main.addEventListener("touchstart", handleNativeTouchStart, { capture: true, passive: true });
+    main.addEventListener("touchend", handleNativeTouchEnd, { capture: true, passive: true });
+
+    return () => {
+      main.removeEventListener("touchstart", handleNativeTouchStart, { capture: true });
+      main.removeEventListener("touchend", handleNativeTouchEnd, { capture: true });
+    };
+  }, []);
+
+  const handleSwipeStart = (event: PointerEvent<HTMLElement>) => {
+    swipeStart.current = { x: event.clientX, y: event.clientY };
+  };
+
+  const handleSwipeEnd = (event: PointerEvent<HTMLElement>) => {
+    const start = swipeStart.current;
+    swipeStart.current = null;
+
+    finishSwipe(start, event.clientX, event.clientY);
+  };
+
+  const handleTouchStart = (event: TouchEvent<HTMLElement>) => {
+    const touch = event.touches[0];
+
+    if (!touch) return;
+
+    touchSwipeStart.current = { x: touch.clientX, y: touch.clientY };
+  };
+
+  const handleTouchEnd = (event: TouchEvent<HTMLElement>) => {
+    const touch = event.changedTouches[0];
+    const start = touchSwipeStart.current;
+    touchSwipeStart.current = null;
+
+    if (!touch) return;
+
+    finishSwipe(start, touch.clientX, touch.clientY);
   };
 
   return (
@@ -155,12 +211,15 @@ export default function Home() {
       </div>
 
       <main
+        ref={mainRef}
         className="min-h-0 flex-1 relative overflow-hidden w-full touch-pan-y"
         onPointerDown={handleSwipeStart}
         onPointerUp={handleSwipeEnd}
         onPointerCancel={() => {
           swipeStart.current = null;
         }}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
       >
         <div
           className="flex h-full min-h-0 w-full transition-transform duration-700 ease-in-out"
@@ -183,7 +242,7 @@ export default function Home() {
           aria-label="Previous section"
           className="pointer-events-auto h-16 w-12 rounded-[8px] bg-transparent p-0 font-mono text-5xl font-light leading-none text-foreground/38 backdrop-blur-sm transition-all hover:bg-primary/5 hover:text-primary/80 disabled:opacity-0"
         >
-          ‹
+          {"<"}
         </Button>
       </div>
 
@@ -196,7 +255,7 @@ export default function Home() {
           aria-label="Next section"
           className="pointer-events-auto h-16 w-12 rounded-[8px] bg-transparent p-0 font-mono text-5xl font-light leading-none text-foreground/38 backdrop-blur-sm transition-all hover:bg-primary/5 hover:text-primary/80 disabled:opacity-0"
         >
-          ›
+          {">"}
         </Button>
       </div>
 
