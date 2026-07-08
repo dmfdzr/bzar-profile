@@ -106,10 +106,10 @@ function isLatestProject(updatedAt: string | undefined) {
     if (!updatedAt) return false;
 
     const updatedDate = new Date(updatedAt);
-    const twoMonthsAgo = new Date();
-    twoMonthsAgo.setMonth(twoMonthsAgo.getMonth() - 2);
+    const oneMonthAgo = new Date();
+    oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
 
-    return updatedDate >= twoMonthsAgo;
+    return updatedDate >= oneMonthAgo;
 }
 
 export function ProjectsSection({ language }: { language: "en" | "id" }) {

@@ -51,7 +51,7 @@ const capabilities = [
             en: "Integrate REST APIs with clear loading, error, and data-state behavior.",
             id: "Mengintegrasikan REST API dengan status loading, error, dan data yang jelas.",
         },
-        skills: ["RESTful APIs", "Supabase", "Payload Mapping", "Error States", "SQL Context"],
+        skills: ["RESTful APIs", "Supabase", "Prisma ORM", "PostgreSQL", "Payload Mapping", "Error States", "SQL Context"],
     },
     {
         title: { en: "Performance Mindset", id: "Pola Pikir Performa" },
@@ -113,6 +113,8 @@ const skillLabels: Record<"en" | "id", Record<string, string>> = {
     id: {
         "Payload Mapping": "Pemetaan Payload",
         Supabase: "Supabase",
+        "Prisma ORM": "Prisma ORM",
+        PostgreSQL: "PostgreSQL",
         "Node.js": "Node.js",
         "Error States": "Status Error",
         "SQL Context": "Konteks SQL",
@@ -135,6 +137,8 @@ const skillIcons: Record<string, LucideIcon> = {
     ShadcnUI: Component,
     "RESTful APIs": Network,
     Supabase: Database,
+    "Prisma ORM": DatabaseZap,
+    PostgreSQL: Database,
     "Payload Mapping": Server,
     "Error States": AlertTriangle,
     "SQL Context": DatabaseZap,
