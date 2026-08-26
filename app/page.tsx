@@ -22,14 +22,14 @@ export default function Home() {
 
   const copy = {
     en: {
-      shellTitle: "interactive frontend console",
+      shellTitle: "interactive operations console",
       sections: ["Intro", "Skills", "Works", "Projects", "Contact"],
       commands: ["whoami", "capabilities", "case-studies", "projects-api", "connect"],
       languageLabel: "Switch to Indonesian",
       cvLabel: "Download ATS CV",
     },
     id: {
-      shellTitle: "konsol frontend interaktif",
+      shellTitle: "konsol operasional interaktif",
       sections: ["Intro", "Skill", "Karya", "Proyek", "Kontak"],
       commands: ["profil", "kapabilitas", "studi-kasus", "projects-api", "kontak"],
       languageLabel: "Ganti ke English",

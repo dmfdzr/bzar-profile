@@ -10,34 +10,34 @@ const copy = {
     en: {
         live: "live profile",
         command: "$ init profile --interactive",
-        body: "Frontend Engineer who translates UI/UX into interactive, stable, and fast web apps. I am comfortable working around APIs, data payloads, and business needs so the interface is not only attractive, but also reliable in production.",
+        body: "A highly motivated Application Support Engineer with a strong foundation in web architecture and operational stability. As a dedicated problem solver, I am committed to continuously learning best practices and delivering highly reliable applications.",
         signals: [
-            { label: "Availability", value: "Open to frontend roles" },
-            { label: "Focus", value: "Interfaces, APIs, performance" },
-            { label: "Runtime", value: "Next.js + TypeScript" },
+            { label: "Education", value: "B.S. Information System (GPA 3.68) - Amikom Yogyakarta" },
+            { label: "Availability", value: "Open to Application Support & Web Development" },
+            { label: "Focus", value: "L2 Ops, Troubleshooting, Web Development" },
         ],
         stats: [
-            { id: "experiences", value: "3", label: "major experiences" },
+            { id: "experiences", value: "4", label: "major experiences" },
             { id: "liveProjects", value: "4", label: "live project links" },
         ],
-        traits: ["Clean UI", "API aware", "Maintainable"],
-        note: "Currently shaping interfaces that balance visual polish, network efficiency, and long-term maintainability.",
+        traits: ["Problem Solver", "Reliable", "Maintainable"],
+        note: "Currently shaping interfaces and resolving complex operational flows that balance visual polish, network efficiency, and long-term maintainability.",
     },
     id: {
         live: "profil aktif",
         command: "$ mulai profil --interaktif",
-        body: "Frontend Engineer yang menerjemahkan UI/UX menjadi aplikasi web interaktif, stabil, dan cepat. Saya nyaman bekerja di area API, payload data, dan kebutuhan bisnis supaya antarmuka tidak hanya menarik, tapi juga andal di produksi.",
+        body: "Seorang Application Support Engineer yang sangat termotivasi dengan fondasi kuat dalam arsitektur web dan stabilitas operasional. Saya memiliki spesialisasi dalam menerjemahkan desain menjadi antarmuka yang fungsional dan responsif sembari menjaga kode tetap bersih dan mudah dipelihara. Didukung oleh pengalaman praktis dalam Operasional Level 2, saya menerapkan pendekatan berorientasi produksi dalam pekerjaan saya. Saya unggul dalam pemecahan masalah yang komprehensif, mengisolasi akar penyebab, dan menjembatani celah teknis antara pengalaman pengguna dan keandalan sistem.",
         signals: [
-            { label: "Ketersediaan", value: "Terbuka untuk peran frontend" },
-            { label: "Fokus", value: "Antarmuka, API, performa" },
-            { label: "Runtime", value: "Next.js + TypeScript" },
+            { label: "Pendidikan", value: "S1 Sistem Informasi (IPK 3.68) - Universitas Amikom Yogyakarta" },
+            { label: "Ketersediaan", value: "Terbuka untuk peran Application Support & Frontend" },
+            { label: "Fokus", value: "L2 Ops, Troubleshooting, Antarmuka" },
         ],
         stats: [
-            { id: "experiences", value: "3", label: "pengalaman utama" },
+            { id: "experiences", value: "4", label: "pengalaman utama" },
             { id: "liveProjects", value: "4", label: "tautan proyek live" },
         ],
-        traits: ["UI Rapi", "Paham API", "Mudah Dirawat"],
-        note: "Saat ini fokus membentuk antarmuka yang seimbang antara kualitas visual, efisiensi jaringan, dan kemudahan perawatan jangka panjang.",
+        traits: ["Problem Solver", "Andal", "Mudah Dirawat"],
+        note: "Saat ini fokus pada penyelesaian masalah operasional kompleks dan antarmuka yang seimbang antara kualitas visual, efisiensi jaringan, dan kemudahan perawatan.",
     },
 };
 
@@ -92,7 +92,7 @@ export function IntroSection({ language }: { language: "en" | "id" }) {
                     <div className="mb-6 flex flex-wrap items-center gap-2">
                         <Badge variant="outline" className="h-7 rounded-[6px] border-primary/40 bg-primary/10 px-3 font-mono text-primary">
                             <Terminal className="mr-1 h-3.5 w-3.5" />
-                            frontend.engineer
+                            application.support
                         </Badge>
                         <Badge variant="secondary" className="h-7 rounded-[6px] bg-accent/18 px-3 font-mono text-accent-foreground dark:text-accent">
                             <Activity className="mr-1 h-3.5 w-3.5" />

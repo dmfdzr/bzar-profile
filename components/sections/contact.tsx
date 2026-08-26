@@ -6,9 +6,9 @@ const copy = {
     en: {
         command: "$ connect --intent collaboration",
         title: "Let's build something useful.",
-        description: "Open to career opportunities, frontend projects, UI implementation, or product collaboration that needs a fast, clear, production-ready interface.",
+        description: "Open to career opportunities, web development projects, IT operations, or product collaboration that needs a fast, clear, production-ready interface.",
         availability: "Availability",
-        availabilityValue: "Open for frontend roles and project discussions",
+        availabilityValue: "Open for Application Support & Web Development roles",
         response: "Response style",
         responseValue: "Async, practical, no fluff",
         primary: "Send Email",
@@ -21,9 +21,9 @@ const copy = {
     id: {
         command: "$ kontak --tujuan kolaborasi",
         title: "Mari bangun sesuatu yang berguna.",
-        description: "Terbuka untuk peluang karier, proyek frontend, implementasi UI, atau kolaborasi produk yang butuh antarmuka cepat, jelas, dan siap produksi.",
+        description: "Terbuka untuk peluang karier, proyek web development, operasional IT, atau kolaborasi produk yang butuh antarmuka cepat, jelas, dan siap produksi.",
         availability: "Ketersediaan",
-        availabilityValue: "Terbuka untuk peran frontend dan diskusi proyek",
+        availabilityValue: "Terbuka untuk peran Application Support & Web Development",
         response: "Gaya respons",
         responseValue: "Asinkron, praktis, tanpa basa-basi berlebihan",
         primary: "Kirim Email",

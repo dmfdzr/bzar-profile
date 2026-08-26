@@ -28,6 +28,50 @@ import {
 
 const experiences = [
     {
+        id: "insignia",
+        company: "PT. Kreasi Media Asia (Insignia.co.id)",
+        role: {
+            en: "L2 Ops",
+            id: "L2 Ops",
+        },
+        period: { en: "August 2026 - Present", id: "Agustus 2026 - Sekarang" },
+        badge: { en: "Contract", id: "Kontrak" },
+        icon: TerminalSquare,
+        accent: "text-blue-500",
+        color: "#3b82f6",
+        command: "monitor production-ops",
+        metric: {
+            en: "Stability and reliability of critical production environments",
+            id: "Stabilitas dan keandalan lingkungan produksi kritis",
+        },
+        impact: {
+            en: "Specialized in deep technical investigations, minimizing resolution times, and acting as the primary bridge between users and L3.",
+            id: "Spesialisasi dalam investigasi teknis mendalam, meminimalkan waktu penyelesaian, dan menjadi penghubung utama antara pengguna dan L3.",
+        },
+        scope: {
+            en: ["Incident Investigation", "Escalation Management", "Technical Debt Mitigation"],
+            id: ["Investigasi Insiden", "Manajemen Eskalasi", "Mitigasi Technical Debt"],
+        },
+        description: {
+            en: "Served as a L2 Ops responsible for maintaining the stability and reliability of critical production environments, with a specific focus on complex transactional flows and order management systems.",
+            id: "Bertugas sebagai L2 Ops yang bertanggung jawab menjaga stabilitas dan keandalan lingkungan produksi kritis, dengan fokus khusus pada alur transaksional kompleks dan sistem manajemen pesanan.",
+        },
+        details: {
+            en: [
+                "Incident Investigation & Troubleshooting: Analyzed system logs, inspected network request/response payloads, and performed client-side debugging to accurately isolate root causes from error reports.",
+                "L2 to L3 Escalation Management: Triaged system anomalies and technical constraints within transactional flows, ensuring all escalated tickets included clear reproduction steps and precise technical context for the developer team.",
+                "Operational Technical Debt Mitigation: Identified recurring error patterns in production and provided an actionable feedback loop to L3 Engineering for longterm system and architectural improvements.",
+            ],
+            id: [
+                "Investigasi Insiden & Troubleshooting: Menganalisis log sistem, memeriksa payload request/response jaringan, dan melakukan debugging sisi klien untuk mengisolasi akar penyebab dari laporan error secara akurat.",
+                "Manajemen Eskalasi L2 ke L3: Melakukan triase anomali sistem dan kendala teknis dalam alur transaksional, memastikan semua tiket yang dieskalasi menyertakan langkah reproduksi yang jelas dan konteks teknis yang tepat untuk tim developer.",
+                "Mitigasi Technical Debt Operasional: Mengidentifikasi pola error berulang di produksi dan memberikan feedback yang dapat ditindaklanjuti ke tim L3 Engineering untuk peningkatan sistem dan arsitektur jangka panjang.",
+            ],
+        },
+        stack: ["Log Analysis", "Debugging", "Payload Inspection", "Troubleshooting"],
+        links: [],
+    },
+    {
         id: "sat",
         company: "PT. Sumber Alfaria Trijaya, Tbk.",
         role: {
@@ -38,6 +82,7 @@ const experiences = [
         badge: { en: "Internship", id: "Magang" },
         icon: Briefcase,
         accent: "text-primary",
+        color: "#22d3ee",
         command: "deploy enterprise-ui",
         metric: {
             en: "National-scale construction documentation platform",
@@ -85,6 +130,7 @@ const experiences = [
         badge: { en: "Work Training", id: "Pelatihan Kerja" },
         icon: Database,
         accent: "text-emerald-500",
+        color: "#34d399",
         command: "query relational-data",
         metric: { en: "Database design and reporting context", id: "Konteks desain database dan pelaporan" },
         impact: {
@@ -126,6 +172,7 @@ const experiences = [
         badge: { en: "Independent Study", id: "Studi Independen" },
         icon: Search,
         accent: "text-accent",
+        color: "#f59e0b",
         command: "prototype product-flow",
         metric: { en: "Research, design, prototype, frontend", id: "Riset, desain, prototipe, frontend" },
         impact: {
@@ -173,6 +220,10 @@ const stackLabels: Record<"en" | "id", Record<string, string>> = {
         Prototyping: "Prototyping",
         "UI/UX Principles": "Prinsip UI/UX",
         "Frontend Development": "Pengembangan Frontend",
+        "Log Analysis": "Analisis Log",
+        "Debugging": "Debugging",
+        "Payload Inspection": "Inspeksi Payload",
+        "Troubleshooting": "Troubleshooting",
     },
 };
 
@@ -228,7 +279,7 @@ export function WorksSection({ language }: { language: "en" | "id" }) {
                             <Dialog key={exp.id}>
                                 <div className="min-w-0 overflow-hidden rounded-[8px] p-px lg:overflow-visible">
                                     <ElectricBorder
-                                        color={index === 1 ? "#34d399" : index === 2 ? "#f59e0b" : "#22d3ee"}
+                                        color={exp.color}
                                         speed={0.42}
                                         chaos={0.055}
                                         borderRadius={8}
