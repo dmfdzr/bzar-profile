@@ -26,11 +26,11 @@ const copy = {
     id: {
         live: "profil aktif",
         command: "$ mulai profil --interaktif",
-        body: "Seorang Application Support Engineer yang sangat termotivasi dengan fondasi kuat dalam arsitektur web dan stabilitas operasional. Saya memiliki spesialisasi dalam menerjemahkan desain menjadi antarmuka yang fungsional dan responsif sembari menjaga kode tetap bersih dan mudah dipelihara. Didukung oleh pengalaman praktis dalam Operasional Level 2, saya menerapkan pendekatan berorientasi produksi dalam pekerjaan saya. Saya unggul dalam pemecahan masalah yang komprehensif, mengisolasi akar penyebab, dan menjembatani celah teknis antara pengalaman pengguna dan keandalan sistem.",
+        body: "Seorang Application Support Engineer yang sangat termotivasi dengan fondasi kuat dalam arsitektur web dan stabilitas operasional. Sebagai problem solver yang berdedikasi, saya berkomitmen untuk terus mempelajari praktik terbaik dan menghadirkan aplikasi yang sangat andal.",
         signals: [
             { label: "Pendidikan", value: "S1 Sistem Informasi (IPK 3.68) - Universitas Amikom Yogyakarta" },
-            { label: "Ketersediaan", value: "Terbuka untuk peran Application Support & Frontend" },
-            { label: "Fokus", value: "L2 Ops, Troubleshooting, Antarmuka" },
+            { label: "Ketersediaan", value: "Terbuka untuk peran Application Support & Web Development" },
+            { label: "Fokus", value: "L2 Ops, Troubleshooting, Web Development" },
         ],
         stats: [
             { id: "experiences", value: "4", label: "pengalaman utama" },
