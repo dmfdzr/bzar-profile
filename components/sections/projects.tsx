@@ -277,7 +277,7 @@ export function ProjectsSection({ language }: { language: "en" | "id" }) {
                         <div
                             ref={carouselRef}
                             data-section-swipe-skip="true"
-                            className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-3 [scrollbar-width:none] md:-mx-8 md:px-8 [&::-webkit-scrollbar]:hidden"
+                            className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto overflow-y-hidden px-4 pt-2 pb-3 [scrollbar-width:none] md:-mx-8 md:px-8 [&::-webkit-scrollbar]:hidden"
                         >
                             {visibleProjects.map((project) => (
                                 <Card

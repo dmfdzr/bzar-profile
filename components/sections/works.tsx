@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useRef } from "react";
 import ElectricBorder from "@/components/ElectricBorder";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -6,6 +9,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import {
     Briefcase,
     Calendar,
+    ChevronLeft,
+    ChevronRight,
     Code2,
     Database,
     ExternalLink,
@@ -240,6 +245,9 @@ export function WorksSection({ language }: { language: "en" | "id" }) {
             impact: "Impact",
             scope: "Scope",
             overview: "Overview",
+            gallery: "Experience carousel",
+            previous: "Previous experiences",
+            next: "Next experiences",
         },
         id: {
             title: "Pengalaman yang jelas sinyalnya.",
@@ -252,8 +260,22 @@ export function WorksSection({ language }: { language: "en" | "id" }) {
             impact: "Dampak",
             scope: "Cakupan",
             overview: "Ringkasan",
+            gallery: "Carousel pengalaman",
+            previous: "Pengalaman sebelumnya",
+            next: "Pengalaman berikutnya",
         },
     }[language];
+
+    const carouselRef = useRef<HTMLDivElement | null>(null);
+
+    const scrollWorks = (direction: "left" | "right") => {
+        const carousel = carouselRef.current;
+        if (!carousel) return;
+        carousel.scrollBy({
+            left: direction === "left" ? -carousel.clientWidth * 0.86 : carousel.clientWidth * 0.86,
+            behavior: "smooth",
+        });
+    };
 
     return (
         <section className="w-full h-full min-h-0 shrink-0 flex justify-center items-start overflow-x-hidden overflow-y-auto px-4 pb-8 pt-4 md:px-8 md:pb-10 md:pt-7 lg:px-8 lg:pb-8 lg:pt-6">
@@ -271,22 +293,54 @@ export function WorksSection({ language }: { language: "en" | "id" }) {
                     </p>
                 </div>
 
-                <div className="grid min-w-0 grid-cols-1 items-stretch gap-3 md:gap-4 lg:grid-cols-3">
-                    {experiences.map((exp, index) => {
-                        const Icon = exp.icon;
+                <div className="flex min-w-0 flex-col gap-3">
+                    <div className="flex items-center gap-3">
+                        <h3 className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">{sectionCopy.gallery}</h3>
+                        <span className="h-px flex-1 bg-border/70" />
+                        <div className="hidden items-center gap-2 md:flex">
+                            <Button
+                                type="button"
+                                variant="outline"
+                                size="icon"
+                                onClick={() => scrollWorks("left")}
+                                aria-label={sectionCopy.previous}
+                                className="size-9 rounded-[8px] border-border/60 bg-background/45 backdrop-blur"
+                            >
+                                <ChevronLeft className="h-4 w-4" />
+                            </Button>
+                            <Button
+                                type="button"
+                                variant="outline"
+                                size="icon"
+                                onClick={() => scrollWorks("right")}
+                                aria-label={sectionCopy.next}
+                                className="size-9 rounded-[8px] border-border/60 bg-background/45 backdrop-blur"
+                            >
+                                <ChevronRight className="h-4 w-4" />
+                            </Button>
+                        </div>
+                    </div>
 
-                        return (
-                            <Dialog key={exp.id}>
-                                <div className="min-w-0 overflow-hidden rounded-[8px] p-px lg:overflow-visible">
-                                    <ElectricBorder
-                                        color={exp.color}
-                                        speed={0.42}
-                                        chaos={0.055}
-                                        borderRadius={8}
-                                        className="group h-full min-w-0 rounded-[8px]"
-                                    >
-                                        <DialogTrigger asChild>
-                                            <Card className="h-full min-w-0 cursor-pointer rounded-[8px] border-border/70 bg-card/86 py-0 shadow-xl shadow-black/5 backdrop-blur transition-all duration-300 group-hover:-translate-y-1 group-hover:border-primary/50 group-hover:shadow-primary/10">
+                    <div
+                        ref={carouselRef}
+                        data-section-swipe-skip="true"
+                        className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto overflow-y-hidden px-4 pt-2 pb-3 [scrollbar-width:none] md:-mx-8 md:px-8 [&::-webkit-scrollbar]:hidden"
+                    >
+                        {experiences.map((exp, index) => {
+                            const Icon = exp.icon;
+
+                            return (
+                                <Dialog key={exp.id}>
+                                    <div className="group flex w-[82vw] shrink-0 snap-center min-w-0 overflow-hidden rounded-[8px] p-px sm:w-105 lg:w-97.5 lg:overflow-visible">
+                                        <ElectricBorder
+                                            color={exp.color}
+                                            speed={0.42}
+                                            chaos={0.055}
+                                            borderRadius={8}
+                                            className="flex flex-1 min-w-0 rounded-[8px]"
+                                        >
+                                            <DialogTrigger asChild>
+                                                <Card className="flex flex-1 flex-col h-full min-w-0 cursor-pointer rounded-[8px] border-border/70 bg-card/86 py-0 shadow-xl shadow-black/5 backdrop-blur transition-all duration-300 group-hover:-translate-y-1 group-hover:border-primary/50 group-hover:shadow-primary/10">
                                             <CardHeader className="border-b border-border/60 p-4 lg:p-4">
                                                 <div className="mb-3 flex items-center justify-between">
                                                     <div className="rounded-[8px] border border-border/70 bg-background/70 p-2.5 transition-transform duration-300 group-hover:scale-105">
@@ -444,6 +498,7 @@ export function WorksSection({ language }: { language: "en" | "id" }) {
                         );
                     })}
                 </div>
+            </div>
             </div>
         </section>
     );
