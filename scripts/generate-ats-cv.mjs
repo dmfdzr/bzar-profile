@@ -7,12 +7,20 @@ const sections = [
   {
     title: "P R O F I L E",
     lines: [
-      "A highly motivated Frontend Engineer with a strong foundation in modern web technologies, including Vanilla JavaScript, Next.js, and Tailwind CSS. I specialize in translating thoughtful UI/UX designs into functional, responsive interfaces while maintaining clean and readable code. As a dedicated problem-solver, I am committed to continuously learning frontend best practices and delivering reliable, production-ready applications.",
+      "A highly motivated Application Support Engineer with a strong foundation in web architecture and operational stability. As a dedicated problem solver, I am committed to continuously learning best practices and delivering highly reliable applications.",
     ],
   },
   {
     title: "E X P E R I E N C E",
     lines: [
+      "PT. Kreasi Media Asia",
+      "July 2024 - Present",
+      "L2 OPERATIONS (APPLICATION SUPPORT)",
+      "- Operation Monitoring: Monitor logs and system behavior using Datadog and internal tools to ensure stable operational flows.",
+      "- Issue Investigation: Isolate edge-cases in user complaints, trace root causes, and reproduce bugs to provide clear contexts for developers.",
+      "- Bug Triage: Filter out non-technical issues, categorize incidents by severity, and route them to appropriate engineering units.",
+      "- Service Reporting: Document common issues to improve Standard Operating Procedures and knowledge base.",
+      "",
       "PT. Sumber Alfaria Trijaya, Tbk",
       "November 2025 - May 2026",
       "BUILDING AND MAINTENANCE DIGITAL STORE (INTERNSHIP)",
@@ -56,13 +64,14 @@ const sections = [
       {
         title: "Hard Skills",
         lines: [
-          "MySQL",
           "Microsoft SQL Server (SSMS)",
           "JavaScript",
           "Typescript",
           "React",
           "NextJS",
           "TailwindCSS",
+          "Docker",
+          "Linux",
         ],
       },
       {
@@ -83,7 +92,7 @@ const sections = [
 
 const header = [
   { text: "D I M A S  A B I D Z A R  F A D L Y", size: 19, gapAfter: 8, align: "center", bold: true },
-  { text: "+6285727914053 | dimasfadly01@gmail.com | https://bzar-here.vercel.app", size: 9.8, gapAfter: 20, align: "center" },
+  { text: "+6285727914053 | dimasfadly01@gmail.com | https://bzarhere.my.id", size: 9.8, gapAfter: 20, align: "center" },
 ];
 
 const page = {
@@ -104,14 +113,13 @@ function escapePdf(text) {
 
 function wrapLine(text, size, x = page.marginX) {
   const availableWidth = page.width - page.marginX - x;
-  const maxChars = Math.max(34, Math.floor(availableWidth / (size * 0.48)));
   const words = sanitize(text).split(" ");
   const lines = [];
   let current = "";
 
   for (const word of words) {
     const candidate = current ? `${current} ${word}` : word;
-    if (candidate.length > maxChars && current) {
+    if (textWidth(candidate, size) > availableWidth && current) {
       lines.push(current);
       current = word;
     } else {
@@ -134,8 +142,19 @@ function ensurePageSpace(pages, state, requiredHeight) {
   }
 }
 
+const helveticaWidths = {
+  a: 556, b: 556, c: 500, d: 556, e: 556, f: 278, g: 556, h: 556, i: 222, j: 222, k: 500, l: 222, m: 833, n: 556, o: 556, p: 556, q: 556, r: 333, s: 500, t: 278, u: 556, v: 500, w: 722, x: 500, y: 500, z: 500,
+  A: 667, B: 667, C: 722, D: 722, E: 667, F: 611, G: 778, H: 722, I: 278, J: 500, K: 667, L: 556, M: 833, N: 722, O: 778, P: 667, Q: 778, R: 722, S: 667, T: 611, U: 722, V: 667, W: 944, X: 667, Y: 667, Z: 611,
+  "0": 556, "1": 556, "2": 556, "3": 556, "4": 556, "5": 556, "6": 556, "7": 556, "8": 556, "9": 556,
+  " ": 278, ".": 278, ",": 278, "-": 333, ":": 278, ";": 278, "(": 333, ")": 333,
+};
+
 function textWidth(text, size) {
-  return sanitize(text).length * size * 0.48;
+  let width = 0;
+  for (const char of sanitize(text)) {
+    width += (helveticaWidths[char] || 500) / 1000;
+  }
+  return width * size;
 }
 
 function pushDivider(pages, state, gapAfter = 8) {
@@ -227,30 +246,30 @@ function pushSkillColumns(pages, state, columns) {
 
 function lineStyle(text) {
   if (text === "") {
-    return { size: 9.4, gapAfter: 8 };
+    return { size: 9.4, gapAfter: 10 };
   }
 
   if (text.startsWith("- ")) {
-    return { size: 9.4, gapAfter: 3, indent: 12, hangingIndent: 10, lineHeight: 1.5, justify: true };
+    return { size: 9.4, gapAfter: 4, indent: 12, hangingIndent: 10, lineHeight: 1.55, justify: true };
   }
 
   if (text.startsWith("PT.") || text === "Amikom Yogyakarta University") {
-    return { size: 10.5, gapAfter: 3, bold: true, lineHeight: 1.5, justify: true };
+    return { size: 10.5, gapAfter: 4, bold: true, lineHeight: 1.55, justify: true };
   }
 
   if (text === "Micro Project" || text === "Massive Project" || text === "Hard Skills" || text === "Soft Skills") {
-    return { size: 9.8, gapAfter: 4, bold: true, lineHeight: 1.5, justify: true };
+    return { size: 9.8, gapAfter: 5, bold: true, lineHeight: 1.55, justify: true };
   }
 
   if (text === text.toUpperCase() && /[A-Z]/.test(text)) {
-    return { size: 9.8, gapAfter: 5, bold: true, lineHeight: 1.5, justify: true };
+    return { size: 9.8, gapAfter: 6, bold: true, lineHeight: 1.55, justify: true };
   }
 
   if (/^\d{4}|^(January|February|March|April|May|June|July|August|September|October|November|December)/.test(text)) {
-    return { size: 9.2, gapAfter: 5, lineHeight: 1.5, justify: true };
+    return { size: 9.2, gapAfter: 6, lineHeight: 1.55, justify: true };
   }
 
-  return { size: 9.5, gapAfter: 5, lineHeight: 1.5, justify: true };
+  return { size: 9.5, gapAfter: 6, lineHeight: 1.55, justify: true };
 }
 
 function buildLines() {
@@ -263,13 +282,13 @@ function buildLines() {
 
   for (const section of sections) {
     ensurePageSpace(pages, state, 46);
-    pushLine(pages, state, section.title, 11.5, 0, { bold: true, lineHeight: 0.85 });
+    pushLine(pages, state, section.title, 11.5, 0, { bold: true, lineHeight: 0.85, justify: true });
     pushDivider(pages, state, 16);
     if (section.columns) {
       pushSkillColumns(pages, state, section.columns);
     } else {
       for (const line of section.lines) {
-        if (line === "PT. Kinema Systrans" && pages.at(-1).length > 0) {
+        if (line === "PT. Indocyber Global Teknologi" && pages.at(-1).length > 0) {
           pages.push([]);
           state.y = page.height - page.marginTop;
         }
@@ -278,7 +297,7 @@ function buildLines() {
         pushLine(pages, state, line, style.size, style.gapAfter, style);
       }
     }
-    state.y -= 10;
+    state.y -= 20;
   }
 
   return pages;
