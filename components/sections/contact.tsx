@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Github, Linkedin, Mail, Phone, Terminal, UserRoundCheck } from "lucide-react";
+import { Github, Linkedin, Mail, Terminal, UserRoundCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const copy = {
@@ -12,11 +12,10 @@ const copy = {
         response: "Response style",
         responseValue: "Async, practical, no fluff",
         primary: "Send Email",
-        phone: "Open WhatsApp chat",
         github: "Open GitHub profile",
         linkedin: "Open LinkedIn profile",
         direct: "Direct channels",
-        directValue: "Email, WhatsApp, GitHub, and LinkedIn are one tap away.",
+        directValue: "Email, GitHub, and LinkedIn are one tap away.",
     },
     id: {
         command: "$ kontak --tujuan kolaborasi",
@@ -27,11 +26,10 @@ const copy = {
         response: "Gaya respons",
         responseValue: "Asinkron, praktis, tanpa basa-basi berlebihan",
         primary: "Kirim Email",
-        phone: "Buka chat WhatsApp",
         github: "Buka profil GitHub",
         linkedin: "Buka profil LinkedIn",
         direct: "Kanal langsung",
-        directValue: "Email, WhatsApp, GitHub, dan LinkedIn bisa dibuka dalam satu klik.",
+        directValue: "Email, GitHub, dan LinkedIn bisa dibuka dalam satu klik.",
     },
 };
 
@@ -75,15 +73,10 @@ export function ContactSection({ language }: { language: "en" | "id" }) {
                         <p className="mt-1 text-sm font-semibold">{content.directValue}</p>
                     </div>
 
-                    <div className="flex flex-wrap justify-center gap-2 sm:grid sm:grid-cols-[1fr_auto_auto_auto] sm:justify-normal sm:gap-3">
+                    <div className="flex flex-wrap justify-center gap-2 sm:grid sm:grid-cols-[1fr_auto_auto] sm:justify-normal sm:gap-3">
                         <Button asChild className="w-full rounded-[8px] gap-2 px-5 text-sm sm:w-auto">
                             <Link href="mailto:dimasfadly01@gmail.com">
                                 {content.primary} <Mail size={16} />
-                            </Link>
-                        </Button>
-                        <Button asChild variant="outline" size="icon" className="rounded-[8px] hover:bg-primary hover:text-primary-foreground">
-                            <Link href="https://wa.me/6285727914053" target="_blank" rel="noopener noreferrer" aria-label={content.phone}>
-                                <Phone size={20} />
                             </Link>
                         </Button>
                         <Button asChild variant="outline" size="icon" className="rounded-[8px] hover:bg-primary hover:text-primary-foreground">
