@@ -15,7 +15,7 @@ const sections = [
     lines: [
       "PT. Kreasi Media Asia",
       "July 2024 - Present",
-      "L2 OPERATIONS (APPLICATION SUPPORT)",
+      "L2 OPERATIONS (CONTRACT)",
       "- Operation Monitoring: Monitor logs and system behavior using Datadog and internal tools to ensure stable operational flows.",
       "- Issue Investigation: Isolate edge-cases in user complaints, trace root causes, and reproduce bugs to provide clear contexts for developers.",
       "- Bug Triage: Filter out non-technical issues, categorize incidents by severity, and route them to appropriate engineering units.",
@@ -99,8 +99,8 @@ const page = {
   width: 612,
   height: 792,
   marginX: 50,
-  marginTop: 50,
-  marginBottom: 48,
+  marginTop: 42,
+  marginBottom: 36,
 };
 
 function sanitize(text) {
@@ -226,7 +226,7 @@ function pushSkillColumns(pages, state, columns) {
 
   pushFixedLine(pages, state, columns[0].title, leftX, 10, { bold: true });
   pushFixedLine(pages, state, columns[1].title, rightX, 10, { bold: true });
-  state.y -= 18;
+  state.y -= 16;
 
   for (let index = 0; index < maxRows; index += 1) {
     const left = columns[0].lines[index];
@@ -240,7 +240,7 @@ function pushSkillColumns(pages, state, columns) {
       pushFixedLine(pages, state, `- ${right}`, rightX + 12, 9.4);
     }
 
-    state.y -= 16;
+    state.y -= 15;
   }
 }
 
@@ -297,7 +297,7 @@ function buildLines() {
         pushLine(pages, state, line, style.size, style.gapAfter, style);
       }
     }
-    state.y -= 20;
+    state.y -= 15;
   }
 
   return pages;
