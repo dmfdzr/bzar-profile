@@ -179,10 +179,7 @@ export function IntroSection({ language }: { language: "en" | "id" }) {
                         })}
                     </div>
 
-                    <div className="rounded-[8px] border border-accent/40 bg-accent/10 p-4 text-sm text-muted-foreground">
-                        <Sparkles className="mr-2 inline h-4 w-4 text-accent" />
-                        {content.note}
-                    </div>
+
                 </div>
             </div>
         </section>

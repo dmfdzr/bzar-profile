@@ -262,14 +262,7 @@ export function SkillsSection({ language }: { language: "en" | "id" }) {
                     </div>
                 </div>
 
-                <div className="rounded-[8px] border border-accent/40 bg-accent/10 p-4">
-                        <div className="flex items-start gap-3">
-                            <Handshake className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
-                            <p className="text-sm leading-6 text-muted-foreground">
-                                {content.principle}
-                            </p>
-                        </div>
-                </div>
+
             </div>
         </section>
     );
