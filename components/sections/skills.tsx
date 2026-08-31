@@ -139,16 +139,44 @@ const skillIcons: Record<string, LucideIcon> = {
     "Multitasking Ability": Workflow,
 };
 
+const skillLogoUrls: Record<string, string> = {
+    JavaScript: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
+    TypeScript: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
+    React: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
+    "Next.js": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg",
+    "Tailwind CSS": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
+    "Node.js": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg",
+    "Prisma ORM": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg",
+    PostgreSQL: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg",
+    Supabase: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg",
+    "Microsoft SQL Server (SSMS)": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/microsoftsqlserver/microsoftsqlserver-original.svg",
+    Docker: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg",
+    Linux: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg",
+    Vercel: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg",
+    Render: "https://cdn.simpleicons.org/render"
+};
+
 const skillLogoItems: LogoItem[] = Array.from(new Set(capabilities.flatMap((capability) => capability.skills))).map((skill) => {
     const Icon = skillIcons[skill] ?? Blocks;
+    const logoUrl = skillLogoUrls[skill];
+    const isDarkLogo = skill === "Next.js" || skill === "Vercel";
 
     return {
         title: skill,
         ariaLabel: skill,
         node: (
             <div className="inline-flex h-10 items-center gap-2 rounded-[8px] border border-border/70 bg-background/72 px-3 font-mono text-xs font-semibold text-foreground shadow-sm backdrop-blur">
-                <span className="flex h-6 min-w-6 items-center justify-center rounded-[6px] bg-primary/12 px-1.5 text-primary">
-                    <Icon className="h-3.5 w-3.5" />
+                <span className={`flex h-6 min-w-6 items-center justify-center rounded-[6px] ${logoUrl ? 'bg-transparent px-0' : 'bg-primary/12 px-1.5 text-primary'}`}>
+                    {logoUrl ? (
+                        <img 
+                            src={logoUrl} 
+                            alt={`${skill} logo`} 
+                            className={`h-4 w-4 object-contain ${isDarkLogo ? 'dark:invert' : ''}`}
+                            loading="lazy"
+                        />
+                    ) : (
+                        <Icon className="h-3.5 w-3.5" />
+                    )}
                 </span>
                 <span>{skill}</span>
             </div>
