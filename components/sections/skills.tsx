@@ -171,7 +171,7 @@ export function SkillsSection({ language }: { language: "en" | "id" }) {
     };
 
     return (
-        <section className="w-full h-full min-h-0 shrink-0 flex justify-center items-start lg:items-center overflow-x-hidden overflow-y-auto lg:overflow-hidden px-4 pb-40 pt-6 lg:pb-0 md:px-8 md:pt-8 lg:px-8 lg:pt-0">
+        <section id="skills" className="w-full lg:h-full shrink-0 flex flex-col justify-center items-center px-4 py-12 md:px-8 md:py-16 lg:px-8 lg:py-0">
             <div className="max-w-6xl min-w-0 w-full space-y-5 lg:space-y-4">
                 <div className="grid gap-4 md:grid-cols-[0.9fr_1.1fr] md:items-end">
                     <div className="space-y-3">

@@ -86,7 +86,7 @@ export function IntroSection({ language }: { language: "en" | "id" }) {
     );
 
     return (
-        <section className="w-full h-full shrink-0 flex justify-center items-start lg:items-center p-4 md:p-8 lg:px-8 lg:py-4 pb-36 lg:pb-20 overflow-y-auto lg:overflow-hidden animate-in fade-in duration-1000">
+        <section id="intro" className="w-full lg:h-full shrink-0 flex flex-col justify-center items-center px-4 pt-6 pb-12 md:px-8 md:pt-28 md:pb-16 lg:px-8 lg:py-4 animate-in fade-in duration-1000">
             <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-6 lg:gap-5 items-start">
                 <div className="scanline relative overflow-hidden rounded-[8px] border border-border/70 bg-card/82 p-5 lg:p-6 shadow-2xl shadow-black/10 backdrop-blur-xl">
                     <div className="mb-6 flex flex-wrap items-center gap-2">

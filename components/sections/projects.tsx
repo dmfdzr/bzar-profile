@@ -184,7 +184,7 @@ export function ProjectsSection({ language }: { language: "en" | "id" }) {
     };
 
     return (
-        <section className="w-full h-full min-h-0 shrink-0 flex justify-center items-start lg:items-center overflow-x-hidden overflow-y-auto lg:overflow-hidden px-4 pb-8 pt-4 lg:pb-0 md:px-8 md:pb-10 md:pt-7 lg:px-8 lg:pt-0">
+        <section id="projects" className="w-full lg:h-full shrink-0 flex flex-col justify-center items-center px-4 py-12 md:px-8 md:py-16 lg:px-8 lg:py-0">
             <div className="max-w-6xl min-w-0 w-full flex flex-col gap-4">
                 <div className="grid gap-4 md:grid-cols-[0.92fr_1.08fr] md:items-end">
                     <div className="flex flex-col gap-3">

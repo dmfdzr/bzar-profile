@@ -37,7 +37,7 @@ export function ContactSection({ language }: { language: "en" | "id" }) {
     const content = copy[language];
 
     return (
-        <section className="w-full h-full shrink-0 flex justify-center items-start lg:items-center p-4 pb-36 pt-4 md:p-8 md:pb-36 lg:p-8 lg:pb-0 overflow-y-auto lg:overflow-hidden">
+        <section id="contact" className="w-full lg:h-full shrink-0 flex flex-col justify-center items-center px-4 py-12 md:p-8 md:py-16 lg:p-8 lg:py-0">
             <div className="max-w-5xl w-full grid grid-cols-1 gap-6 lg:grid-cols-[1fr_0.88fr] lg:items-center">
                 <div className="space-y-5">
                     <div className="rounded-[8px] border border-border/70 bg-card/82 p-5 md:p-7 shadow-xl shadow-black/5 backdrop-blur">
