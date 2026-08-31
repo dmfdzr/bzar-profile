@@ -184,8 +184,8 @@ export function ProjectsSection({ language }: { language: "en" | "id" }) {
     };
 
     return (
-        <section className="w-full h-full min-h-0 shrink-0 flex justify-center items-start overflow-x-hidden overflow-y-auto px-4 pb-8 pt-4 md:px-8 md:pb-10 md:pt-8 lg:px-8 lg:pb-8 lg:pt-6">
-            <div className="max-w-6xl min-w-0 w-full flex flex-col gap-4 lg:gap-4">
+        <section className="w-full h-full min-h-0 shrink-0 flex justify-center items-start lg:items-center overflow-x-hidden overflow-y-auto lg:overflow-hidden px-4 pb-8 pt-4 lg:pb-0 md:px-8 md:pb-10 md:pt-7 lg:px-8 lg:pt-0">
+            <div className="max-w-6xl min-w-0 w-full flex flex-col gap-4">
                 <div className="grid gap-4 md:grid-cols-[0.92fr_1.08fr] md:items-end">
                     <div className="flex flex-col gap-3">
                         <Badge variant="outline" className="h-7 w-fit rounded-[6px] border-primary/40 bg-primary/10 px-3 font-mono text-primary">

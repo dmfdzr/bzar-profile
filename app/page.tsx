@@ -11,11 +11,14 @@ import { WorksSection } from "@/components/sections/works";
 import { ProjectsSection } from "@/components/sections/projects";
 import { ContactSection } from "@/components/sections/contact";
 import { Button } from "@/components/ui/button";
-import { FileDown } from "lucide-react";
+import { FileDown, Terminal } from "lucide-react";
 
 export default function Home() {
   const [step, setStep] = useState(0);
   const [language, setLanguage] = useState<"en" | "id">("en");
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadingText, setLoadingText] = useState("Establishing connection...");
+  
   const mainRef = useRef<HTMLElement | null>(null);
   const swipeStart = useRef<{ x: number; y: number } | null>(null);
   const touchSwipeStart = useRef<{ x: number; y: number } | null>(null);
@@ -62,75 +65,79 @@ export default function Home() {
     goPrev();
   };
 
-  useEffect(() => {
-    const main = mainRef.current;
-
-    if (!main) return;
-
-    const handleNativeTouchStart = (event: globalThis.TouchEvent) => {
-      if (shouldSkipSectionSwipe(event.target)) return;
-
-      const touch = event.touches[0];
-
-      if (!touch) return;
-
-      touchSwipeStart.current = { x: touch.clientX, y: touch.clientY };
-    };
-
-    const handleNativeTouchEnd = (event: globalThis.TouchEvent) => {
-      const touch = event.changedTouches[0];
-      const start = touchSwipeStart.current;
-      touchSwipeStart.current = null;
-
-      if (!touch) return;
-
-      finishSwipe(start, touch.clientX, touch.clientY);
-    };
-
-    main.addEventListener("touchstart", handleNativeTouchStart, { capture: true, passive: true });
-    main.addEventListener("touchend", handleNativeTouchEnd, { capture: true, passive: true });
-
-    return () => {
-      main.removeEventListener("touchstart", handleNativeTouchStart, { capture: true });
-      main.removeEventListener("touchend", handleNativeTouchEnd, { capture: true });
-    };
-  }, []);
-
-  const shouldSkipSectionSwipe = (target: EventTarget | null) =>
-    target instanceof Element && Boolean(target.closest("[data-section-swipe-skip='true']"));
-
-  const handleSwipeStart = (event: PointerEvent<HTMLElement>) => {
-    if (shouldSkipSectionSwipe(event.target)) return;
-
-    swipeStart.current = { x: event.clientX, y: event.clientY };
-  };
-
-  const handleSwipeEnd = (event: PointerEvent<HTMLElement>) => {
-    const start = swipeStart.current;
-    swipeStart.current = null;
-
-    finishSwipe(start, event.clientX, event.clientY);
+  const shouldSkipSectionSwipe = (target: EventTarget | null) => {
+    if (!target) return false;
+    let node = target as Node;
+    if (node.nodeType === 3) {
+      node = node.parentNode as Node;
+    }
+    return node instanceof Element && Boolean(node.closest("[data-section-swipe-skip='true']"));
   };
 
   const handleTouchStart = (event: TouchEvent<HTMLElement>) => {
     if (shouldSkipSectionSwipe(event.target)) return;
 
     const touch = event.touches[0];
-
     if (!touch) return;
 
-    touchSwipeStart.current = { x: touch.clientX, y: touch.clientY };
+    swipeStart.current = { x: touch.clientX, y: touch.clientY };
   };
 
   const handleTouchEnd = (event: TouchEvent<HTMLElement>) => {
     const touch = event.changedTouches[0];
-    const start = touchSwipeStart.current;
-    touchSwipeStart.current = null;
+    const start = swipeStart.current;
+    swipeStart.current = null;
 
     if (!touch) return;
 
     finishSwipe(start, touch.clientX, touch.clientY);
   };
+
+  useEffect(() => {
+    const t1 = setTimeout(() => setLoadingText("Authenticating session..."), 600);
+    const t2 = setTimeout(() => setLoadingText("Loading capabilities..."), 1200);
+    const t3 = setTimeout(() => setLoadingText("System ready."), 1800);
+    const t4 = setTimeout(() => setIsLoading(false), 2200);
+    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); clearTimeout(t4); };
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="flex h-dvh w-full flex-col items-center justify-center bg-background text-primary font-mono relative overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 opacity-[0.5] dark:opacity-[1]">
+          <LetterGlitch
+            glitchColors={["#0f766e", "#22d3ee", "#f59e0b"]}
+            glitchSpeed={88}
+            centerVignette={false}
+            outerVignette
+            smooth
+            characters="01{}[]()/\\<>_+=NEXTJS_TYPESCRIPT_API"
+          />
+        </div>
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,hsl(var(--background)/0.72),hsl(var(--background)/0.94))]" />
+        
+        <div className="z-10 flex flex-col items-center gap-6">
+          <div className="relative flex h-16 w-16 items-center justify-center rounded-[10px] border border-primary/30 bg-primary/5 shadow-[0_0_15px_rgba(var(--primary),0.2)]">
+            <Image
+               src="/favicon.ico" 
+               alt="Dimas Logo" 
+               width={40}
+               height={40}
+               className="w-10 h-10 rounded-[6px] object-contain animate-pulse"
+             />
+          </div>
+          <div className="flex flex-col items-center gap-3">
+            <p className="text-xs md:text-sm tracking-[0.2em] uppercase text-primary/80">{loadingText}</p>
+            <div className="flex gap-1.5">
+              <span className="h-1 w-1 md:h-1.5 md:w-1.5 rounded-full bg-primary animate-bounce [animation-delay:-0.3s]" />
+              <span className="h-1 w-1 md:h-1.5 md:w-1.5 rounded-full bg-primary animate-bounce [animation-delay:-0.15s]" />
+              <span className="h-1 w-1 md:h-1.5 md:w-1.5 rounded-full bg-primary animate-bounce" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="console-grid h-dvh w-full flex flex-col overflow-hidden bg-background text-foreground font-sans relative">
@@ -222,11 +229,6 @@ export default function Home() {
       <main
         ref={mainRef}
         className="min-h-0 flex-1 relative overflow-hidden w-full touch-pan-y"
-        onPointerDown={handleSwipeStart}
-        onPointerUp={handleSwipeEnd}
-        onPointerCancel={() => {
-          swipeStart.current = null;
-        }}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >

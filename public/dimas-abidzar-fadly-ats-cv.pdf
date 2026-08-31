@@ -3,10 +3,10 @@
 << /Type /Catalog /Pages 2 0 R >>
 endobj
 2 0 obj
-<< /Type /Pages /Kids [3 0 R 5 0 R] /Count 2 >>
+<< /Type /Pages /Kids [3 0 R 5 0 R 7 0 R] /Count 3 >>
 endobj
 3 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 7 0 R /F2 8 0 R >> >> /Contents 4 0 R >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 9 0 R /F2 10 0 R >> >> /Contents 4 0 R >>
 endobj
 4 0 obj
 << /Length 4093 >>
@@ -220,10 +220,10 @@ ET
 endstream
 endobj
 5 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 7 0 R /F2 8 0 R >> >> /Contents 6 0 R >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 9 0 R /F2 10 0 R >> >> /Contents 6 0 R >>
 endobj
 6 0 obj
-<< /Length 4174 >>
+<< /Length 2948 >>
 stream
 BT
 /F2 10.5 Tf
@@ -373,112 +373,132 @@ q
 562 220.26499999999973 l
 S
 Q
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 9 0 R /F2 10 0 R >> >> /Contents 8 0 R >>
+endobj
+8 0 obj
+<< /Length 1134 >>
+stream
 BT
 /F2 10 Tf
-1 0 0 1 50 204.26499999999973 Tm
+1 0 0 1 50 750 Tm
 (Hard Skills) Tj
 ET
 BT
 /F2 10 Tf
-1 0 0 1 324 204.26499999999973 Tm
+1 0 0 1 324 750 Tm
 (Soft Skills) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 62 188.26499999999973 Tm
+1 0 0 1 62 734 Tm
 (- Microsoft SQL Server \(SSMS\)) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 336 188.26499999999973 Tm
+1 0 0 1 336 734 Tm
 (- Effective Communication) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 62 173.26499999999973 Tm
+1 0 0 1 62 719 Tm
 (- JavaScript) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 336 173.26499999999973 Tm
+1 0 0 1 336 719 Tm
 (- Problem Solving) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 62 158.26499999999973 Tm
+1 0 0 1 62 704 Tm
 (- Typescript) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 336 158.26499999999973 Tm
+1 0 0 1 336 704 Tm
 (- Time Management) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 62 143.26499999999973 Tm
-(- React) Tj
+1 0 0 1 62 689 Tm
+(- React & Next.js) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 336 143.26499999999973 Tm
+1 0 0 1 336 689 Tm
 (- Adaptability & Fast Learner) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 62 128.26499999999973 Tm
-(- NextJS) Tj
+1 0 0 1 62 674 Tm
+(- Node.js & RESTful API) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 336 128.26499999999973 Tm
+1 0 0 1 336 674 Tm
 (- Attention to Detail) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 62 113.26499999999973 Tm
-(- TailwindCSS) Tj
+1 0 0 1 62 659 Tm
+(- Prisma ORM & PostgreSQL) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 336 113.26499999999973 Tm
+1 0 0 1 336 659 Tm
 (- Team Collaboration) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 62 98.26499999999973 Tm
-(- Docker) Tj
+1 0 0 1 62 644 Tm
+(- Supabase) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 336 98.26499999999973 Tm
+1 0 0 1 336 644 Tm
 (- Multitasking Ability) Tj
 ET
 BT
 /F1 9.4 Tf
-1 0 0 1 62 83.26499999999973 Tm
-(- Linux) Tj
+1 0 0 1 62 629 Tm
+(- Tailwind CSS) Tj
+ET
+BT
+/F1 9.4 Tf
+1 0 0 1 62 614 Tm
+(- Docker & Linux) Tj
+ET
+BT
+/F1 9.4 Tf
+1 0 0 1 62 599 Tm
+(- Vercel & Render) Tj
 ET
 endstream
 endobj
-7 0 obj
+9 0 obj
 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
 endobj
-8 0 obj
+10 0 obj
 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
 endobj
 xref
-0 9
+0 11
 0000000000 65535 f 
 0000000009 00000 n 
 0000000058 00000 n 
-0000000121 00000 n 
-0000000257 00000 n 
-0000004402 00000 n 
-0000004538 00000 n 
-0000008764 00000 n 
-0000008834 00000 n 
+0000000127 00000 n 
+0000000264 00000 n 
+0000004409 00000 n 
+0000004546 00000 n 
+0000007546 00000 n 
+0000007683 00000 n 
+0000008869 00000 n 
+0000008939 00000 n 
 trailer
-<< /Size 9 /Root 1 0 R >>
+<< /Size 11 /Root 1 0 R >>
 startxref
-8909
+9015
 %%EOF
