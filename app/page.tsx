@@ -275,7 +275,7 @@ export default function Home() {
               size="sm"
               className="h-9 rounded-[8px] px-2.5 font-mono text-xs sm:px-3"
             >
-              <a href="/dimas-abidzar-fadly-ats-cv.pdf" download aria-label={copy.cvLabel}>
+              <a href="/dimas-abidzar-fadly-ats-cv.pdf" download="CV_DimasAbidzarFadly.pdf" aria-label={copy.cvLabel}>
                 <FileDown className="h-4 w-4 sm:mr-1.5" />
                 <span className="hidden sm:inline">CV</span>
               </a>
