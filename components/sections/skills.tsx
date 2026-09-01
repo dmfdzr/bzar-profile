@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -41,12 +41,12 @@ import {
 
 const capabilities = [
     {
-        title: { en: "Frontend Development", id: "Frontend Development" },
+        title: { en: "Frontend Development", id: "Pengembangan Frontend" },
         command: "build --frontend",
         icon: LayoutTemplate,
         description: {
             en: "Build functional, responsive, and maintainable web interfaces using modern frameworks.",
-            id: "Membangun antarmuka web yang fungsional, responsif, dan mudah dipelihara menggunakan framework modern.",
+            id: "Membangun antarmuka web yang fungsional, responsif, dan kodenya mudah dikembangkan menggunakan framework modern.",
         },
         skills: ["JavaScript", "TypeScript", "React", "Next.js", "Tailwind CSS"],
     },
@@ -56,7 +56,7 @@ const capabilities = [
         icon: DatabaseZap,
         description: {
             en: "Develop robust server-side logic, design relational databases, and construct scalable RESTful APIs.",
-            id: "Mengembangkan logika sisi server yang kuat, mendesain database relasional, dan membangun RESTful API yang skalabel.",
+            id: "Mengembangkan sistem sisi-server yang kokoh, merancang database relasional, dan menyusun RESTful API yang siap menerima trafik tinggi.",
         },
         skills: ["Node.js", "RESTful API", "Prisma ORM", "PostgreSQL", "Supabase"],
     },
@@ -66,17 +66,17 @@ const capabilities = [
         icon: Server,
         description: {
             en: "Manage databases, containerization, and deployments to support reliable applications.",
-            id: "Mengelola database, containerization, dan deployment untuk mendukung aplikasi yang andal.",
+            id: "Mengelola database, container (Docker), serta proses deployment agar aplikasi selalu berjalan stabil dan minim kendala.",
         },
         skills: ["Microsoft SQL Server (SSMS)", "Docker", "Linux", "Vercel", "Render"],
     },
     {
-        title: { en: "Professional Workflow", id: "Workflow Profesional" },
+        title: { en: "Professional Workflow", id: "Cara Kerja & Profesionalisme" },
         command: "execute --efficiently",
         icon: Workflow,
         description: {
             en: "Apply strong problem-solving and communication skills to collaborate effectively and resolve complex issues.",
-            id: "Menerapkan kemampuan problem-solving dan komunikasi yang kuat untuk berkolaborasi secara efektif dan menyelesaikan masalah kompleks.",
+            id: "Menggabungkan kemampuan analisis masalah (problem-solving) dan komunikasi yang baik untuk berkolaborasi dalam tim dan menyelesaikan tantangan rumit.",
         },
         skills: ["Problem Solving", "Time Management", "Effective Communication", "Adaptability & Fast Learner", "Attention to Detail", "Team Collaboration", "Multitasking Ability"],
     },
@@ -92,10 +92,10 @@ const sectionCopy = {
         next: "Next capabilities",
     },
     id: {
-        title: "Skill sebagai sistem kerja.",
-        description: "Daripada sekadar daftar tools, bagian ini memetakan cara saya bekerja: membangun UI, memahami data dari API, menjaga performa, dan tetap komunikatif di tim.",
-        principle: "Prinsip kerjanya sederhana: UI harus jelas untuk pengguna, mudah dirawat developer berikutnya, dan tidak membuang biaya runtime lewat request atau render yang tidak perlu.",
-        gallery: "Carousel kapabilitas",
+        title: "Keahlian sebagai fondasi sistem.",
+        description: "Bukan sekadar daftar teknologi, bagian ini menunjukkan bagaimana saya bekerja: mulai dari merancang antarmuka (UI), mengelola data dari API, menjaga performa server, hingga komunikasi aktif di dalam tim.",
+        principle: "Prinsip saya sederhana: Kode harus mudah dibaca oleh developer lain, pengalaman pengguna (UX) harus mulus, dan performa tidak boleh terbebani oleh proses yang tidak perlu.",
+        gallery: "Galeri kapabilitas",
         previous: "Kapabilitas sebelumnya",
         next: "Kapabilitas berikutnya",
     },
@@ -156,38 +156,54 @@ const skillLogoUrls: Record<string, string> = {
     Render: "https://cdn.simpleicons.org/render"
 };
 
-const skillLogoItems: LogoItem[] = Array.from(new Set(capabilities.flatMap((capability) => capability.skills))).map((skill) => {
-    const Icon = skillIcons[skill] ?? Blocks;
-    const logoUrl = skillLogoUrls[skill];
-    const isDarkLogo = skill === "Next.js" || skill === "Vercel";
-
-    return {
-        title: skill,
-        ariaLabel: skill,
-        node: (
-            <div className="inline-flex h-10 items-center gap-2 rounded-[8px] border border-border/70 bg-background/72 px-3 font-mono text-xs font-semibold text-foreground shadow-sm backdrop-blur">
-                <span className={`flex h-6 min-w-6 items-center justify-center rounded-[6px] ${logoUrl ? 'bg-transparent px-0' : 'bg-primary/12 px-1.5 text-primary'}`}>
-                    {logoUrl ? (
-                        <img 
-                            src={logoUrl} 
-                            alt={`${skill} logo`} 
-                            className={`h-4 w-4 object-contain ${isDarkLogo ? 'dark:invert' : ''}`}
-                            loading="lazy"
-                        />
-                    ) : (
-                        <Icon className="h-3.5 w-3.5" />
-                    )}
-                </span>
-                <span>{skill}</span>
-            </div>
-        ),
-    };
-});
+const softSkillsTranslations: Record<string, string> = {
+    "Problem Solving": "Problem Solving",
+    "Time Management": "Manajemen Waktu",
+    "Effective Communication": "Komunikasi Efektif",
+    "Adaptability & Fast Learner": "Adaptif & Cepat Belajar",
+    "Attention to Detail": "Teliti (Detail-Oriented)",
+    "Team Collaboration": "Kolaborasi Tim",
+    "Multitasking Ability": "Kemampuan Multitasking"
+};
 
 export function SkillsSection({ language }: { language: "en" | "id" }) {
     const content = sectionCopy[language];
-
     const carouselRef = useRef<HTMLDivElement | null>(null);
+
+    const skillLogoItems: LogoItem[] = useMemo(() => {
+        return Array.from(new Set(capabilities.flatMap((capability) => capability.skills))).map((skill) => {
+            const Icon = skillIcons[skill] ?? Blocks;
+            const logoUrl = skillLogoUrls[skill];
+            const isDarkLogo = skill === "Next.js" || skill === "Vercel";
+            
+            // Translate the skill name if it's a soft skill and language is "id"
+            const displaySkill = language === "id" && softSkillsTranslations[skill] 
+                ? softSkillsTranslations[skill] 
+                : skill;
+
+            return {
+                title: displaySkill,
+                ariaLabel: displaySkill,
+                node: (
+                    <div className="inline-flex h-10 items-center gap-2 rounded-[8px] border border-border/70 bg-background/72 px-3 font-mono text-xs font-semibold text-foreground shadow-sm backdrop-blur" style={{ backfaceVisibility: "hidden", transform: "translateZ(0)" }}>
+                        <span className={`flex h-6 min-w-6 items-center justify-center rounded-[6px] ${logoUrl ? 'bg-transparent px-0' : 'bg-primary/12 px-1.5 text-primary'}`}>
+                            {logoUrl ? (
+                                <img 
+                                    src={logoUrl} 
+                                    alt={`${displaySkill} logo`} 
+                                    className={`h-4 w-4 object-contain ${isDarkLogo ? 'dark:invert' : ''}`}
+                                    loading="lazy"
+                                />
+                            ) : (
+                                <Icon className="h-3.5 w-3.5" />
+                            )}
+                        </span>
+                        <span>{displaySkill}</span>
+                    </div>
+                ),
+            };
+        });
+    }, [language]);
 
     const scrollSkills = (direction: "left" | "right") => {
         const carousel = carouselRef.current;
@@ -216,7 +232,7 @@ export function SkillsSection({ language }: { language: "en" | "id" }) {
                     </p>
                 </div>
 
-                <div className="rounded-[8px] border border-border/70 bg-card/76 p-3 shadow-xl shadow-black/5 backdrop-blur">
+                <div className="rounded-[8px] border border-border/70 bg-card/76 p-3 shadow-xl shadow-black/5 backdrop-blur" style={{ backfaceVisibility: "hidden", transform: "translateZ(0)" }}>
                     <LogoLoop
                         logos={skillLogoItems}
                         speed={72}

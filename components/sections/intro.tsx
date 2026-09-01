@@ -24,20 +24,20 @@ const copy = {
         note: "Currently shaping interfaces and resolving complex operational flows that balance visual polish, network efficiency, and long-term maintainability.",
     },
     id: {
-        live: "profil aktif",
-        command: "$ mulai profil --interaktif",
-        body: "Seorang Application Support Engineer yang sangat termotivasi dengan fondasi kuat dalam arsitektur web dan stabilitas operasional. Sebagai problem solver yang berdedikasi, saya berkomitmen untuk terus mempelajari praktik terbaik dan menghadirkan aplikasi yang sangat andal.",
+        live: "profil interaktif",
+        command: "$ inisialisasi profil --interaktif",
+        body: "Saya adalah seorang Application Support Engineer yang berfokus pada arsitektur web dan stabilitas sistem. Sebagai pemecah masalah (problem solver) yang berdedikasi, saya selalu antusias menerapkan praktik terbaik agar aplikasi dapat berjalan lebih andal dan efisien.",
         signals: [
             { label: "Pendidikan", value: "S1 Sistem Informasi (IPK 3.68) - Universitas Amikom Yogyakarta" },
-            { label: "Ketersediaan", value: "Terbuka untuk peran Application Support & Web Development" },
-            { label: "Fokus", value: "L2 Ops, Troubleshooting, Web Development" },
+            { label: "Ketersediaan", value: "Terbuka untuk posisi Application Support & Web Developer" },
+            { label: "Fokus", value: "Operasional L2, Troubleshooting, Pengembangan Web" },
         ],
         stats: [
-            { id: "experiences", value: "4", label: "pengalaman utama" },
-            { id: "liveProjects", value: "4", label: "tautan proyek live" },
+            { id: "experiences", value: "4", label: "pengalaman profesional" },
+            { id: "liveProjects", value: "4", label: "proyek aktif" },
         ],
-        traits: ["Problem Solver", "Andal", "Mudah Dirawat"],
-        note: "Saat ini fokus pada penyelesaian masalah operasional kompleks dan antarmuka yang seimbang antara kualitas visual, efisiensi jaringan, dan kemudahan perawatan.",
+        traits: ["Solutif", "Dapat Diandalkan", "Rapi & Terstruktur"],
+        note: "Saat ini saya berfokus untuk menjaga kelancaran operasional sistem dan merancang antarmuka yang efisien.",
     },
 };
 

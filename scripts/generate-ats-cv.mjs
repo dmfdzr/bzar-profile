@@ -1,7 +1,7 @@
 import { writeFileSync } from "node:fs";
 import { join } from "node:path";
 
-const outputPath = join(process.cwd(), "public", "dimas-abidzar-fadly-ats-cv.pdf");
+const outputPath = join(process.cwd(), "public", "CV_DimasAbidzarFadly.pdf");
 
 const sections = [
   {

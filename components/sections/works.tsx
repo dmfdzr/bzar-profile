@@ -250,9 +250,9 @@ export function WorksSection({ language }: { language: "en" | "id" }) {
             next: "Next experiences",
         },
         id: {
-            title: "Pengalaman yang jelas sinyalnya.",
-            description: "Setiap card dibuat seperti snapshot case study: konteks pekerjaan, kontribusi utama, stack, dan link yang bisa langsung diverifikasi.",
-            signal: "sinyal",
+            title: "Riwayat pengalaman nyata.",
+            description: "Setiap kartu dirancang selayaknya studi kasus ringkas: mencakup konteks pekerjaan, kontribusi utama, teknologi yang digunakan, serta tautan yang dapat diverifikasi langsung.",
+            signal: "fokus utama",
             viewDetails: "Lihat Detail",
             keyContributions: "Kontribusi Utama",
             technologies: "Teknologi & Tools",

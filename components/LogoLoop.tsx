@@ -124,10 +124,7 @@ const useAnimationLoop = (
   hoverSpeed: number | undefined,
   isVertical: boolean
 ) => {
-  const rafRef = useRef<number | null>(null);
-  const lastTimestampRef = useRef<number | null>(null);
-  const offsetRef = useRef(0);
-  const velocityRef = useRef(0);
+  const animationRef = useRef<Animation | null>(null);
 
   useEffect(() => {
     const track = trackRef.current;
@@ -140,58 +137,55 @@ const useAnimationLoop = (
 
     const seqSize = isVertical ? seqHeight : seqWidth;
 
-    if (seqSize > 0) {
-      offsetRef.current = ((offsetRef.current % seqSize) + seqSize) % seqSize;
-      const transformValue = isVertical
-        ? `translate3d(0, ${-offsetRef.current}px, 0)`
-        : `translate3d(${-offsetRef.current}px, 0, 0)`;
-      track.style.transform = transformValue;
+    if (prefersReduced) {
+      track.style.transform = 'translate3d(0, 0, 0)';
+      return;
     }
 
-    if (prefersReduced) {
-      track.style.transform = isVertical ? 'translate3d(0, 0, 0)' : 'translate3d(0, 0, 0)';
+    if (seqSize > 0) {
+      const duration = (seqSize / targetVelocity) * 1000;
+      
+      const keyframes = isVertical
+        ? [
+            { transform: 'translate3d(0, 0, 0)' },
+            { transform: `translate3d(0, -${seqSize}px, 0)` }
+          ]
+        : [
+            { transform: 'translate3d(0, 0, 0)' },
+            { transform: `translate3d(-${seqSize}px, 0, 0)` }
+          ];
+
+      const animation = track.animate(keyframes, {
+        duration,
+        iterations: Infinity,
+        easing: 'linear',
+      });
+      
+      animationRef.current = animation;
+
       return () => {
-        lastTimestampRef.current = null;
+        animation.cancel();
       };
     }
+  }, [seqWidth, seqHeight, targetVelocity, isVertical]);
 
-    const animate = (timestamp: number) => {
-      if (lastTimestampRef.current === null) {
-        lastTimestampRef.current = timestamp;
+  useEffect(() => {
+    const animation = animationRef.current;
+    if (!animation) return;
+
+    if (isHovered) {
+      if (hoverSpeed === undefined) {
+        animation.pause();
+      } else {
+        animation.playbackRate = hoverSpeed / targetVelocity;
       }
-
-      const deltaTime = Math.max(0, timestamp - lastTimestampRef.current) / 1000;
-      lastTimestampRef.current = timestamp;
-
-      const target = isHovered && hoverSpeed !== undefined ? hoverSpeed : targetVelocity;
-
-      const easingFactor = 1 - Math.exp(-deltaTime / ANIMATION_CONFIG.SMOOTH_TAU);
-      velocityRef.current += (target - velocityRef.current) * easingFactor;
-
-      if (seqSize > 0) {
-        let nextOffset = offsetRef.current + velocityRef.current * deltaTime;
-        nextOffset = ((nextOffset % seqSize) + seqSize) % seqSize;
-        offsetRef.current = nextOffset;
-
-        const transformValue = isVertical
-          ? `translate3d(0, ${-offsetRef.current}px, 0)`
-          : `translate3d(${-offsetRef.current}px, 0, 0)`;
-        track.style.transform = transformValue;
+    } else {
+      if (animation.playState === 'paused') {
+        animation.play();
       }
-
-      rafRef.current = requestAnimationFrame(animate);
-    };
-
-    rafRef.current = requestAnimationFrame(animate);
-
-    return () => {
-      if (rafRef.current !== null) {
-        cancelAnimationFrame(rafRef.current);
-        rafRef.current = null;
-      }
-      lastTimestampRef.current = null;
-    };
-  }, [targetVelocity, seqWidth, seqHeight, isHovered, hoverSpeed, isVertical]);
+      animation.playbackRate = 1;
+    }
+  }, [isHovered, hoverSpeed, targetVelocity]);
 };
 
 export const LogoLoop = React.memo<LogoLoopProps>(
@@ -479,8 +473,14 @@ export const LogoLoop = React.memo<LogoLoopProps>(
           className={cx(
             'flex will-change-transform select-none relative z-0',
             'motion-reduce:transform-none',
-            isVertical ? 'flex-col h-max w-full' : 'flex-row w-max'
+            isVertical ? 'flex-col min-h-max' : 'flex-row min-w-max'
           )}
+          style={{ 
+            backfaceVisibility: 'hidden', 
+            WebkitBackfaceVisibility: 'hidden',
+            transformStyle: 'preserve-3d', 
+            transform: 'translateZ(0)' 
+          }}
           ref={trackRef}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
